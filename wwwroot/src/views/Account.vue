@@ -15,7 +15,7 @@ export default {
           id: 1,
           nameSub: "Tài khoản",
           iconSub: "fas fa-user fa-1x",
-          activeComponent: "account/mainAccount"
+          activeComponent: "/account/mainAccount"
         },
         {
           id: 2,

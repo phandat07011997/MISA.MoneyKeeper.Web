@@ -4,12 +4,13 @@ import DayHistory from '../components/DayHistory.vue'
 import ViewDay from '../components/ViewDay.vue'
 import Account from '../views/Account.vue'
 import Home from '../views/Home.vue'
-
+import Notebook from '../views/Notebook.vue'
 import Report from '../views/Report.vue'
+import SpendingLimit from '../views/SpendingLimit.vue'
 
 import ReportAnalysis from '../views/report/ReportAnalysis.vue'
 import ReportEvents from '../views/report/ReportEvents.vue'
-// import ReportCharbar from '../views/report/ReportCharbar.vue'
+import ReportCharbar from '../views/report/ReportCharbar.vue'
 import ReportPayee from '../views/report/ReportPayee.vue'
 import ReportFinancial from '../views/report/ReportFinancial.vue'
 import ReportLentBorrowed from '../views/report/ReportLentBorrowed.vue'
@@ -30,10 +31,26 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path:"/",
+    name:'home',
+    component :Home,
+    meta: { transition: 'fade-in-right' },
+  },
+  {
     path:"/home",
     name:'home',
     component :Home,
     meta: { transition: 'fade-in-right' },
+  },
+  {
+    path:'/notebook',
+    name:'notebook',
+    component:Notebook
+  },
+  {
+    path:'/spending-limit',
+    name:'spending-limit',
+    component:SpendingLimit
   },
   {
     path:'/viewday',
@@ -68,12 +85,12 @@ const routes = [
         component: ReportAnalysis
 
       },
-      // {
-      //   path: 'charbar',
-      //   name: 'ReportCharbar',
-      //   component: ReportCharbar
+      {
+        path: 'charbar',
+        name: 'ReportCharbar',
+        component: ReportCharbar
 
-      // },
+      },
       {
         path: 'lentborrowed',
         name: 'ReportLentBorrowed',

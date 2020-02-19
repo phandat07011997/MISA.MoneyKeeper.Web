@@ -60,22 +60,22 @@ ul li {
   margin-top: 72px;
   #sidenav {
     background-color: #073763;
-    position: fixed;
+    // position: fixed;
     width: 76px;
-    height: 100%;
-    z-index: 1;
-    top: 72px; /* Stay at the top */
-    left: 0;
-    overflow-x: hidden; /* Disable horizontal scroll */
+    height: calc(100% - 72px);
+    // z-index: 1;
+    // top: 72px; /* Stay at the top */
+    // left: 0;
+    // overflow-x: hidden; /* Disable horizontal scroll */
     // padding-top: 16px;
   }
 
   #content {
     /*height: calc(100vh - 72px);*/
-    overflow:scroll;
-    width: 100%;
-    position: fixed;
-    height: 100%;
+    overflow-y:scroll;
+    // width: 100%;
+    // position: fixed;
+    height: calc(100vh - 72px);
     background-color: #e9ebee;
     margin-left: 76px;
   }

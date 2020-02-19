@@ -46,7 +46,7 @@ export default {
           iconClass:"far fa-building",
           isHover: false,
           navName: "Hạn Mức Chi",
-          activeComponent: "/moneykeeper"
+          activeComponent: "/spending-limit"
         },
         {
           id: 4,
