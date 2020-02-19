@@ -3,7 +3,7 @@
     <div id="left-top-bar">
       <img src="../../assets/img/logo-moneykeeper.png" alt />
       <span>
-        <i class="fa fa-credit-card-alt" aria-hidden="true"></i> Tài chính hiện tại:
+        <i class="far fa-credit-card" aria-hidden="true"></i> Tài chính hiện tại:
         <span>+100.000 VND</span>
       </span>
     </div>

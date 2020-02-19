@@ -1,61 +1,136 @@
 <template>
-    <div id="side-bar">
-        <a href="#">
-            <div class="directory-icon">
-                <img src="../../assets/img/dash-board-icon.png" alt="">
-            </div>
-            <div class="directory-label">
-                Tổng quan
-            </div>
-        </a>
-        <a href="#">
-            <div class="directory-icon">
-                <img src="../../assets/img/record-icon.png" alt="">
-            </div>
-            <div class="directory-label">
-                Sổ ghi chép
-            </div>
-        </a>
-        <a href="#">
-            <div class="directory-icon">
-                <img src="../../assets/img/account-icon.png" alt="">
-            </div>
-            <div class="directory-label">
-                Tài khoản
-            </div>
-        </a>
-        <a href="#">
-            <div class="directory-icon">
-                <img src="../../assets/img/spending-limit-icon.png" alt="">
-            </div>
-            <div class="directory-label">
-                Hạn mức chi
-            </div>
-        </a>
-        <a href="#">
-            <div class="directory-icon">
-                <img src="../../assets/img/report-icon.png" alt="">
-            </div>
-            <div class="directory-label">
-                Báo cáo
-            </div>
-        </a>
-        <a href="#">
-            <div class="directory-icon">
-                <img src="../../assets/img/extend-icon.png" alt="">
-            </div>
-            <div class="directory-label">
-                Khác
-            </div>
-        </a>
-    </div>
+  <div class="menu-on-left shadow-sm " style="height:100%">
+    <ul class="ml-0  p-0 list-menu hidden-xs-down" style="height:100%">
+
+      <!-- <router-link to="/" class="text-decoration-none"> -->
+      <li
+        v-for="item in items"
+        :key="item.id"
+        class=""
+      >
+        <router-link :to="item.activeComponent" class="router-link d-flex flex-column justify-content-center align-items-center">
+          <i :class="item.iconClass" style="font-size:28px"></i>
+          <div style="font-size:9px">{{item.navName}}</div> 
+        </router-link>
+      </li>
+    </ul>
+  </div>
 </template>
+
 <script>
 export default {
-    name:"sidebar"
-}
-</script>
+  name: "sidebar",
+  data() {
+    return {
+      bind:true,
+      bindSize:'S',
+      items: [
+        {
+          id: 1,
+          iconClass: "fas fa-home",
+          isHover: false,
+          navName: "Tổng quan",
+          activeComponent: "/home",
+          
+        },
+        {
+          id: 2,
+          iconClass: "fas fa-book",
+          isHover: false,
+          navName: "Sổ Ghi Chép",
+          activeComponent: "/notebook"
+        },
 
-<style lang="scss">
-@import "../../assets/css/side-bar.scss";
+        {
+          id: 3,
+          iconClass:"far fa-building",
+          isHover: false,
+          navName: "Hạn Mức Chi",
+          activeComponent: "/moneykeeper"
+        },
+        {
+          id: 4,
+          iconClass: "far fa-list-alt",
+          isHover: false,
+          navName: "Tài Khoản",
+          activeComponent: "/account"
+        },
+        
+        {
+          id: 5,
+          iconClass: "fab fa-wpforms",
+          isHover: false,
+          navName: "Báo Cáo",
+          activeComponent: "/report"
+        },
+        {
+          id: 6,
+          iconClass: "fas fa-bars",
+          isHover: false,
+          navName: "Khác",
+          activeComponent: "/other"
+        }
+      ]
+    };
+  },
+
+  // methods(){
+  //   checkEqual(a, b){
+      
+  //   }
+  // },
+  
+  
+};
+</script>
+<style scoped>
+.active{
+  display: none;
+}
+.home {
+  width: 100%;
+  align-items: stretch;
+}
+.menu-on-left {
+  width: 76px;
+  height: 100%;
+  background-color: rgb(8, 72, 102);
+  z-index: 1;
+  position: fixed
+
+}
+.menu-on-left ul li {
+  text-align: center;
+  margin: 0;
+  height: 80px;
+}
+.menu-on-left ul li a {
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 10px;
+  display: content;
+  text-decoration: none;
+}
+.menu-on-left ul li:hover {
+  background-color: #319e4e;
+  color: rgb(8, 72, 102);
+}
+.menu-on-left ul li {
+  color: white;
+}
+
+.router-link {
+  height: 100%;
+  width: 100%;
+  display: block;
+  padding: 10px;
+}
+.router-link:hover {
+  color: rgb(8, 72, 102);
+}
+.router-link-active {
+  background-color: #319e4e;
+  color: rgb(8, 72, 102) !important;
+}
 </style>

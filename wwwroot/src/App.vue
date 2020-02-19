@@ -8,7 +8,9 @@
         <SideBar />
       </div>
       <div id="content">
+          <transition name="view">
         <router-view />
+          </transition>
       </div>
     </div>
     <div class="clr"></div>
@@ -65,7 +67,7 @@ ul li {
     top: 72px; /* Stay at the top */
     left: 0;
     overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 16px;
+    // padding-top: 16px;
   }
 
   #content {
@@ -75,8 +77,28 @@ ul li {
     position: fixed;
     height: 100%;
     background-color: #e9ebee;
-    padding: 10px 10px;
     margin-left: 76px;
   }
+}
+.view-enter-active,.view-leave-active{
+  transition: opacity 0 ease-in-out,transform 0 ease;
+}
+.view-enter-active{
+  transition-delay: 0.2s
+}
+.view-enter{
+  opacity: 0;
+  transform: translateX(-20px);
+}
+.view-enter-to,.view-leave{
+  opacity: 0.5;
+  transform: translateX(0px);
+  z-index: -1;
+}
+.view-leave-to{
+  opacity: 0;
+  transform: translateX(100px);
+  z-index: -1;
+  
 }
 </style>
