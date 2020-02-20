@@ -1,99 +1,120 @@
 #top-bar {
-  height: 72px;
-  background-color: rgb(8, 72, 102);
-  // padding: 12px 12px;
-  #left-top-bar {
-    float: left;
-    width: 30%;
-    height: 100%;
-
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    img {
-      height: 48px;
-      width: 50px;
-      margin-left: 14px;
-    }
-    > span {
-      font-weight: bold;
-      margin-left: 36px;
-      color: white;
-      span {
-        color: #009e0f;
-      }
-    }
-  }
-  #mid-top-bar {
-    width: 40%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    > a {
-      display: block;
-      color: white;
-      &:hover {
-        text-decoration: none;
-        color: #15c8ff;
-      }
-      #add-icon {
-        text-align: center;
+    height: 72px;
+    background-color: rgb(8, 72, 102);
+    // padding: 12px 12px;
+    #left-top-bar {
+        float: left;
+        width: 30%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        /**/
         img {
-          width: 40px;
-          height: 40px;
+            height: 48px;
+            width: 50px;
+            margin-left: 14px;
         }
-      }
-      #add-label {
-        font-size: 12px;
-        text-align: center;
-        line-height: 20px;
-        font-weight: bold;
-      }
-    }
-  }
-  #right-top-bar {
-    float: right;
-    width: 30%;
-    height: 100%;
 
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+        > span {
+            font-weight: bold;
+            margin-left: 36px;
+            color: white;
 
-    #user {
-      margin-right: 14px;
-      > a {
-        color: white;
-        &:hover {
-          text-decoration: none;
-          color: #15c8ff;
+            @media only screen and (max-width: 1221px) {
+                #hiddenText {
+                    display: none;
+                }
+            }
+
+            #money-total {
+                color: #009e0f;
+            }
         }
-        #user-icon {
-          text-align: center;
-          img {
-            width: 34px;
-            height: 34px;
-          }
-        }
-        #user-name {
-          font-size: 16px;
-          text-align: center;
-          line-height: 20px;
-          font-weight: bold;
-        }
-      }
     }
-    #bell {
-      // position: absolute;
-      // top: 50%;
-      // transform: translateY(-50%);
-      // display: inline-block;
-      margin-right: 25px;
-      img {
-        width: 34px;
-        height: 34px;
-      }
+
+    #mid-top-bar {
+        width: 40%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        > a {
+            display: block;
+            color: white;
+
+            &:hover {
+                text-decoration: none;
+                color: #15c8ff;
+            }
+
+            #add-icon {
+                text-align: center;
+
+                img {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+
+            #add-label {
+                font-size: 12px;
+                text-align: center;
+                line-height: 20px;
+                font-weight: bold;
+            }
+        }
     }
-  }
+
+    #right-top-bar {
+        float: right;
+        width: 30%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        #user {
+            margin-right: 14px;
+
+            > a {
+                color: white;
+
+                &:hover {
+                    text-decoration: none;
+                    color: #15c8ff;
+                }
+
+                #user-icon {
+                    text-align: center;
+
+                    img {
+                        width: 34px;
+                        height: 34px;
+                    }
+                }
+
+                #user-name {
+                    font-size: 16px;
+                    text-align: center;
+                    line-height: 20px;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        #bell {
+            // position: absolute;
+            // top: 50%;
+            // transform: translateY(-50%);
+            // display: inline-block;
+            margin-right: 25px;
+
+            img {
+                width: 34px;
+                height: 34px;
+            }
+        }
+    }
 }

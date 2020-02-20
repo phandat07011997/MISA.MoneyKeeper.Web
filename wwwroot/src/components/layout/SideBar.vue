@@ -8,7 +8,7 @@
         :key="item.id"
         class=""
       >
-        <router-link :to="item.activeComponent" class="router-link d-flex flex-column justify-content-center align-items-center">
+        <router-link :to="item.activeComponent" exact class="router-link d-flex flex-column justify-content-center align-items-center">
           <i :class="item.iconClass" style="font-size:28px"></i>
           <div style="font-size:9px">{{item.navName}}</div> 
         </router-link>
@@ -30,7 +30,7 @@ export default {
           iconClass: "fas fa-home",
           isHover: false,
           navName: "Tổng quan",
-          activeComponent: "/home",
+          activeComponent: "/",
           
         },
         {

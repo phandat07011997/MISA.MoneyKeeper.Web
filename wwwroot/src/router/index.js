@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import DayHistory from '../components/DayHistory.vue'
-import ViewDay from '../components/ViewDay.vue'
+
+//import ViewDay from '../components/ViewDay.vue'
 import Account from '../views/Account.vue'
 import Home from '../views/Home.vue'
 import Notebook from '../views/Notebook.vue'
@@ -26,157 +26,142 @@ import AccountDeposit from '../views/account/AccountDeposit.vue'
 import AccountMainAccount from '../views/account/AccountMainAccount.vue'
 import AccountSaveMoney from '../views/account/AccountSaveMoney.vue'
 
- 
+
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path:"/",
-    name:'home',
-    component :Home,
-    meta: { transition: 'fade-in-right' },
-  },
-  {
-    path:"/home",
-    name:'home',
-    component :Home,
-    meta: { transition: 'fade-in-right' },
-  },
-  {
-    path:'/notebook',
-    name:'notebook',
-    component:Notebook
-  },
-  {
-    path:'/spending-limit',
-    name:'spending-limit',
-    component:SpendingLimit
-  },
-  {
-    path:'/viewday',
-    name:'viewday',
-    component:ViewDay
-  },
-  {
-    path:'/dayhistory',
-    name:'dayhistory',
-    component: DayHistory
-  },
-  {
-    path:'/report',
-    name:'report',
-    component: Report,
-    children: [
-      {
-        path: 'events',
-        name: 'ReportEvents',
-        component: ReportEvents
+    {
+        path: "/",
+        name: 'home',
+        component: Home,
 
-      },
-      {
-        path: 'financial',
-        name: 'ReportFinancial',
-        component: ReportFinancial
+    },
 
-      },
-      {
-        path: 'analysis',
-        name: 'ReportFinancial',
-        component: ReportAnalysis
+    {
+        path: '/notebook',
+        name: 'notebook',
+        component: Notebook
+    },
+    {
+        path: '/spending-limit',
+        name: 'spending-limit',
+        component: SpendingLimit
+    },
+    {
+        path: '/report',
+        name: 'report',
+        component: Report,
+        children: [
+            {
+                path: 'events',
+                name: 'ReportEvents',
+                component: ReportEvents
 
-      },
-      {
-        path: 'charbar',
-        name: 'ReportCharbar',
-        component: ReportCharbar
+            },
+            {
+                path: 'financial',
+                name: 'ReportFinancial',
+                component: ReportFinancial
 
-      },
-      {
-        path: 'lentborrowed',
-        name: 'ReportLentBorrowed',
-        component: ReportLentBorrowed
+            },
+            {
+                path: 'analysis',
+                name: 'ReportAnalysis',
+                component: ReportAnalysis
 
-      },
-      {
-        path: 'payee',
-        name: 'ReportPayee',
-        component: ReportPayee
+            },
+            {
+                path: 'charbar',
+                name: 'ReportCharbar',
+                component: ReportCharbar
 
-      },
-      
-    ]
-  },
+            },
+            {
+                path: 'lentborrowed',
+                name: 'ReportLentBorrowed',
+                component: ReportLentBorrowed
 
-  {
-    path: '/account',
-    name: 'Account',
-    component: Account,
-    children:[
-      {
-        path: 'deposit',
-        name: 'AccountDeposit',
-        component: AccountDeposit
+            },
+            {
+                path: 'payee',
+                name: 'ReportPayee',
+                component: ReportPayee
 
-      },
-      {
-        path: 'mainAccount',
-        name: 'AccountMainAccount',
-        component: AccountMainAccount
+            },
 
-      },
-      {
-        path: 'saveMoney',
-        name: ' AccountSaveMoney',
-        component: AccountSaveMoney
+        ]
+    },
 
-      },
+    {
+        path: '/account',
+        name: 'Account',
+        component: Account,
+        children: [
+            {
+                path: 'deposit',
+                name: 'AccountDeposit',
+                component: AccountDeposit
 
-    ]
-  },
-  {
-    path:'/other',
-    name:'other',
-    component :Other,
-    children:[
-      {
-        path: 'categories',
-        name: 'OtherCategories',
-        component: OtherCategories
+            },
+            {
+                path: 'mainAccount',
+                name: 'AccountMainAccount',
+                component: AccountMainAccount
 
-      },
-      {
-        path: 'connectFriends',
-        name: 'OtherConnectFriends',
-        component: OtherConnectFriends
+            },
+            {
+                path: 'saveMoney',
+                name: ' AccountSaveMoney',
+                component: AccountSaveMoney
 
-      },
-      {
-        path: 'help',
-        name: 'OtherHelp',
-        component: OtherHelp
+            },
 
-      },
-      {
-        path: 'recurring',
-        name: 'OtherRecurring',
-        component: OtherRecurring
+        ]
+    },
+    {
+        path: '/other',
+        name: 'other',
+        component: Other,
+        children: [
+            {
+                path: 'categories',
+                name: 'OtherCategories',
+                component: OtherCategories
 
-      },
-      {
-        path: 'settings',
-        name: 'OtherSettings',
-        component: OtherSettings
+            },
+            {
+                path: 'connectFriends',
+                name: 'OtherConnectFriends',
+                component: OtherConnectFriends
 
-      },
-  ]
+            },
+            {
+                path: 'help',
+                name: 'OtherHelp',
+                component: OtherHelp
 
-  }
+            },
+            {
+                path: 'recurring',
+                name: 'OtherRecurring',
+                component: OtherRecurring
+
+            },
+            {
+                path: 'settings',
+                name: 'OtherSettings',
+                component: OtherSettings
+
+            },
+        ]
+
+    }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
 })
 
 export default router

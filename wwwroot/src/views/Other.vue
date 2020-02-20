@@ -1,7 +1,7 @@
 <template>
 <div class="d-flex">  
     <SubSidebar v-bind:subSidebars="subSidebars">Khác</SubSidebar>
-    <router-link></router-link>
+    <router-view></router-view>
 </div>
 </template>
 <script>

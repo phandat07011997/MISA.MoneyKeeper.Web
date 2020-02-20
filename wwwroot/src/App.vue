@@ -1,26 +1,28 @@
 ﻿<template>
-  <div id="app">
-    <div id="header">
-      <TopBar />
+    <div id="app">
+        <div id="header">
+            <TopBar />
+        </div>
+        <div id="main">
+            <div id="sidenav">
+                <SideBar />
+            </div>
+            <div id="content">
+                <transition name="view">
+                    <router-view />
+                </transition>
+            </div>
+        </div>
+        <div class="clr"></div>
+
     </div>
-    <div id="main">
-      <div id="sidenav">
-        <SideBar />
-      </div>
-      <div id="content">
-          <transition name="view">
-        <router-view />
-          </transition>
-      </div>
-    </div>
-    <div class="clr"></div>
-  </div>
+    
 </template>
 <script>
 import TopBar from "./components/layout/TopBar.vue";
 import SideBar from "./components/layout/SideBar.vue";
 export default {
-  components: { TopBar, SideBar }
+  components: { TopBar, SideBar, }
 };
 </script>
 
@@ -48,7 +50,7 @@ ul li {
 }
 
 #header {
-  position: fixed;
+  /*position: fixed;*/
   z-index: 1;
   width: 100%;
   top: 0; /* Stay at the top */
@@ -57,7 +59,6 @@ ul li {
 }
 
 #main {
-  margin-top: 72px;
   #sidenav {
     background-color: #073763;
     // position: fixed;

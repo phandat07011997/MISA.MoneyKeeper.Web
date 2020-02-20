@@ -1,3 +1,3 @@
-<template>
-    <div class="border"></div>
+﻿<template>
+    <div>Tài chính hiện tại</div>
 </template>

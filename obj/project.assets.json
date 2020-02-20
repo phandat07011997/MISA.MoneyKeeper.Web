@@ -626,19 +626,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DatPQ\\.nuget\\packages\\": {}
+    "C:\\Users\\pqdat\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MISA.MoneyKeeper.Web\\MISA.MoneyKeeper.Web.csproj",
+      "projectUniqueName": "E:\\MISA.MoneyKeeper.Web\\MISA.MoneyKeeper.Web\\MISA.MoneyKeeper.Web.csproj",
       "projectName": "MISA.MoneyKeeper.Web",
-      "projectPath": "D:\\MISA.MoneyKeeper.Web\\MISA.MoneyKeeper.Web.csproj",
-      "packagesPath": "C:\\Users\\DatPQ\\.nuget\\packages\\",
-      "outputPath": "D:\\MISA.MoneyKeeper.Web\\obj\\",
+      "projectPath": "E:\\MISA.MoneyKeeper.Web\\MISA.MoneyKeeper.Web\\MISA.MoneyKeeper.Web.csproj",
+      "packagesPath": "C:\\Users\\pqdat\\.nuget\\packages\\",
+      "outputPath": "E:\\MISA.MoneyKeeper.Web\\MISA.MoneyKeeper.Web\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\DatPQ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pqdat\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
