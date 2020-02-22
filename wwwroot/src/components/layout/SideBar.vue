@@ -3,16 +3,27 @@
     <ul class="ml-0  p-0 list-menu hidden-xs-down" style="height:100%">
 
       <!-- <router-link to="/" class="text-decoration-none"> -->
-      <li
-        v-for="item in items"
-        :key="item.id"
-        class=""
-      >
-        <router-link :to="item.activeComponent" exact class="router-link d-flex flex-column justify-content-center align-items-center">
-          <i :class="item.iconClass" style="font-size:28px"></i>
-          <div style="font-size:9px">{{item.navName}}</div> 
-        </router-link>
-      </li>
+        <li v-for="item in items"
+            :key="item.id"
+            class="">
+            <router-link :to="item.activeComponent" class="router-link d-flex flex-column justify-content-center align-items-center" v-if="item.activeComponent==='/other'">
+                <i :class="item.iconClass" style="font-size:28px"></i>
+                <div style="font-size:9px">{{item.navName}}</div>
+            </router-link>
+            <router-link :to="item.activeComponent" class="router-link d-flex flex-column justify-content-center align-items-center" v-else-if="item.activeComponent==='/report'">
+                <i :class="item.iconClass" style="font-size:28px"></i>
+                <div style="font-size:9px">{{item.navName}}</div>
+            </router-link>
+            <router-link :to="item.activeComponent" class="router-link d-flex flex-column justify-content-center align-items-center" v-else-if="item.activeComponent==='/account'">
+                <i :class="item.iconClass" style="font-size:28px"></i>
+                <div style="font-size:9px">{{item.navName}}</div>
+            </router-link>
+
+            <router-link :to="item.activeComponent" exact class="router-link d-flex flex-column justify-content-center align-items-center" v-else>
+                <i :class="item.iconClass" style="font-size:28px"></i>
+                <div style="font-size:9px">{{item.navName}}</div>
+            </router-link>
+        </li>
     </ul>
   </div>
 </template>
@@ -38,7 +49,7 @@ export default {
           iconClass: "fas fa-book",
           isHover: false,
           navName: "Sổ Ghi Chép",
-          activeComponent: "/notebook"
+          activeComponent: "/transaction"
         },
 
         {
@@ -83,54 +94,8 @@ export default {
   
 };
 </script>
-<style scoped>
-.active{
-  display: none;
-}
-.home {
-  width: 100%;
-  align-items: stretch;
-}
-.menu-on-left {
-  width: 76px;
-  height: 100%;
-  background-color: rgb(8, 72, 102);
-  z-index: 1;
-  position: fixed
 
-}
-.menu-on-left ul li {
-  text-align: center;
-  margin: 0;
-  height: 80px;
-}
-.menu-on-left ul li a {
-  text-align: center;
-  color: white;
-  font-weight: bold;
-  font-size: 10px;
-  display: content;
-  text-decoration: none;
-}
-.menu-on-left ul li:hover {
-  background-color: #319e4e;
-  color: rgb(8, 72, 102);
-}
-.menu-on-left ul li {
-  color: white;
-}
+<style scoped lang="scss">
 
-.router-link {
-  height: 100%;
-  width: 100%;
-  display: block;
-  padding: 10px;
-}
-.router-link:hover {
-  color: rgb(8, 72, 102);
-}
-.router-link-active {
-  background-color: #319e4e;
-  color: rgb(8, 72, 102) !important;
-}
+    @import "../../assets/css/layout/side-bar.scss";
 </style>

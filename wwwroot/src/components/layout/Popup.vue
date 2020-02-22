@@ -1,64 +1,81 @@
 ﻿
-    <template>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="col-md-4 modal-title" id="exampleModalLabel">
-                                <div class="col-md-12"><slot name="headerExpense"></slot></div>
-              
+<template>
+    <div class="modal fade" v-bind:id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-icon">
+                         <slot name="iconModal"></slot>
+                    </div>
+                    <div class="col-md-4 modal-title" id="exampleModalLabel">
+                        <div class="col-md-12">
+                            <slot name="headerExpense"></slot>
                         </div>
-                        <div class="col-md-4">
-                            <div class=""><slot ></slot></div>
-                        </div>
-                        
-                        <button type="button" class=" close button-style" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
                     </div>
-                    <div class="modal-body">
-                        <slot name="contentModal"></slot>
+                    <div class="col-md-4">
+                        <div class=""><slot></slot></div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="far fa-trash-alt"></i> Hủy</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fas fa-save"></i> Lưu</button>
-                    </div>
+
+                    <button type="button" class=" close button-style" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <slot name="contentModal"></slot>
+                </div>
+                <div class="modal-footer">
+                    <slot name="buttonModal"></slot>
+                    <!--<button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="far fa-trash-alt"></i> Hủy</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fas fa-save"></i> Lưu</button>-->
                 </div>
             </div>
-            </div>
-    </template>
-    <script>
-        export default {
-        name:'popup',
+        </div>
+    </div>
+</template>
+<script>
+    export default {
+        name: 'popup',
+        props: [
+            'modal'
+        ],
         data: () => {
             return {
             };
-            },
+        },
         //props: [expense],
     };
-    </script>
-<style >
-    .modal-content{
-      position: absolute;
-      margin-top: 75px;
-      left: 50%;
-      transform: translateX(-50%);
+</script>
+<style>
+    .modal-content {
+        position: absolute;
+        margin-top: 75px;
+        left: 50%;
+        transform: translateX(-50%);
         max-width: 900px;
-    /* width: 500px; */
-    min-width: 500px;
-    min-height: 700px;
-        
+        /* width: 500px; */
+        min-width: 500px;
     }
 
 
     .modal-dialog {
-        /*position:*/ 
+        /*position:*/
     }
+
     .modal-header {
-        text-align: center;
-    background: #319e4e;
-    color: white;
-    font-size: 20px;
+        background: #319e4e;
+        color: white;
+        font-size: 20px;
+
+    }
+
+    .modal-title {
+        padding:0;
+    }
+
+    .modal-icon {
+        display: flex;
+        justify-content:center;
+        align-items:center;
     }
 
     .button-style {

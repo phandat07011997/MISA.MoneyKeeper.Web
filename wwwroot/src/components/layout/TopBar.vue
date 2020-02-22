@@ -6,7 +6,7 @@
 
                 <i class="far fa-credit-card hidden-xs" aria-hidden="true"></i>
                 <span id="hiddenText"> Tài chính hiện tại:</span>
-                <span id="money-total" class="">+100.000 VND</span>
+                <span id="money-total" class=""> +100.000 VND</span>
             </span>
         </div>
 
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div id="mid-top-bar">
-            <a class="" data-toggle="modal" data-target="#exampleModal" href="#">
+            <a class="" data-toggle="modal" v-bind:data-target="'#' + modal" href="#">
 
 
                 <div id="add-icon">
@@ -35,7 +35,7 @@
                 <div id="add-label">Thêm ghi chép</div>
 
             </a>
-            <AddExpense />
+            <AddTransaction v-bind:modal="modal"/>
 
 
         </div>
@@ -43,19 +43,21 @@
     </div>
 </template>
 <script>
-    import AddExpense from '../AddExpense.vue'
+    import AddTransaction from '@/components/transaction/AddTransaction.vue'
     export default {
         name: "topbar",
         data() {
-            return {};
+            return {
+                modal: "addModal"
+            };
         },
         components: {
-            AddExpense,
+            AddTransaction,
         },
         methods: {}
     };
 </script>
 <style lang="scss">
 
-    @import "../../assets/css/top-bar.scss";
+    @import "../../assets/css/layout/top-bar.scss";
 </style>

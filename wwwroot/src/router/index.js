@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 //import ViewDay from '../components/ViewDay.vue'
 import Account from '../views/Account.vue'
 import Home from '../views/Home.vue'
-import Notebook from '../views/Notebook.vue'
+import Transaction from '../views/Transaction.vue'
 import Report from '../views/Report.vue'
 import SpendingLimit from '../views/SpendingLimit.vue'
 
@@ -38,9 +38,9 @@ const routes = [
     },
 
     {
-        path: '/notebook',
-        name: 'notebook',
-        component: Notebook
+        path: '/transaction',
+        name: 'Transaction',
+        component: Transaction
     },
     {
         path: '/spending-limit',

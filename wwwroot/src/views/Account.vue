@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex">
         <SubSidebar v-bind:subSidebars="subSidebars">Tài Khoản</SubSidebar>
-        <router-view></router-view>
+        <div class="child-content"><router-view></router-view></div>
     </div>
 </template>
 
@@ -42,4 +42,9 @@
     };
 </script>
 
-<style scoped>
+<style lang="scss">
+
+    .child-content {
+        width: 100%;
+    }
+</style>

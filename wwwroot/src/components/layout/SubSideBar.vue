@@ -1,5 +1,12 @@
 <template>
-    <div class="col-md-2 border-right sub-sidebar">
+    <div class="subsidebar shadow">
+        <div class="subsidebartitle"><slot></slot></div>
+        <router-link :to="subSidebar.activeComponent" v-for="subSidebar in subSidebars" :key="subSidebar.id" class="subsidelink ">
+            <i :class="subSidebar.iconSub" ></i>
+            <span class="">{{subSidebar.nameSub}}</span>
+        </router-link>
+    </div>
+    <!-- <div class="col-md-2 border-right sub-sidebar">
         <div class="row subsidbar-row">
             <div class="col-md-12 border-bottom">
                 <div style="text-align: center; padding-top: 15px;">
@@ -15,13 +22,13 @@
 
                         <i :class="subSidebar.iconSub" style="width:20px;"></i>
 
-                        <div style="text-align:left;margin-left:30px;">{{subSidebar.nameSub}}</div>
+                        <div style="text-align:left;margin-left:30px;"></div>
                     </router-link>
 
                 </li>
             </ul>
         </div>
-    </div>
+    </div> -->
 </template>
 <script>
     export default {
@@ -33,60 +40,7 @@
     };
 </script>
 
-<style scoped>
-    .sub-sidebar {
-        /*position: fixed;*/
-        height: 100%;
-    }
+<style scoped lang="scss">
 
-    .container {
-        border: 1px solid lightgray;
-        border-radius: 5px;
-        margin-top: 20px;
-        width: 60%;
-    }
-
-    .menu-on-left {
-        height: 50px;
-        width: 100%;
-    }
-
-    .router-link {
-        height: 100%;
-        width: 100%;
-        padding: 10px;
-        color: white;
-    }
-
-        .router-link:hover {
-            color: rgb(8, 72, 102);
-        }
-
-    .router-link-active {
-        background-color: #319e4e;
-        color: rgb(8, 72, 102) !important;
-    }
-
-    .subsidebar-list {
-        color: black;
-        text-decoration: none;
-        width: 100%;
-        height: 100%;
-        padding: 6px
-    }
-
-        .subsidebar-list:hover {
-            background-color: #319e4e;
-            color: rgb(8, 72, 102);
-        }
-
-    .icon-sub {
-        min-width: 100%
-    }
-
-    .icon-style {
-        font-size: 20px !important;
-        width: 20px;
-        height: 20px;
-    }
+    @import "../../assets/css/layout/sub-side-bar.scss";
 </style>

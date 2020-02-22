@@ -1,0 +1,39 @@
+﻿.subsidebar {
+    position: fixed;
+    background-color: white;
+    height: calc(100vh - 72px);
+    width: 234px;
+    display: flex;
+    flex-direction: column;
+
+    a {
+        font-size: 20px;
+        line-height: 60px;
+        text-decoration: none;
+
+        &:hover {
+            background-color: #c7e4ff;
+        }
+
+        i {
+            width: 20px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+
+    .subsidebartitle {
+        font-size: 30px;
+        line-height: 60px;
+        font-weight: bold;
+        text-align: center;
+        padding: auto auto;
+        background-color: #358cdb;
+        color: white;
+    }
+
+    .router-link-active {
+        background-color: #c7e4ff;
+        color: #007bff;
+    }
+}

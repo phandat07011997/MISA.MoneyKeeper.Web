@@ -1,0 +1,55 @@
+.active {
+    display: none;
+}
+
+.home {
+    width: 100%;
+    align-items: stretch;
+}
+
+.menu-on-left {
+    width: 76px;
+    height: 100%;
+    background-color: rgb(8, 72, 102);
+    z-index: 1;
+    position: fixed;
+
+    ul li {
+        text-align: center;
+        margin: 0;
+        height: 80px;
+
+        a {
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-size: 10px;
+            display: content;
+            text-decoration: none;
+        }
+
+        &:hover {
+            background-color: #319e4e;
+            color: rgb(8, 72, 102);
+        }
+
+        color: white;
+    }
+}
+
+.router-link {
+    height: 100%;
+    width: 100%;
+    display: block;
+    padding: 10px;
+
+    &:hover {
+        background-color: #1088c0;
+        color: white;
+    }
+}
+
+.router-link-active {
+    background-color: #1088c0;
+    color: white;
+}

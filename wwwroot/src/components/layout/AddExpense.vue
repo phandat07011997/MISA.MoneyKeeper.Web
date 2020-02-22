@@ -9,7 +9,7 @@
     </div>
 </template>
 <script>
-    import Popup from './layout/Popup.vue'
+    import Popup from './Popup.vue'
     export default {
         data() {
             return {

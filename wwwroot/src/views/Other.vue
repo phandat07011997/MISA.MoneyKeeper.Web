@@ -1,7 +1,8 @@
 <template>
 <div class="d-flex">  
     <SubSidebar v-bind:subSidebars="subSidebars">Khác</SubSidebar>
-    <router-view></router-view>
+    <div class="child-content"><router-view></router-view></div>
+    
 </div>
 </template>
 <script>
@@ -50,5 +51,8 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang="scss">
+    .child-content{
+        width:100%;
+    }
 </style>

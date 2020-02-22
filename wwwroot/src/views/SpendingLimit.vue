@@ -1,3 +1,5 @@
-<template>
-    <div>han muc chi</div>
+﻿<template>
+    <div>
+        <h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi</h1></h1></h1></h1></h1></h1></h1></h1><h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi</h1></h1></h1></h1></h1></h1></h1></h1><h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi</h1></h1></h1></h1></h1></h1></h1></h1><h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi</h1></h1></h1></h1></h1></h1></h1></h1><h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi<h1>Hạn mức chi</h1></h1></h1></h1></h1></h1></h1></h1>
+    </div>
 </template>

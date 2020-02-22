@@ -2,7 +2,7 @@
 
 <div class="container-report d-flex">  
     <SubSidebar v-bind:subSidebars="subSidebars">Báo cáo</SubSidebar>
-  <router-view></router-view>
+    <div class="child-content"><router-view></router-view></div>
 </div>
 
 </template>
@@ -58,5 +58,9 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang="scss">
+
+    .child-content {
+        width: 100%;
+    }
 </style>
