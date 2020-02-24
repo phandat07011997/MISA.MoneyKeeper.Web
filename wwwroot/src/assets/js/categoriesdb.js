@@ -4,7 +4,7 @@ export var categories = {
             id: 1,
             abc: "#1",
             name: "Ăn uống",
-            allowToChange: true,
+            allowToEdit: true,
             note: '#anuong',
             note1: 'anuong',
             icon: "fas fa-utensils",
@@ -19,7 +19,7 @@ export var categories = {
             id: 2,
             abc: "#2",
             name: "Cho vay",
-            allowToChange: false,
+            allowToEdit: false,
             note: '#chovay',
             note1: 'chovay',
             icon: "fas fa-money-bill-wave",
@@ -28,7 +28,7 @@ export var categories = {
             id: 3,
             name: "Con cái",
             icon: "fas fa-baby",
-            allowToChange: true,
+            allowToEdit: true,
             note: '#concai',
             note1: 'concai',
             childs: [
@@ -43,7 +43,7 @@ export var categories = {
             id: 4,
             name: "Dịch vụ sinh hoạt",
             icon: "fab fa-amazon",
-            allowToChange: true,
+            allowToEdit: true,
             note: '#sinhhoat',
             note1: 'sinhhoat',
             childs: [
@@ -61,7 +61,7 @@ export var categories = {
         {
             id: 5,
             name: "Đi lại",
-            allowToChange: true,
+            allowToEdit: true,
             icon: 'fas fa-directions',
             note: '#dilai',
             note1: 'dilai',
@@ -77,7 +77,7 @@ export var categories = {
         {
             id: 6,
             name: "Hiếu hỉ",
-            allowToChange: true,
+            allowToEdit: true,
             note: '#hieuhi',
             note1: 'hieuhi',
             icon: 'fas fa-award',
@@ -91,7 +91,7 @@ export var categories = {
         {
             id: 7,
             name: "Hưởng thụ",
-            allowToChange: true,
+            allowToEdit: true,
             note: '#huongthu',
             note1: 'huongthu',
             icon: 'fas fa-spa',
@@ -106,7 +106,7 @@ export var categories = {
         {
             id: 8,
             name: "Nhà cửa",
-            allowToChange: true,
+            allowToEdit: true,
             icon: 'far fa-building',
             note: '#nhacua',
             note1: 'nhacua',
@@ -119,7 +119,7 @@ export var categories = {
         {
             id: 9,
             name: "Phát triển bản thân",
-            allowToChange: true,
+            allowToEdit: true,
             note: '#phattrienbanthan',
             note1: 'phattrienbanthan',
             childs: [
@@ -131,7 +131,7 @@ export var categories = {
         {
             id: 10,
             name: "Sức khỏe",
-            allowToChange: true,
+            allowToEdit: true,
             note: '#suckhoe',
             note1: 'suckhoe',
             childs: [
@@ -144,7 +144,7 @@ export var categories = {
         {
             id: 11,
             name: "Trả nợ",
-            allowToChange: false,
+            allowToEdit: false,
             note: '#trano',
             note1: 'trano',
             icon: 'fas fa-money-bill-wave'
@@ -152,7 +152,7 @@ export var categories = {
         {
             id: 12,
             name: "Trang phục",
-            allowToChange: true,
+            allowToEdit: true,
             note: '#trangphuc',
             note1: 'trangphuc',
             childs: [
@@ -163,13 +163,13 @@ export var categories = {
         },
     ],
     categoriesIn: [
-        { id: 1, name: "Đi vay", allowToChange: false, note: '', icon: 'fas fa-hand-holding-usd' },
-        { id: 2, name: "Được cho/tặng", allowToChange: true, note: '', icon: 'fas fa-gift' },
-        { id: 3, name: "Khác", allowToChange: true, note: '', icon: 'fas fa-box' },
-        { id: 4, name: "Lãi tiết kiệm", allowToChange: false, note: '', icon: 'fas fa-coins' },
-        { id: 5, name: "Lương", allowToChange: true, note: '', icon: 'fas fa-money-check-alt' },
-        { id: 6, name: "Thu nợ", allowToChange: false, note: '', icon: 'fas fa-funnel-dollar' },
-        { id: 7, name: "Thưởng", allowToChange: true, note: '', icon: 'fas fa-wallet' },
-        { id: 7, name: "Tiền lãi", allowToChange: true, note: '', icon: 'fas fa-file-invoice-dollar' },
+        { id: 1, name: "Đi vay", allowToEdit: false, note: '', icon: 'fas fa-hand-holding-usd' },
+        { id: 2, name: "Được cho/tặng", allowToEdit: true, note: '', icon: 'fas fa-gift' },
+        { id: 3, name: "Khác", allowToEdit: true, note: '', icon: 'fas fa-box' },
+        { id: 4, name: "Lãi tiết kiệm", allowToEdit: false, note: '', icon: 'fas fa-coins' },
+        { id: 5, name: "Lương", allowToEdit: true, note: '', icon: 'fas fa-money-check-alt' },
+        { id: 6, name: "Thu nợ", allowToEdit: false, note: '', icon: 'fas fa-funnel-dollar' },
+        { id: 7, name: "Thưởng", allowToEdit: true, note: '', icon: 'fas fa-wallet' },
+        { id: 7, name: "Tiền lãi", allowToEdit: true, note: '', icon: 'fas fa-file-invoice-dollar' },
     ]
 }

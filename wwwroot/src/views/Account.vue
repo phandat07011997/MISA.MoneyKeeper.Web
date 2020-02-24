@@ -15,7 +15,8 @@
                         id: 1,
                         nameSub: "Tài khoản",
                         iconSub: "fas fa-user fa-1x",
-                        activeComponent: "/account/mainAccount"
+                        activeComponent: "/account/mainAccount",
+
                     },
                     {
                         id: 2,
@@ -42,9 +43,8 @@
     };
 </script>
 
-<style lang="scss">
+<style lang="scss" >
 
-    .child-content {
-        width: 100%;
-    }
+   @import "../assets/css/views/account.scss";
+
 </style>

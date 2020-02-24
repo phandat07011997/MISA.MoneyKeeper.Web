@@ -20,11 +20,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.home{
-  width: 100%;
-  border:1px solid black;
-  height: 100%;
-}
-
+<style lang="scss" >
+    @import '../assets/css/views/home.scss';
 </style>

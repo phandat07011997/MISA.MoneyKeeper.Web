@@ -58,9 +58,6 @@ export default {
   }
 };
 </script>
-<style lang="scss">
-
-    .child-content {
-        width: 100%;
-    }
+<style lang="scss" >
+@import "../assets/css/views/report.scss";
 </style>

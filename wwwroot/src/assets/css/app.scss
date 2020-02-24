@@ -1,6 +1,7 @@
 ﻿* {
     margin: 0px;
     padding: 0px;
+
 }
 
 a {
@@ -34,6 +35,7 @@ ul li {
         // position: fixed;
         width: 76px;
         height: calc(100% - 72px);
+
         // z-index: 1;
         // top: 72px; /* Stay at the top */
         // left: 0;
@@ -48,7 +50,12 @@ ul li {
         // position: fixed;
         height: calc(100vh - 72px);
         background-color: #e9ebee;
-        margin-left: 76px;
+        margin-left: 72px;
+    }
+    @media only screen and (max-width:600px){
+        #content{
+            margin-left:0px;
+        }
     }
 }
 #back-to-top-btn {

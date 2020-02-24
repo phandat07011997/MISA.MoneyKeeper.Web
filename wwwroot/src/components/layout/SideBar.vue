@@ -26,6 +26,7 @@
         </li>
     </ul>
   </div>
+        
 </template>
 
 <script>
@@ -95,7 +96,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
     @import "../../assets/css/layout/side-bar.scss";
 </style>

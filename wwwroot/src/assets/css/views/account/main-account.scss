@@ -1,0 +1,46 @@
+﻿.total-money {
+    margin-top: 50px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 50px;
+}
+.main-account {
+    margin-top: 50px;
+    width: 1200px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+
+    ul {
+
+        li {
+            list-style: none;
+            margin: 0;
+            height: 70px;
+
+            .left-list {
+                height: 100%;
+                margin: 0;
+            }
+
+            .left-list:active, hover {
+                background-color: #319e4e;
+            }
+        }
+    }
+
+    .btn-style {
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+}
+.list-account {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-top:1px solid black;
+    border-bottom:1px solid black;
+    .items-in-list {
+        height: 100%;
+    }
+}

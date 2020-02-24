@@ -2,7 +2,7 @@
     <div id="top-bar">
         <div id="left-top-bar">
             <img src="../../assets/img/logo-moneykeeper.png" alt />
-            <span>
+            <span class="money-now">
 
                 <i class="far fa-credit-card hidden-xs" aria-hidden="true"></i>
                 <span id="hiddenText"> Tài chính hiện tại:</span>
@@ -21,7 +21,7 @@
                     <div id="user-icon">
                         <img src="../../assets/img/user-icon.png" />
                     </div>
-                    <div id="user-name">Đạt</div>
+                    <div id="user-name">{{getUser}}</div>
                 </a>
             </div>
         </div>
@@ -48,16 +48,26 @@
         name: "topbar",
         data() {
             return {
-                modal: "addModal"
+                modal: "addModal",
             };
         },
         components: {
             AddTransaction,
         },
-        methods: {}
+        computed:
+        {
+            getUser() {
+                var user = JSON.parse(localStorage.getItem('user'));
+                return user.username
+            }
+        },
+        created() {
+            //console.log(JSON.parse(localStorage.getItem('user')))
+            //console.log(JSON.parse(localStorage.getItem('user')).username)
+        }
     };
 </script>
-<style lang="scss">
+<style lang="scss"  >
 
-    @import "../../assets/css/layout/top-bar.scss";
+    @import '../../assets/css/layout/top-bar.scss';
 </style>

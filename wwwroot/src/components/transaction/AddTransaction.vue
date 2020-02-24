@@ -139,10 +139,9 @@
 </template>
 <script>
     import Popup from '../layout/Popup.vue';
-    import TransactionClass from '../../assets/js/transaction'
-    import IncomeExpenseCategoryClass from '../../assets/js/IncomeExpenseCategory'
-    import UserAccountClass from '../../assets/js/UserAccount'
-    import eventBus from '../../assets/js/eventbus'
+    //import TransactionClass from '../../assets/js/transaction'
+    //import eventBus from '../../assets/js/eventbus'
+    import { mapActions, mapState } from "vuex";
     export default {
         props: [
             'modal'
@@ -152,9 +151,63 @@
             return {
                 isCollapse: false,
                 selected: false,
-                incomeExpenseCategories: null,
-                userAccounts: null,
+               
                 state: {
+                    TransactionID: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+                    AccountID: '',
+                    Address: '',
+                    Amount: '',
+                    ClosingAmount:'',
+                    Description: '',
+                    EventName: '',
+                    FCAmount: '',
+                    Following: true,
+                    Giver: '',
+                    ImageAttachName: null,
+                    IncomeExpenseCategoryID: '',
+                    IsFavorite: false,
+                    IsoDebitDate: '',
+                    IsoTransactionDate: '',
+                    Latitude: 0,
+                    Longitude: 0,
+                    Payee:'',
+                    RelatedPerson: null,
+                    RelationshipID: null,
+                    SortOrder: 0,
+                    ToAccountID: null,
+                    TransactionType: 1
+                },
+
+                incomeExpenseCategoryChoosed: null,
+                userAccountChoosed: null,
+            };
+        },
+        components: {
+            Popup,
+        },
+        methods: {
+            selectIncomeExpenseCategory(id) {
+                for (var item in this.incomeExpenseCategories) {
+                    if (this.incomeExpenseCategories[item].IncomeExpenseCategoryID == id) {
+                        console.log(this.incomeExpenseCategories[item])
+                        return [this.incomeExpenseCategoryChoosed = this.incomeExpenseCategories[item], this.state.IncomeExpenseCategoryID = this.incomeExpenseCategories[item].IncomeExpenseCategoryID];
+                    }
+                }
+                
+                return null;
+            },
+             selectUserAccount(id) {
+                for (var item in this.userAccounts) {
+                    if (this.userAccounts[item].AccountID == id) {
+                        console.log(this.userAccounts[item])
+                        return [this.userAccountChoosed = this.userAccounts[item], this.state.AccountID = this.userAccounts[item].AccountID];
+                    }
+                }
+                
+                return null;
+            },
+            clearData() {
+                var data = {
                     AccountID: '',
                     Address: '',
                     Amount: '',
@@ -178,65 +231,26 @@
                     ToAccountID: null,
                     TransactionID: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
                     TransactionType: 1
-                },
-
-                incomeExpenseCategoryChoosed: null,
-                userAccountChoosed: null,
-            };
-        },
-        components: {
-            Popup,
-        },
-
-        methods: {
-            selectIncomeExpenseCategory(id) {
-                for (var item in this.incomeExpenseCategories) {
-                    if (this.incomeExpenseCategories[item].IncomeExpenseCategoryID == id) {
-                        console.log(this.incomeExpenseCategories[item])
-                        return [this.incomeExpenseCategoryChoosed = this.incomeExpenseCategories[item], this.state.IncomeExpenseCategoryID = this.incomeExpenseCategories[item].IncomeExpenseCategoryID];
-                    }
                 }
-                
-                return null;
-            },
-             selectUserAccount(id) {
-                for (var item in this.userAccounts) {
-                    if (this.userAccounts[item].AccountID == id) {
-                        console.log(this.userAccounts[item])
-                        return [this.userAccountChoosed = this.userAccounts[item], this.state.AccountID = this.userAccounts[item].AccountID];
-                    }
-                }
-                
-                return null;
+                return this.state = data;
             },
             createTransaction() {
-                var transaction = new TransactionClass();
-                //console.log(transaction)
-                console.log(this.state)
-                transaction.create(this.state);
-                eventBus.$emit('rerender', true);
-             }
+                this.$store.dispatch('financetransaction/create', this.state);
+                //eventBus.$emit('rerender', true);
+                this.clearData();
+            },
+            ...mapActions("incomeexpensecategory", ["getAll"]),
+            ...mapActions("useraccount", ["getAll"]),
+            ...mapActions("financetransaction", ["create"]),
         },
-
         created() {
-            var _this = this;
-            var incomeExpenseCategory = new IncomeExpenseCategoryClass();
-            var userAccount = new UserAccountClass();
-
-            incomeExpenseCategory.getAll().then(data => {
-                console.log(data)
-                return _this.incomeExpenseCategories = data;
-            }).catch(err => {
-                console.log(err)
-            })
-
-            userAccount.getAll().then(data => {
-                console.log(data)
-                return _this.userAccounts = data;
-            }).catch(err => {
-                console.log(err)
-            })
-        }
+            this.$store.dispatch('incomeexpensecategory/getAll');
+            this.$store.dispatch('useraccount/getAll');
+        },
+        computed: mapState({
+            incomeExpenseCategories: state => state.incomeexpensecategory.data,
+            userAccounts: state => state.useraccount.data,
+        }),
     }
 </script>
 <style lang="scss">
@@ -252,7 +266,7 @@
         textarea
 
     {
-        border-radius: 20px;
+        border-radius: 10px;
         height: 100px;
         width: 100%;
         border: none;

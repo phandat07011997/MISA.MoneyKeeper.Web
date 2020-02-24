@@ -1,12 +1,6 @@
 <template>
-    <div class="subsidebar shadow">
-        <div class="subsidebartitle"><slot></slot></div>
-        <router-link :to="subSidebar.activeComponent" v-for="subSidebar in subSidebars" :key="subSidebar.id" class="subsidelink ">
-            <i :class="subSidebar.iconSub" ></i>
-            <span class="">{{subSidebar.nameSub}}</span>
-        </router-link>
-    </div>
-    <!-- <div class="col-md-2 border-right sub-sidebar">
+    
+     <div class="col-md-2 border-right sub-sidebar">
         <div class="row subsidbar-row">
             <div class="col-md-12 border-bottom">
                 <div style="text-align: center; padding-top: 15px;">
@@ -22,13 +16,13 @@
 
                         <i :class="subSidebar.iconSub" style="width:20px;"></i>
 
-                        <div style="text-align:left;margin-left:30px;"></div>
+                        <div style="text-align:left;margin-left:30px;">{{subSidebar.nameSub}}</div>
                     </router-link>
 
                 </li>
             </ul>
         </div>
-    </div> -->
+    </div> 
 </template>
 <script>
     export default {
@@ -42,5 +36,5 @@
 
 <style scoped lang="scss">
 
-    @import "../../assets/css/layout/sub-side-bar.scss";
+    @import "../../assets/css/layout/sub-sidebar.scss";
 </style>

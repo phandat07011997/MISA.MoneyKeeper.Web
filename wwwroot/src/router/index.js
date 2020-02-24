@@ -24,144 +24,169 @@ import OtherSettings from '../views/other/OtherSettings.vue'
 
 import AccountDeposit from '../views/account/AccountDeposit.vue'
 import AccountMainAccount from '../views/account/AccountMainAccount.vue'
-import AccountSaveMoney from '../views/account/AccountSaveMoney.vue'
+import AccountAccumulation from '../views/account/AccountAccumulation.vue'
 
+import Login from '../views/authenticate/Login.vue'
+import Main from '../components/layout/Main.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
     {
         path: "/",
-        name: 'home',
-        component: Home,
-
-    },
-
-    {
-        path: '/transaction',
-        name: 'Transaction',
-        component: Transaction
-    },
-    {
-        path: '/spending-limit',
-        name: 'spending-limit',
-        component: SpendingLimit
-    },
-    {
-        path: '/report',
-        name: 'report',
-        component: Report,
+        name: 'Main',
+        component: Main,
         children: [
             {
-                path: 'events',
-                name: 'ReportEvents',
-                component: ReportEvents
-
+                path: 'home',
+                name: 'Home',
+                component: Home
             },
             {
-                path: 'financial',
-                name: 'ReportFinancial',
-                component: ReportFinancial
-
+                path: 'transaction',
+                name: 'Transaction',
+                component: Transaction
             },
             {
-                path: 'analysis',
-                name: 'ReportAnalysis',
-                component: ReportAnalysis
-
+                path: 'spending-limit',
+                name: 'spending-limit',
+                component: SpendingLimit
             },
             {
-                path: 'charbar',
-                name: 'ReportCharbar',
-                component: ReportCharbar
+                path: 'report',
+                name: 'report',
+                component: Report,
+                children: [
+                    {
+                        path: 'events',
+                        name: 'ReportEvents',
+                        component: ReportEvents
 
+                    },
+                    {
+                        path: 'financial',
+                        name: 'ReportFinancial',
+                        component: ReportFinancial
+
+                    },
+                    {
+                        path: 'analysis',
+                        name: 'ReportAnalysis',
+                        component: ReportAnalysis
+
+                    },
+                    {
+                        path: 'charbar',
+                        name: 'ReportCharbar',
+                        component: ReportCharbar
+
+                    },
+                    {
+                        path: 'lentborrowed',
+                        name: 'ReportLentBorrowed',
+                        component: ReportLentBorrowed
+
+                    },
+                    {
+                        path: 'payee',
+                        name: 'ReportPayee',
+                        component: ReportPayee
+
+                    },
+
+                ]
+            },
+
+            {
+                path: 'account',
+                name: 'Account',
+                component: Account,
+                children: [
+                    {
+                        path: 'deposit',
+                        name: 'AccountDeposit',
+                        component: AccountDeposit
+
+                    },
+                    {
+                        path: 'mainAccount',
+                        name: 'AccountMainAccount',
+                        component: AccountMainAccount
+
+                    },
+                    {
+                        path: 'saveMoney',
+                        name: ' AccountSaveMoney',
+                        component: AccountAccumulation
+
+                    },
+
+                ]
             },
             {
-                path: 'lentborrowed',
-                name: 'ReportLentBorrowed',
-                component: ReportLentBorrowed
+                path: 'other',
+                name: 'other',
+                component: Other,
+                children: [
+                    {
+                        path: 'categories',
+                        name: 'OtherCategories',
+                        component: OtherCategories
 
-            },
-            {
-                path: 'payee',
-                name: 'ReportPayee',
-                component: ReportPayee
+                    },
+                    {
+                        path: 'connectFriends',
+                        name: 'OtherConnectFriends',
+                        component: OtherConnectFriends
 
-            },
+                    },
+                    {
+                        path: 'help',
+                        name: 'OtherHelp',
+                        component: OtherHelp
 
+                    },
+                    {
+                        path: 'recurring',
+                        name: 'OtherRecurring',
+                        component: OtherRecurring
+
+                    },
+                    {
+                        path: 'settings',
+                        name: 'OtherSettings',
+                        component: OtherSettings
+
+                    },
+                ]
+
+            }
         ]
     },
-
     {
-        path: '/account',
-        name: 'Account',
-        component: Account,
-        children: [
-            {
-                path: 'deposit',
-                name: 'AccountDeposit',
-                component: AccountDeposit
-
-            },
-            {
-                path: 'mainAccount',
-                name: 'AccountMainAccount',
-                component: AccountMainAccount
-
-            },
-            {
-                path: 'saveMoney',
-                name: ' AccountSaveMoney',
-                component: AccountSaveMoney
-
-            },
-
-        ]
+        path: '/login',
+        name: 'Login',
+        component: Login
     },
-    {
-        path: '/other',
-        name: 'other',
-        component: Other,
-        children: [
-            {
-                path: 'categories',
-                name: 'OtherCategories',
-                component: OtherCategories
 
-            },
-            {
-                path: 'connectFriends',
-                name: 'OtherConnectFriends',
-                component: OtherConnectFriends
-
-            },
-            {
-                path: 'help',
-                name: 'OtherHelp',
-                component: OtherHelp
-
-            },
-            {
-                path: 'recurring',
-                name: 'OtherRecurring',
-                component: OtherRecurring
-
-            },
-            {
-                path: 'settings',
-                name: 'OtherSettings',
-                component: OtherSettings
-
-            },
-        ]
-
-    }
+    
 ]
-
 const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes
 })
+
+router.beforeEach((to, from, next) => {
+    const publicPages = ['/login'];
+    const authRequired = !publicPages.includes(to.path);
+    const loggedIn = localStorage.getItem('user');
+    if (authRequired && !loggedIn)
+        next('/login')
+    // if the user is not authenticated, `next` is called twice
+    else next()
+})
+
+
 
 export default router

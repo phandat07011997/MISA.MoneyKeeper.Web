@@ -1,11 +1,12 @@
 ﻿
+
 <template>
     <div class="modal fade" v-bind:id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="modal-icon">
-                         <slot name="iconModal"></slot>
+                        <slot name="iconModal"></slot>
                     </div>
                     <div class="col-md-4 modal-title" id="exampleModalLabel">
                         <div class="col-md-12">
@@ -44,51 +45,7 @@
         },
         //props: [expense],
     };
-</script>
-<style>
-    .modal-content {
-        position: absolute;
-        margin-top: 75px;
-        left: 50%;
-        transform: translateX(-50%);
-        max-width: 900px;
-        /* width: 500px; */
-        min-width: 500px;
-    }
-
-
-    .modal-dialog {
-        /*position:*/
-    }
-
-    .modal-header {
-        background: #319e4e;
-        color: white;
-        font-size: 20px;
-
-    }
-
-    .modal-title {
-        padding:0;
-    }
-
-    .modal-icon {
-        display: flex;
-        justify-content:center;
-        align-items:center;
-    }
-
-    .button-style {
-        margin-right: 20px;
-        color: #fff;
-        opacity: 1 !important;
-    }
-
-
-    @media (min-width: 576px) {
-        .modal-dialog {
-            max-width: 900px !important;
-            margin: 1.75rem auto;
-        }
-    }
+    </script>
+<style lang="scss" scoped>
+   @import "../../assets/css/layout/pop-up.scss";
 </style>

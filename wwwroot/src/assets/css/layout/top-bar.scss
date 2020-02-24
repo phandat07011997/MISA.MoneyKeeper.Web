@@ -15,12 +15,16 @@
             width: 50px;
             margin-left: 14px;
         }
-
+        @media only screen and (max-width:400px){
+            money-now{
+                display:none;
+            }
+        }
         > span {
             font-weight: bold;
             margin-left: 36px;
             color: white;
-
+            min-width:200px;
             @media only screen and (max-width: 1221px) {
                 #hiddenText {
                     display: none;

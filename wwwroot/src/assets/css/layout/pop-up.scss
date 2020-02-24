@@ -1,0 +1,34 @@
+﻿.modal-content {
+    position: absolute;
+    margin-top: 75px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 900px;
+    /* width: 500px; */
+    min-width: 500px;
+    min-height: 700px;
+}
+
+.modal-dialog {
+    /*position:*/
+}
+
+.modal-header {
+    text-align: center;
+    background: #319e4e;
+    color: white;
+    font-size: 20px;
+}
+
+.button-style {
+    margin-right: 20px;
+    color: #fff;
+    opacity: 1 !important;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 900px !important;
+        margin: 1.75rem auto;
+    }
+}
