@@ -1,128 +1,86 @@
 ﻿<template>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6 offset-sm-3">
-                <div class="hello">
-                    <div class="login">
-                        <div class="main">
-                            <div class="logo">
-                                <img src="https://testid.misa.com.vn/img/Logo%20MISA_VN.svg" alt="misa-icon" />
-                            </div>
-                            <div class="content" v-if="lang === 'VN'">
-                                <div class="left">
-                                    <h2>Đăng nhập</h2>
-                                    <p>Một tài khoản sử dụng tất cả các ứng dụng của MISA</p>
+    <div class="login">
+        <div class="main">
+            <div class="logo">
+                <img src="https://testid.misa.com.vn/img/Logo%20MISA_VN.svg" alt="misa-icon" />
+            </div>
+            <div class="content" v-if="lang === 'VN'">
+                <div class="left">
+                    <h2>Đăng nhập</h2>
+                    <p>Một tài khoản sử dụng tất cả các ứng dụng của MISA</p>
 
-                                    <input type="text"
-                                           id="email"
-                                           name="email"
-                                           v-model="email"
-                                           placeholder="Số điện thoại hoặc email" />
-                                    <p class="errorEmail text-danger"></p>
-                                    <input type="password"
-                                           id="pass"
-                                           name="pass"
-                                           v-model="pass"
-                                           placeholder="Mật khẩu" />
-                                    <span toggle="#pass"
-                                          class="fa fa-fw fa-eye field-icon toggle-password"
-                                          @click="hello()"
-                                          style="cursor: pointer"></span>
-                                    <p class="error_pass text-danger"></p>
-                                    <a class="forget-pass">Bạn quên mật khẩu</a>
-                                    <button class="nut-login" @click="dangnhap()">Đăng nhập</button>
+                    <input type="text"
+                           id="email"
+                           name="email"
+                           v-model="email"
+                           placeholder="Số điện thoại hoặc email" />
+                    <p class="errorEmail text-danger"></p>
+                    <input type="password"
+                           id="pass"
+                           name="pass"
+                           v-model="pass"
+                           placeholder="Mật khẩu" />
+                    <span toggle="#pass"
+                          class="fa fa-fw fa-eye field-icon toggle-password"
+                          @click="hello()"
+                          style="cursor: pointer"></span>
+                    <p class="error_pass text-danger"></p>
+                    <a class="forget-pass">Bạn quên mật khẩu</a>
+                    <button class="nut-login" @click="dangnhap()">Đăng nhập</button>
 
-                                    <span>Bạn chưa có tài khoản,</span>
-                                    <a @click="signIn">Đăng ký ngay</a>
-                                </div>
-                                <div class="right">
-                                    <p>Hoặc đăng nhập với</p>
-                                    <button>
-                                        <i class="fa fa-circle-o-notch fa-spin"></i>
-                                    </button>
-                                    <button>
-                                        <i class="fa fa-cog fa-spin"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="content" v-if="lang === 'EN'">
-                                <div class="left">
-                                    <h2>Sign in</h2>
-                                    <p>One account uses all MISA applications</p>
+                    <span>Bạn chưa có tài khoản,</span>
+                    <a @click="signIn">Đăng ký ngay</a>
+                </div>
+                <div class="right">
+                    <p>Hoặc đăng nhập với</p>
+                    <button>
+                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                    </button>
+                    <button>
+                        <i class="fa fa-cog fa-spin"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="content" v-if="lang === 'EN'">
+                <div class="left">
+                    <h2>Sign in</h2>
+                    <p>One account uses all MISA applications</p>
 
-                                    <input type="text"
-                                           id="email"
-                                           name="email"
-                                           v-model="email"
-                                           placeholder="Phone number or email" />
+                    <input type="text"
+                           id="email"
+                           name="email"
+                           v-model="email"
+                           placeholder="Phone number or email" />
 
-                                    <input type="password"
-                                           id="pass"
-                                           name="pass"
-                                           v-model="pass"
-                                           placeholder="Password" />
-                                    <span toggle="#pass"
-                                          class="fa fa-fw fa-eye field-icon toggle-password"
-                                          @click="hello()"
-                                          style="cursor: pointer"></span>
-                                    <a class="forget-pass">Forgot password</a>
-                                    <button class="nut-login" @click="dangnhap()">Sign in</button>
-                                    <p class="error text-danger"></p>
+                    <input type="password"
+                           id="pass"
+                           name="pass"
+                           v-model="pass"
+                           placeholder="Password" />
+                    <span toggle="#pass"
+                          class="fa fa-fw fa-eye field-icon toggle-password"
+                          @click="hello()"
+                          style="cursor: pointer"></span>
+                    <a class="forget-pass">Forgot password</a>
+                    <button class="nut-login" @click="dangnhap()">Sign in</button>
+                    <p class="error text-danger"></p>
 
-                                    <span>Do not have an account,</span>
-                                    <a @click="signIn">Sign up now</a>
-                                </div>
-                                <div class="right">
-                                    <p>Or sign in with</p>
-                                    <button>
-                                        <i class="fa fa-circle-o-notch fa-spin"></i>
-                                    </button>
-                                    <button>
-                                        <i class="fa fa-cog fa-spin"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <a class="language"
-                           @click="changeLanguage()">{{ this.lang === "VN" ? "English" : "Tiếng Việt"}}</a>
-                    </div>
-
-                    <div class="signup">
-                        <div class="main">
-                            <div class="logo">
-                                <img src="https://testid.misa.com.vn/img/Logo%20MISA_VN.svg" alt />
-                            </div>
-                            <div class="content">
-                                <div class="left">
-                                    <h2>Create account</h2>
-                                    <p>Sign up below to create a secure account</p>
-                                    <label for="email_signUp">Email</label>
-                                    <input type="text" id="email_signUp" name="email_signUp" v-model="email" />
-                                    <label for="pass_signUp">Mat khau</label>
-                                    <input type="password" id="pass_signUp" name="pass_signUp" v-model="pass" />
-                                    <span toggle="#pass_signUp" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-
-                                    <button class="nut-login" @click="dangky()">Dang Ky</button>
-                                    <p class="error text-danger"></p>
-                                    <!-- <a href="#" class="forget-pass">Quen mat khau</a> -->
-                                    <span>Already have account?</span>
-                                    <a @click="signUp">Sign In</a>
-                                </div>
-                                <div class="right">
-                                    <button>
-                                        <i class="fa fa-smile-o"></i>
-                                    </button>
-                                    <button>
-                                        <i class="fa fa-sign-language"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="language" @click="changeLanguage()"></div>
-                    </div>
+                    <span>Do not have an account,</span>
+                    <a @click="signIn!=signIn">Sign up now</a>
+                    <router-link to="/authenticate/register" v-if="signIn"></router-link>
+                </div>
+                <div class="right">
+                    <p>Or sign in with</p>
+                    <button>
+                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                    </button>
+                    <button>
+                        <i class="fa fa-cog fa-spin"></i>
+                    </button>
                 </div>
             </div>
         </div>
+        
     </div>
 </template>
 
@@ -138,15 +96,12 @@ export default {
     return {
       email: "",
       pass: "",
-      lang: "EN",
+        lang: "EN",
+        signIn: false
     };
   },
   methods: {
-    signIn() {
-      document.querySelector(".login").style.display = "none";
-      document.querySelector(".signup").style.display = "block";
-      // document.getElementById("demo").innerHTML = x;
-    },
+    
 
     signUp() {
       document.querySelector(".signup").style.display = "none";
@@ -165,7 +120,7 @@ export default {
       if (this.email && this.pass) {
         var self = this;
         axios
-          .post("http://localhost:8081/AuthenticationService.svc/json/login", {
+          .post("http://localhost:8080/AuthenticationService.svc/json/login", {
             username: this.email,
             password: this.pass
           })

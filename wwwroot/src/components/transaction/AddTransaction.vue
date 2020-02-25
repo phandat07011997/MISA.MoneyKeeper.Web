@@ -5,15 +5,26 @@
             <template v-slot:iconModal>
                 <img width="30" src="../../assets/img/edit-icon.png" />
             </template>
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="dropdown select-type">
+                    <a class="dropdown-toggle " type="button" id="select-type" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span v-if="state.IncomeExpenseCategoryID !== '' "> {{ incomeExpenseCategoryChoosed.IncomeExpenseCategoryName }}</span>
+                        <span v-else>Chi tiền</span>
+                    </a>
+                    <div class="dropdown-menu p-3" aria-labelledby="category-select">
+                        <div class="p-1" v-for="(item) in incomeExpenseCategories" v-bind:key="item.IncomeExpenseCategoryID" v-on:click="selectIncomeExpenseCategory(item.IncomeExpenseCategoryID)"><i class="far fa-address-book mr-1"></i> {{ item.IncomeExpenseCategoryName }}</div>
+                    </div>
+                </div>
+            </div>
             <template v-slot:headerExpense>
                 Thêm ghi chép
             </template>
             <template v-slot:contentModal>
-                <div class="row pb-3">
+                <div class="row pb-4">
                     <div class="col-4">
                         <div class="widget">
                             <label for="">Số tiền</label>
-                            <input type="type" v-model="state.Amount" placeholder="Nhập số tiền" />
+                            <input type="type" v-model="state.Amount" placeholder="Nhập số tiền"/>
                         </div>
                     </div>
                     <div class="col-4">
@@ -22,10 +33,10 @@
                             <div class="dropdown category-select">
                                 <a class="dropdown-toggle " type="button" id="category-select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span v-if="state.IncomeExpenseCategoryID !== '' "><i class="far fa-address-book"></i> {{ incomeExpenseCategoryChoosed.IncomeExpenseCategoryName }}</span>
-                                    <span v-else><i class="far fa-address-book"></i> Chọn danh mục</span>
+                                    <span v-else><i class="far fa-address-book mr-1"></i> Chọn danh mục</span>
                                 </a>
                                 <div class="dropdown-menu p-3" aria-labelledby="category-select">
-                                    <div class="p-1" v-for="(item) in incomeExpenseCategories" v-bind:key="item.IncomeExpenseCategoryID" v-on:click="selectIncomeExpenseCategory(item.IncomeExpenseCategoryID)"><i class="far fa-address-book"></i> {{ item.IncomeExpenseCategoryName }}</div>
+                                    <div class="p-1" v-for="(item) in incomeExpenseCategories" v-bind:key="item.IncomeExpenseCategoryID" v-on:click="selectIncomeExpenseCategory(item.IncomeExpenseCategoryID)"><i class="far fa-address-book mr-1"></i> {{ item.IncomeExpenseCategoryName }}</div>
                                 </div>
                             </div>
 
@@ -55,11 +66,11 @@
                             <label for="">Ví</label>
                             <div class="dropdown spend-per-month">
                                 <a class="dropdown-toggle " type="button" id="spend-per-month" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span v-if="state.AccountID !== '' "><i class="far fa-trash-alt"></i>{{ userAccountChoosed.AccountName }}</span>
-                                    <span v-else><i class="far fa-trash-alt"></i> Chọn ví</span>
+                                    <span v-if="state.AccountID !== '' "><i class="far fa-trash-alt mr-1"></i>{{ userAccountChoosed.AccountName }}</span>
+                                    <span v-else><i class="far fa-trash-alt mr-1"></i> Chọn ví</span>
                                 </a>
                                 <div class="dropdown-menu p-3" aria-labelledby="spend-per-month">
-                                    <div class="p-1" v-for="item in userAccounts" v-bind:key="item.AccountID" v-on:click="selectUserAccount(item.AccountID)"><i class="far fa-trash-alt"></i> {{ item.AccountName }}</div>
+                                    <div class="p-1" v-for="item in userAccounts" v-bind:key="item.AccountID" v-on:click="selectUserAccount(item.AccountID)"><i class="far fa-trash-alt mr-1"></i> {{ item.AccountName }}</div>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +83,7 @@
                     <i class="fas fa-chevron-up" v-else />
                 </div>
 
-                <div class="row pb-3" v-show="isCollapse">
+                <div class="row pb-4" v-show="isCollapse">
                     <div class="col-4">
                         <div class="widget">
                             <label for="">Chi cho ai</label>
@@ -113,7 +124,7 @@
                         <label for="toggle" class="m-0"></label>
                     </div>
 
-                    <div class="row pb-3" v-show="selected">
+                    <div class="row pb-4" v-show="selected">
                         <div class="col-6">
                             <div class="widget">
                                 <label for="">Người cho vay</label>
@@ -177,7 +188,7 @@
                     ToAccountID: null,
                     TransactionType: 1
                 },
-
+                magic_flag: false,
                 incomeExpenseCategoryChoosed: null,
                 userAccountChoosed: null,
             };
@@ -254,22 +265,36 @@
     }
 </script>
 <style lang="scss">
-    .widget {
+    #addModal .widget:focus-within{
+       box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+    #addModal .modal-content{
+        height: auto !important;
+        min-height: unset;
+    }
+    #addModal .widget input.form-control:focus{
+        box-shadow: none;
+    }
+    #addModal .widget {
         height: 90px;
         border: 1px solid gray;
-        border-radius: 20px;
+        border-radius: 10px;
         padding: 10px 20px;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: space-evenly;
         align-items: space-between;
+        
         textarea
-
     {
         border-radius: 10px;
         height: 100px;
         width: 100%;
         border: none;
+        &:focus{
+                   outline: 0 !important;
+                  
+        }
     }
 
     input {
@@ -279,7 +304,7 @@
         &:focus
 
     {
-        outline: none;
+        outline: 0 !important;
     }
 
     }
@@ -310,7 +335,7 @@
     }
     }
 
-    .category-select {
+    #addModal .category-select {
         width: 100%;
         #category-select
 
@@ -426,4 +451,44 @@
         .spend-per-month >  .dropdown-menu {
             top: 20px !important;
         }
+        #addModal .modal-body{
+            padding: 30px !important;
+        }
+
+         .select-type {
+            min-width: 170px;
+            border: 1.5px solid white;
+            border-radius: 20px;
+            padding: 5px 20px;
+            .dropdown-toggle::after{
+                margin-top: 5px;
+            }
+            #select-type {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .dropdown-menu {
+                width: 100%;
+                top: 10px !important;
+                box-shadow: rgba(0, 0, 0, 0.15) 1px 1px 3px 1px;
+                border: none;
+                left: -17px !important;
+                span {
+                    padding: 5px 20px;
+                    &:hover {
+                        background: lightgray;
+                    }
+                 }
+            }
+         }
+    .border-select-type{
+        border-radius: 20px;
+        border: 1px solid white;
+    }
+    #select-type span{
+        font-size: 16px;
+        font-weight: 600,
+    }
 </style>

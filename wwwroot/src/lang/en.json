@@ -1,0 +1,21 @@
+﻿
+
+{
+  "common": {
+    "select_lang": "Language"
+  },
+  "login": {
+    "title": "Login to Facebook",
+    "buttons": {
+      "login": "Login"
+    },
+    "input_text": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "messages": {
+      "none_account": "Create new account",
+      "register": "Register"
+    }
+  }
+}

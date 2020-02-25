@@ -8,7 +8,7 @@
                     <div class="modal-icon">
                         <slot name="iconModal"></slot>
                     </div>
-                    <div class="col-md-4 modal-title" id="exampleModalLabel">
+                    <div class="col-md-4 modal-title text-left p-0" id="exampleModalLabel">
                         <div class="col-md-12">
                             <slot name="headerExpense"></slot>
                         </div>

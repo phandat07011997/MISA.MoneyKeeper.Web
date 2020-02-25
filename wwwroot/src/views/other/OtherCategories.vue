@@ -7,7 +7,6 @@
           <button>Thêm hạng mục</button>
         </a>
       </div>
-      <AddCategory :modal="'addCat'"></AddCategory>
       <!-- Nút điều hướng -->
       <div class="align-elements col-sm-6">
         <div class="top-nav">
@@ -30,22 +29,20 @@
         </div>
       </div>
 
-      <!-- <DxTreeView id="treeview" :items="categoriesEx" :width="500" :search-enabled="true" /> -->
-      <!-- Phần tử nội dung -->
     </div>
+    <!-- Phần tử nội dung -->
     <div class="container col-sm-6">
       <div class="content">
-        <component v-bind:is="currentTab"></component>
+        <Content :currentTab="currentTab"></Content>
       </div>
     </div>
     <div style="height: 300px"></div>
+      <AddCategory :modal="'addCat'"></AddCategory>
   </div>
 </template>
 
 <script>
-// import DxTreeView from "devextreme-vue/tree-view;
-import expenseTab from "../../components/categories/ExpenseTab.vue";
-import incomeTab from "../../components/categories/IncomeTab.vue";
+import Content from "../../components/categories/Content.vue";
 import AddCategory from "../../components/categories/popup/AddCategory.vue";
 
 export default {
@@ -61,8 +58,7 @@ export default {
     };
   },
   components: {
-    expenseTab,
-    incomeTab,
+    Content,
     AddCategory
   }
 };

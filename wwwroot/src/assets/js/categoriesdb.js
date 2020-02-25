@@ -170,6 +170,6 @@ export var categories = {
         { id: 5, name: "Lương", allowToEdit: true, note: '', icon: 'fas fa-money-check-alt' },
         { id: 6, name: "Thu nợ", allowToEdit: false, note: '', icon: 'fas fa-funnel-dollar' },
         { id: 7, name: "Thưởng", allowToEdit: true, note: '', icon: 'fas fa-wallet' },
-        { id: 7, name: "Tiền lãi", allowToEdit: true, note: '', icon: 'fas fa-file-invoice-dollar' },
+        { id: 8, name: "Tiền lãi", allowToEdit: true, note: '', icon: 'fas fa-file-invoice-dollar' },
     ]
 }

@@ -1,0 +1,127 @@
+﻿<template>
+    <div class="container" v-if="!hide">
+        <div class="row">
+            <div class="col-sm-12 header_language">
+                <button class="back_settings" @click="$emit('hidden-content')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <span>Language</span>
+            </div>
+            <div class="col-sm-12 language__item" @click="select_language">
+                <span>Tieng Viet</span>
+                <br />
+                <span>Vietnamese</span>
+
+                <button class="active">
+                    <i class="fas fa-check"></i>
+                </button>
+            </div>
+
+            <div class="col-sm-12 language__item" @click="select_language">
+                <span>English</span>
+                <br />
+                <span>English</span>
+
+                <button>
+                    <i class="fas fa-check"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3 offset-sm-9">
+                <div class="button__finish">
+                    Done
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: 'language',
+        data() {
+            return {
+
+            }
+        },
+        methods: {
+            select_language(event) {
+                var buttons = document.querySelectorAll(".language__item button");
+ 
+                for (var i = 0; i < buttons.length; i++) {
+                    buttons[i].classList.remove("active");
+                }
+
+                var currButton = event.target.querySelectorAll("button")[0];
+                currButton.classList.add("active");
+
+            }
+        },
+        props: ['hide']
+    }
+</script>
+
+<style scoped>
+    button.back_settings {
+        padding: 10px;
+        border: none;
+        background: none;
+        margin-right: 22px;
+        color: lightblue;
+        outline: none;
+        font-size: 20px;
+    }
+
+        button.back_settings:hover i {
+            color: #17a2b8;
+        }
+
+    .col-sm-12.header_language {
+        font-size: 30px;
+        padding: 10px;
+    }
+
+        .col-sm-12.header_language span {
+            color: #17a2b8;
+        }
+
+    .language__item button.active {
+        display: block;
+    }
+
+    span:first-child {
+        font-size: 30px;
+        font-weight: 500;
+    }
+
+    .language__item {
+        border-bottom: 1px solid lightgray;
+        margin: 0 10px;
+        padding-bottom: 10px;
+    }
+
+        .language__item button {
+            display: none;
+            float: right;
+            border: none;
+            outline: none;
+            background: none;
+            color: #17a2b8;
+            transform: translateY(-22px);
+            margin-right: 20px;
+        }
+
+    .button__finish {
+        padding: 10px;
+        color: white;
+        background: #17a2b8;
+        text-align: center;
+        margin-top: 30px;
+        margin-right: -27px;
+        margin-left: 89px;
+        cursor: pointer;
+    }
+</style>
+

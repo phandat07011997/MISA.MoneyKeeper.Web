@@ -1,6 +1,6 @@
-<template>
-    
-     <div class="col-md-2 border-right sub-sidebar">
+﻿<template>
+
+    <div class="col-md-12 sub-sidebar" v-if="hide">
         <div class="row subsidbar-row">
             <div class="col-md-12 border-bottom">
                 <div style="text-align: center; padding-top: 15px;">
@@ -11,10 +11,10 @@
                 <li v-bind:key="subSidebar.id"
                     v-for="subSidebar in subSidebars"
                     class="d-flex menu-on-left m-0 "
-                    style="">
-                    <router-link :to="subSidebar.activeComponent" exact class="border-bottom m-0 d-flex subsidebar-list align-items-center" >
+                    style="" @click="$emit('hidden-sidebar')">
+                    <router-link :to="subSidebar.activeComponent" exact class="m-0 d-flex subsidebar-list align-items-center">
 
-                        <i :class="subSidebar.iconSub" style="width:20px;margin-left: 10px;"></i>
+                        <i :class="subSidebar.iconSub" style="width:20px;margin-left: 20px;"></i>
 
                         <div style="text-align:left;margin-left:30px;">{{subSidebar.nameSub}}</div>
                     </router-link>
@@ -22,7 +22,7 @@
                 </li>
             </ul>
         </div>
-    </div> 
+    </div>
 </template>
 <script>
     export default {
@@ -30,7 +30,7 @@
             return {
             };
         },
-        props: ['subSidebars']
+        props: ['subSidebars', 'hide']
     };
 </script>
 

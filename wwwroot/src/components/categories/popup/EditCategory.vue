@@ -10,7 +10,7 @@
             <div class="col-1">
               <i class="fas fa-question-circle"></i>
             </div>
-            <div class="col-3">
+            <div class="col-5">
               <label for="name-cat">Tên hạng mục:</label>
               <input
                 name="name-cat"
@@ -21,8 +21,8 @@
               />
             </div>
             <div class="col-6" v-if="!isParent">
-              <label for="choose-cat">Chọn hạng mục cha:</label>
-              <select name="choose-cat" class="custom-select mr-sm-2 choose-cat" id="inlineFormCustomSelect">
+              <label for="select-cat-par">Chọn hạng mục cha:</label>
+              <select name="select-cat-par" class="custom-select mr-sm-2 choose-cat" id="select-cat-par" :value="[currentTab === 'expenseTab' ? parent : 'none']">
                 <option value="none">(Không chọn)</option>
                 <option v-for="(cat, index) in categories" :key="index" :value="cat.name">{{ cat.name }}</option>
               </select>
@@ -65,7 +65,7 @@
 import Popup from "../../layout/Popup.vue";
 import {categories} from "../../../assets/js/categoriesdb.js"
 export default {
-  props: ["modal", "nameCat", "isParent", "currentTab"],
+  props: ["modal", "nameCat", "isParent", "currentTab", "parent"],
   components: {
     Popup
   },
@@ -88,8 +88,10 @@ export default {
     font-size: 40px;
     margin-top: 25px;
   }
-  .choose-cat{
-    width: 540px;
+  .modal-body{
+    label{
+      font-weight: bold;
+    }
   }
 }
 </style>

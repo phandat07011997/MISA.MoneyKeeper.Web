@@ -58,6 +58,7 @@ var AccountCategory = [
     }
 ]
 var FinanceTransaction = [
+    
     {
         "AccountID": "1b1b7ee4-9506-4a6b-899a-d17b4244ef7f",
         "Address": "",
@@ -72,7 +73,7 @@ var FinanceTransaction = [
         "IncomeExpenseCategoryID": "f26e6435-398c-4944-a1c7-ffaeaff9fa09",
         "IsFavorite": false,
         "IsoDebitDate": "01/01/1753 12:00:00 AM",
-        "IsoTransactionDate": "11/08/2019 08:22:45 AM",
+        "IsoTransactionDate": "12/08/2019 08:22:45 AM",
         "Latitude": 0,
         "Longitude": 0,
         "Payee": "",
@@ -252,11 +253,13 @@ var IncomeExpenseCategory = [
             })
 
             //FinanceTransaction table
-            tx.executeSql("CREATE TABLE IF NOT EXISTS FinanceTransaction(TransactionID, AccountID, Address, Amount, ClosingAmount, Description, EventName, FCAmount, Following, Giver, ImageAttachName, IncomeExpenseCategoryID, IsFavorite, IsoDebitDate, IsoTransactionDate, Latitude, Longitude, Payee, RelatedPerson, RelationshipID, SortOrder, ToAccountID, TransactionType)");
+            tx.executeSql("CREATE TABLE IF NOT EXISTS FinanceTransaction(TransactionID, AccountID, Address, Amount, ClosingAmount, Description, EventName, FCAmount, Following, Giver, ImageAttachName, IncomeExpenseCategoryID, IsFavorite, IsoDebitDate, IsoTransactionDate, Latitude, Longitude, Payee, RelatedPerson, RelationshipID, SortOrder, ToAccountID, TransactionType, Date)");
 
             FinanceTransaction.forEach(ele => {
-                tx.executeSql("INSERT INTO FinanceTransaction(TransactionID, AccountID, Address, Amount, ClosingAmount, Description, EventName, FCAmount, Following, Giver, ImageAttachName, IncomeExpenseCategoryID, IsFavorite, IsoDebitDate, IsoTransactionDate, Latitude, Longitude, Payee, RelatedPerson, RelationshipID, SortOrder, ToAccountID, TransactionType) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [ele.TransactionID, ele.AccountID, ele.Address, ele.Amount, ele.ClosingAmount, ele.Description, ele.EventName, ele.FCAmount, ele.Following, ele.Giver, ele.ImageAttachName, ele.IncomeExpenseCategoryID, ele.IsFavorite, ele.IsoDebitDate, ele.IsoTransactionDate, ele.Latitude, ele.Longitude, ele.Payee, ele.RelatedPerson, ele.RelationshipID, ele.SortOrder, ele.ToAccountID, ele.TransactionType]);
+                tx.executeSql("INSERT INTO FinanceTransaction VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [ele.TransactionID, ele.AccountID, ele.Address, ele.Amount, ele.ClosingAmount, ele.Description, ele.EventName, ele.FCAmount, ele.Following, ele.Giver, ele.ImageAttachName, ele.IncomeExpenseCategoryID, ele.IsFavorite, ele.IsoDebitDate, ele.IsoTransactionDate, ele.Latitude, ele.Longitude, ele.Payee, ele.RelatedPerson, ele.RelationshipID, ele.SortOrder, ele.ToAccountID, ele.TransactionType, new Date(ele.IsoTransactionDate).toDateString()]);
             })
+           
+
         });
 
-
+console.log();

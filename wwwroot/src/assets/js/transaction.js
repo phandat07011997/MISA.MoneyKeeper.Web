@@ -230,7 +230,7 @@
 //        "IncomeExpenseCategoryIcon": "https://static.moneylover.me/img/icon/icon_136.png",
 //    },
 //];
-    
+
 //export class DataBase {
 //    constructor() {
 //        this.init();
@@ -273,6 +273,23 @@ export default class FinanceTransactionClass {
     constructor() {
         this.data = null
     }
+
+    getSync() {
+        return new Promise((resolve, reject) => {
+            db.transaction((tx) => {
+                tx.executeSql("SELECT * FROM FinanceTransaction", [], (transaction, result) => {
+                    var data = result.rows;
+                    resolve(data)
+                },
+                    (transaction, error) => {
+                        reject(error)
+                    }
+                );
+            });
+        })
+
+    }
+
     getAll() {
         return new Promise((resolve, reject) => {
             db.transaction((tx) => {
@@ -286,12 +303,27 @@ export default class FinanceTransactionClass {
                 );
             });
         })
-        
+
+    }
+    getDate() {
+        return new Promise((resolve, reject) => {
+            db.transaction((tx) => {
+                tx.executeSql("SELECT DISTINCT Date FROM FinanceTransaction", [], (transaction, result) => {
+                    var data = result.rows;
+                    resolve(data);
+                },
+                    (transaction, error) => {
+                        reject(error)
+                    }
+                );
+            });
+        })
+
     }
 
     create(ele) {
         db.transaction((tx) => {
-            tx.executeSql("INSERT INTO FinanceTransaction(AccountID, Address, Amount, ClosingAmount, Description, EventName, FCAmount, Following, Giver, ImageAttachName, IncomeExpenseCategoryID, IsFavorite, IsoDebitDate, IsoTransactionDate, Latitude, Longitude, Payee, RelatedPerson, RelationshipID, SortOrder, ToAccountID, TransactionID, TransactionType) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [ele.AccountID, ele.Address, ele.Amount, ele.ClosingAmount, ele.Description, ele.EventName, ele.FCAmount, ele.Following, ele.Giver, ele.ImageAttachName, ele.IncomeExpenseCategoryID, ele.IsFavorite, ele.IsoDebitDate, ele.IsoTransactionDate, ele.Latitude, ele.Longitude, ele.Payee, ele.RelatedPerson, ele.RelationshipID, ele.SortOrder, ele.ToAccountID, ele.TransactionID, ele.TransactionType], (transaction, result) => {
+            tx.executeSql("INSERT INTO FinanceTransaction VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [ele.AccountID, ele.Address, ele.Amount, ele.ClosingAmount, ele.Description, ele.EventName, ele.FCAmount, ele.Following, ele.Giver, ele.ImageAttachName, ele.IncomeExpenseCategoryID, ele.IsFavorite, ele.IsoDebitDate, ele.IsoTransactionDate, ele.Latitude, ele.Longitude, ele.Payee, ele.RelatedPerson, ele.RelationshipID, ele.SortOrder, ele.ToAccountID, ele.TransactionID, ele.TransactionType, new Date(ele.IsoTransactionDate).toDateString()], (transaction, result) => {
 
                 console.log(result)
             },
@@ -317,7 +349,7 @@ export default class FinanceTransactionClass {
 
     update(ele) {
         db.transaction((tx) => {
-            tx.executeSql("UPDATE FinanceTransaction SET AccountID = ?, Address = ?, Amount = ?, ClosingAmount = ?, Description = ?, EventName = ?, FCAmount = ?, Following = ?, Giver = ?, ImageAttachName = ?, IncomeExpenseCategoryID = ?, IsFavorite = ?, IsoDebitDate = ?, IsoTransactionDate = ?, Latitude = ?, Longitude = ?, Payee = ?, RelatedPerson = ?, RelationshipID = ?, SortOrder = ?, ToAccountID = ?, TransactionType = ? WHERE TransactionID = ?", [ele.AccountID, ele.Address, ele.Amount, ele.ClosingAmount, ele.Description, ele.EventName, ele.FCAmount, ele.Following, ele.Giver, ele.ImageAttachName, ele.IncomeExpenseCategoryID, ele.IsFavorite, ele.IsoDebitDate, ele.IsoTransactionDate, ele.Latitude, ele.Longitude, ele.Payee, ele.RelatedPerson, ele.RelationshipID, ele.SortOrder, ele.ToAccountID, ele.TransactionType, ele.TransactionID], (transaction, result) => {
+            tx.executeSql("UPDATE FinanceTransaction SET AccountID = ?, Address = ?, Amount = ?, ClosingAmount = ?, Description = ?, EventName = ?, FCAmount = ?, Following = ?, Giver = ?, ImageAttachName = ?, IncomeExpenseCategoryID = ?, IsFavorite = ?, IsoDebitDate = ?, IsoTransactionDate = ?, Latitude = ?, Longitude = ?, Payee = ?, RelatedPerson = ?, RelationshipID = ?, SortOrder = ?, ToAccountID = ?, TransactionType = ?, Date =? WHERE TransactionID = ?", [ele.AccountID, ele.Address, ele.Amount, ele.ClosingAmount, ele.Description, ele.EventName, ele.FCAmount, ele.Following, ele.Giver, ele.ImageAttachName, ele.IncomeExpenseCategoryID, ele.IsFavorite, ele.IsoDebitDate, ele.IsoTransactionDate, ele.Latitude, ele.Longitude, ele.Payee, ele.RelatedPerson, ele.RelationshipID, ele.SortOrder, ele.ToAccountID, ele.TransactionType, new Date(ele.IsoTransactionDate).toDateString(),ele.TransactionID], (transaction, result) => {
                 console.log(result)
             },
                 (transaction, error) => {

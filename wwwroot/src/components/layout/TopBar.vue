@@ -19,10 +19,27 @@
             <div id="user">
                 <a href="#">
                     <div id="user-icon">
-                        <img src="../../assets/img/user-icon.png" />
+                        <img src="../../assets/img/user-icon.png" /><i class="fas fa-sort-down" style="font-size:28px"></i>
                     </div>
-                    <div id="user-name">{{getUser}}</div>
+                    <div class="dropdown-content">
+                        <div id="user-info">
+                            <div id="user-avatar"><img src="../../assets/img/user-icon.png" /></div>
+                            <div id="user-name">Phan Quốc Đạt</div>
+                            <div id="user-email">phandat07011997@gmail.com</div>
+                        </div>
+                        <hr />
+
+                        <a class="" href="#" data-toggle="modal" v-bind:data-target="'#' + userInfoModal">Thông tin tài khoản</a>
+                        <a href="#">Liên kết tài khoản</a>
+                        <a href="#">Đăng xuất</a>
+                        
+                    </div>
+
+
+
+                    <!--<div id="user-name">{{getUser}}</div>-->
                 </a>
+                <UserInfo v-bind:modal="userInfoModal"/>
             </div>
         </div>
         <div id="mid-top-bar">
@@ -35,7 +52,7 @@
                 <div id="add-label">Thêm ghi chép</div>
 
             </a>
-            <AddTransaction v-bind:modal="modal"/>
+            <AddTransaction v-bind:modal="modal" />
 
 
         </div>
@@ -43,16 +60,19 @@
     </div>
 </template>
 <script>
+    import UserInfo from '@/components/user/UserInfo.vue'
     import AddTransaction from '@/components/transaction/AddTransaction.vue'
     export default {
         name: "topbar",
         data() {
             return {
                 modal: "addModal",
+                userInfoModal:"userModal"
             };
         },
         components: {
             AddTransaction,
+            UserInfo
         },
         computed:
         {
@@ -67,7 +87,7 @@
         }
     };
 </script>
-<style lang="scss"  >
+<style lang="scss">
 
     @import '../../assets/css/layout/top-bar.scss';
 </style>

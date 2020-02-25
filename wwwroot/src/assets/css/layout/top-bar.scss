@@ -15,16 +15,19 @@
             width: 50px;
             margin-left: 14px;
         }
-        @media only screen and (max-width:400px){
-            money-now{
-                display:none;
+
+        @media only screen and (max-width:400px) {
+            money-now {
+                display: none;
             }
         }
+
         > span {
             font-weight: bold;
             margin-left: 36px;
             color: white;
-            min-width:200px;
+            min-width: 200px;
+
             @media only screen and (max-width: 1221px) {
                 #hiddenText {
                     display: none;
@@ -79,32 +82,75 @@
         justify-content: flex-end;
         align-items: center;
 
+
         #user {
             margin-right: 14px;
+            position: relative;
 
             > a {
                 color: white;
 
-                &:hover {
+                .dropdown-content {
+                    display: none;
+                    position: absolute;
+                    background-color: #f9f9f9;
+                    width: 322px;
+                    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                    z-index: 1;
+                    right: -14px;
+
+                    #user-avatar {
+                        text-align: center;
+
+                        img {
+                            width: 100px;
+                            height: 100px;
+                        }
+                    }
+
+                    #user-name {
+                        text-align: center;
+                        font-weight: bold;
+                    }
+
+                    #user-email {
+                        text-align: center;
+                    }
+
+                    a {
+                        color: black;
+                        padding: 12px 16px;
+                        text-decoration: none;
+                        display: block;
+
+                        &:hover {
+                            background-color: #f1f1f1;
+                        }
+                    }
+                }
+
+
+                &:hover .dropdown-content {
+                    display: block;
                     text-decoration: none;
-                    color: #15c8ff;
+                    color: #0078d4;
                 }
 
                 #user-icon {
                     text-align: center;
 
                     img {
+                        margin-right: 5px;
                         width: 34px;
                         height: 34px;
                     }
                 }
-
-                #user-name {
+                /*#user-name {
                     font-size: 16px;
                     text-align: center;
                     line-height: 20px;
                     font-weight: bold;
-                }
+                }*/
             }
         }
 

@@ -2,7 +2,7 @@
   <div class="edit-cat-popup">
     <Popup v-bind:modal="modal">
       <template v-slot:headerExpense>
-        <h4 class="modal-title">Cảnh báo</h4>
+        <h3 class="modal-title">Cảnh báo</h3>
       </template>
       <template v-slot:contentModal>
         <div class="modal-body">
@@ -32,7 +32,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.edit-cat-popup {
 
-}
 </style>

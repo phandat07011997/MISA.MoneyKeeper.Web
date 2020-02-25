@@ -7,24 +7,33 @@
       <template v-slot:contentModal>
         <div class="modal-body">
           <div class="row">
+            <div class="col-5">
+              <label for="select-tab">Chọn hạng mục:</label>
+              <select name="select-tab" class="custom-select mr-sm-2 choose-cat" id="select-tab" @change="tabSelected = $event.target.value">
+                <option value="expenseTab">Hạng mục chi</option>
+                <option value="incomeTab">Hạng mục thu</option>
+              </select>
+            </div>
             <div class="col-1">
               <i class="fas fa-question-circle" style="font-size:40px"></i>
             </div>
-            <div class="col-3">
+            <div class="col-6">
               <label for="name-cat">Tên hạng mục:</label>
               <input name="name-cat" type="text" class="form-control" placeholder="Tên hạng mục" />
             </div>
+          </div>
+          <br><br>
+          <div class="row">
+            <div class="col-3"></div>
             <div class="col-6">
-              <label for="choose-cat">Chọn hạng mục cha:</label>
-              <select name="choose-cat" class="custom-select mr-sm-2 choose-cat" id="inlineFormCustomSelect">
+              <label for="select-par-cat">Chọn hạng mục cha:</label>
+              <select name="select-par-cat" class="custom-select mr-sm-2 choose-cat" id="select-par-cat">
                 <option value="none">(Không chọn)</option>
-                <option v-for="(cat, index) in categories.categoriesEx" :key="index" value="none">{{ cat.name }}</option>
+                <option v-for="(cat, index) in categories" :key="index" :value="cat.name">{{ cat.name }}</option>
               </select>
             </div>
           </div>
-          <br />
-          <br />
-
+          <br><br>
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
@@ -63,9 +72,19 @@ export default {
   components: {
     Popup
   },
-  data() {
-    return {
-      categories: categories
+  data(){
+    return{
+      tabSelected: 'expenseTab'
+    }
+  },
+  computed: {
+    categories() {
+      if(this.tabSelected === 'expenseTab'){
+        return categories.categoriesEx
+      }
+      else{
+        return categories.categoriesIn
+      }
     }
   }
 };
@@ -76,8 +95,10 @@ export default {
     font-size: 40px;
     margin-top: 25px;
   }
-  .choose-cat{
-    width: 540px;
+  .modal-body{
+    label{
+      font-weight: bold;
+    }
   }
 }
 </style>

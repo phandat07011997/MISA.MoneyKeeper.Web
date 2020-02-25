@@ -29,15 +29,23 @@
                         <div class="m-2 p-0 bg-light border-bottom mx-auto overrall-in-out shadow-sm"
                              style="width: 100%; " v-bind:style="hiddenFilter ? 'display: none;' :'display:block;'">
                             <ul class="row m-0 p-0">
-                                <li style="width:15%; height:40px" class="border d-flex align-items-center p-2" >
-                                    <a class="justify-content-between" style="width:100%" > <b class="mx-auto"> Ngày</b></a>
+                                <li style="width:15%; height:40px" class="border-right d-flex align-items-center text-center p-2">
+                                    <a class="justify-content-between" style="width:100%"> <b>Ngày</b></a>
                                     <ul>
                                         <li>Hôm nay</li>
                                         <li>Hôm qua</li>
                                         <li>Ngày khác</li>
                                     </ul>
                                 </li>
-                                
+                                <li style="width:15%; height:40px" class="border-right d-flex align-items-center text-center p-2">
+                                    <a class="justify-content-between" style="width:100%"> <b>Tháng</b></a>
+                                    <ul>
+                                        <li>Hôm nay</li>
+                                        <li>Hôm qua</li>
+                                        <li>Ngày khác</li>
+                                    </ul>
+                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -124,11 +132,10 @@
                         </div>
                     </div>
                 </div>
-
                 <!--Thông tin chi tiết thu chi -->
                 <div id="transaction-detail"
-                     class="col col-lg-7 mx-auto my-3 py-3 border border-top-0 shadow"
-                     v-bind:style="hiddenDetail ? 'display: none':'display: block' ">
+                     class="col col-lg-7 mx-auto my-3 py-3 border border-top-0 shadow bg-light"
+                     v-bind:style="hiddenDetail ? 'display: none;':'display: block; height:400px' ">
                     <div class="p-2 d-flex align-items-center justify-content-between">
                         <b style="font-size:24px;color:#084866;">Chi tiết ghi chép</b>
                         <i class="fas fa-times fa-2x" v-on:click="hiddenDetail=true"></i>
@@ -214,7 +221,7 @@
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-end">
+                    <div class="d-flex justify-content-end mt-2" style="height:auto;">
                         <button type="button"
                                 class="btn bg-primary m-1 text-light"
                                 data-toggle="modal"
@@ -332,7 +339,8 @@
             this.$store.dispatch('financetransaction/getAll');
         },
         watch: {
-            data() {
+            data(value) {
+                console.log(value)
                 var id = this.transactionDetail.TransactionID;
                 for (var item in this.data) {
                     if (this.data[item].TransactionID == id) {
