@@ -2,43 +2,37 @@
 export default {
     namespaced: true,
     state: {
-        
+
     },
     mutations: {
-        synchronizeTransactionData(state, payload) {
+        
+    },
+    actions: {
+        synchronizeTransactionData({ commit },data) {
             var userId = "ac1118ab-d601-43a4-8336-2369c8c2de04";
             var uuidDevice = "null";
-            
+            console.log(commit)
             var sendData = {
                 "userId": userId,
                 "uuidDevice": uuidDevice,
                 "synchronizeData": {
                     "financeTransaction": {
                         "DeletedFinanceTransactionList": [],
-                        "NewAndEditedFinanceTransactionList": [payload]
+                        "NewAndEditedFinanceTransactionList": [data]
                     }
                 }
             }
-            axios
-                .post("http://localhost:8080/Services/FinanceService.svc/json/SynchronizeData", sendData)
-                .then(function (response) {
-                    var res = JSON.parse(response.request.responseText)
-                    if (res.resultMessage == 'Success') {
-                        console.log("Đồng bộ thành công");
-                        return true;
-                    }
-                    else {
-                        return false;
-                    }
-                })
-                .catch(function (error) {
-                    alert(error);
-                });
-        }
-    },
-    actions: {
-        synchronizeTransactionData({ commit },item) {
-            commit('synchronizeTransactionData',item);
+            return new Promise((res, rej) => {
+                axios
+                    .post("http://localhost:8080/Services/FinanceService.svc/json/SynchronizeData", sendData)
+                    .then(function (response) {
+                        return res(response);
+                    })
+                    .catch(function (error) {
+                        return rej(error);
+                    });
+            })
+
         },
     }
 };

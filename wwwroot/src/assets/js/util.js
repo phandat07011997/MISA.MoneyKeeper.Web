@@ -4,3 +4,10 @@
         return v.toString(16);
     });
 }
+
+export function isOneDay(a,b) {
+    if (a.getDate() != b.getDate()) return false;
+    if (a.getMonth() != b.getMonth()) return false;
+    if (a.getFullYear() != b.getFullYear()) return false;
+    return true;
+}

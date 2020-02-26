@@ -12,7 +12,7 @@
                     v-for="subSidebar in subSidebars"
                     class="d-flex menu-on-left m-0 "
                     style="" @click="$emit('hidden-sidebar')">
-                    <router-link :to="subSidebar.activeComponent" exact class="m-0 d-flex subsidebar-list align-items-center">
+                    <router-link :to="subSidebar.activeComponent" class="m-0 d-flex subsidebar-list align-items-center">
 
                         <i :class="subSidebar.iconSub" style="width:20px;margin-left: 20px;"></i>
 

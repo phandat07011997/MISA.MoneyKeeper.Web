@@ -2,7 +2,7 @@
   <div class="expense-tab">
     <ul v-for="(par, index) in categories" :key="index">
       <li class="cat-par">
-        <ButtonCollapse :isOpen="isOpen" :parNote="par.note"></ButtonCollapse>
+        <ButtonCollapse :isOpen="isOpen" :parNote="'#a'+index"></ButtonCollapse>
         <a
           class="font-size-name-cat"
           data-toggle="modal"
@@ -16,10 +16,10 @@
         </a>
       </li>
       <ul
-        v-bind:id="par.note1"
+        v-bind:id="'a'+index"
         class="collapse show"
-        v-for="(child, index) in par.childs"
-        :key="index"
+        v-for="(child, indexChild) in par.childs"
+        :key="indexChild"
       >
         <li class="cat-child">
           <a

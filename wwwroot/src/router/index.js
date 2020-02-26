@@ -26,30 +26,37 @@ import AccountDeposit from '../views/account/AccountDeposit.vue'
 import AccountMainAccount from '../views/account/AccountMainAccount.vue'
 import AccountAccumulation from '../views/account/AccountAccumulation.vue'
 import Language from '../views/other-content/Language.vue'
+import DefaultCurrency from '../views/other/other-settings/DefaultCurrency'
+import Main from '../components/layout/Main.vue'
+import Login from '../views/authenticate/Login.vue'
+
 //import Main from '../components/layout/Main.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-    
-        
+    {
+        path: "/",
+        name: 'Main',
+        component: Main,
+        children: [
             {
-                path: '/home',
+                path: 'home',
                 name: 'Home',
                 component: Home
             },
             {
-                path: '/transaction',
+                path: 'transaction',
                 name: 'Transaction',
                 component: Transaction
             },
             {
-                path: '/spending-limit',
+                path: 'spending-limit',
                 name: 'spending-limit',
                 component: SpendingLimit
             },
             {
-                path: '/report',
+                path: 'report',
                 name: 'report',
                 component: Report,
                 children: [
@@ -94,7 +101,7 @@ const routes = [
             },
 
             {
-                path: '/account',
+                path: 'account',
                 name: 'Account',
                 component: Account,
                 children: [
@@ -120,7 +127,7 @@ const routes = [
                 ]
             },
             {
-                path: '/other',
+                path: 'other',
                 name: 'other',
                 component: Other,
                 children: [
@@ -151,21 +158,34 @@ const routes = [
                     {
                         path: 'settings',
                         name: 'OtherSettings',
+
                         component: OtherSettings,
-                        children: [
+                         children: [
                             {
                                 path: 'language',
                                 name: 'Language',
                                 component: Language,
-                            }
+                             },
+                             {
+                                 path: 'default-currency',
+                                 name: 'DefaultCurrency',
+                                 component:DefaultCurrency,
+                             }
                         ]
 
                     },
                 ]
 
             }
+        ]
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login
+    },
 
-    
+
 ]
 const router = new VueRouter({
     mode: 'history',
@@ -173,17 +193,15 @@ const router = new VueRouter({
     routes
 })
 
-//router.beforeEach((to, from, next) => {
-//   const  publicPageLogin = ['/authenticate/login'];
-//    const publicPageRegister = ['/authenticate/register'];
-//    const authRequired = (!publicPageLogin.includes(to.path)) || (!publicPageRegister.includes(to.path));
-//    const authRequired = !publicPageLogin.includes(to.path);
-//    const loggedIn = localStorage.getItem('user');
-//    if (authRequired && !loggedIn)
-//        next('/authenticate/login')
-//     if the user is not authenticated, `next` is called twice
-//    else next()
-//})
+router.beforeEach((to, from, next) => {
+    const publicPages = ['/login'];
+    const authRequired = !publicPages.includes(to.path);
+    const loggedIn = localStorage.getItem('user');
+    if (authRequired && !loggedIn)
+        next('/login')
+    // if the user is not authenticated, `next` is called twice
+    else next()
+})
 
 
 

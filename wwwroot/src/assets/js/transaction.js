@@ -273,7 +273,6 @@ export default class FinanceTransactionClass {
     constructor() {
         this.data = null
     }
-
     getSync() {
         return new Promise((resolve, reject) => {
             db.transaction((tx) => {
@@ -289,7 +288,6 @@ export default class FinanceTransactionClass {
         })
 
     }
-
     getAll() {
         return new Promise((resolve, reject) => {
             db.transaction((tx) => {
@@ -323,7 +321,7 @@ export default class FinanceTransactionClass {
 
     create(ele) {
         db.transaction((tx) => {
-            tx.executeSql("INSERT INTO FinanceTransaction VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [ele.AccountID, ele.Address, ele.Amount, ele.ClosingAmount, ele.Description, ele.EventName, ele.FCAmount, ele.Following, ele.Giver, ele.ImageAttachName, ele.IncomeExpenseCategoryID, ele.IsFavorite, ele.IsoDebitDate, ele.IsoTransactionDate, ele.Latitude, ele.Longitude, ele.Payee, ele.RelatedPerson, ele.RelationshipID, ele.SortOrder, ele.ToAccountID, ele.TransactionID, ele.TransactionType, new Date(ele.IsoTransactionDate).toDateString()], (transaction, result) => {
+            tx.executeSql("INSERT INTO FinanceTransaction VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?)", [ele.TransactionID, ele.AccountID, ele.Address, ele.Amount, ele.ClosingAmount, ele.Description, ele.EventName, ele.FCAmount, ele.Following, ele.Giver, ele.ImageAttachName, ele.IncomeExpenseCategoryID, ele.IsFavorite, ele.IsoDebitDate, ele.IsoTransactionDate, ele.Latitude, ele.Longitude, ele.Payee, ele.RelatedPerson, ele.RelationshipID, ele.SortOrder, ele.ToAccountID, ele.TransactionType, new Date(ele.IsoTransactionDate).toDateString()], (transaction, result) => {
 
                 console.log(result)
             },

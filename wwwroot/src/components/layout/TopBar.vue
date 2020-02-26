@@ -25,7 +25,7 @@
                         <div id="user-info">
                             <div id="user-avatar"><img src="../../assets/img/user-icon.png" /></div>
                             <div id="user-name">Phan Quốc Đạt</div>
-                            <div id="user-email">phandat07011997@gmail.com</div>
+                            <div id="user-email">{{getUserFullName}}</div>
                         </div>
                         <hr />
 
@@ -34,10 +34,7 @@
                         <a href="#">Đăng xuất</a>
                         
                     </div>
-
-
-
-                    <!--<div id="user-name">{{getUser}}</div>-->
+                    
                 </a>
                 <UserInfo v-bind:modal="userInfoModal"/>
             </div>
@@ -47,7 +44,7 @@
 
 
                 <div id="add-icon">
-                    <img src="../../assets/img/add-icon.png" />
+                    <i class="fas fa-edit" style="font-size:30px"></i>
                 </div>
                 <div id="add-label">Thêm ghi chép</div>
 
@@ -58,6 +55,7 @@
         </div>
         <div class="clr"></div>
     </div>
+    
 </template>
 <script>
     import UserInfo from '@/components/user/UserInfo.vue'
@@ -67,7 +65,7 @@
         data() {
             return {
                 modal: "addModal",
-                userInfoModal:"userModal"
+                userInfoModal: "userModal"
             };
         },
         components: {
@@ -78,14 +76,19 @@
         {
             getUser() {
                 var user = JSON.parse(localStorage.getItem('user'));
-                return user.username
+                var position = user.username.indexOf("@");
+                return user.username.slice(0, position);
+            },
+            getUserFullName() {
+                var user = JSON.parse(localStorage.getItem('user'));
+                return user.username;
             }
         },
         created() {
-            //console.log(JSON.parse(localStorage.getItem('user')))
-            //console.log(JSON.parse(localStorage.getItem('user')).username)
+
+            //}
         }
-    };
+    }
 </script>
 <style lang="scss">
 

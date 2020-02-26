@@ -8,11 +8,11 @@
             <div class="d-flex justify-content-center align-items-center">
                 <div class="dropdown select-type">
                     <a class="dropdown-toggle " type="button" id="select-type" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span v-if="state.IncomeExpenseCategoryID !== '' "> {{ incomeExpenseCategoryChoosed.IncomeExpenseCategoryName }}</span>
+                        <span v-if="transactionTypeChoosed !== null "> {{ transactionTypeChoosed && transactionTypeChoosed.name }}</span>
                         <span v-else>Chi tiền</span>
                     </a>
                     <div class="dropdown-menu p-3" aria-labelledby="category-select">
-                        <div class="p-1" v-for="(item) in incomeExpenseCategories" v-bind:key="item.IncomeExpenseCategoryID" v-on:click="selectIncomeExpenseCategory(item.IncomeExpenseCategoryID)"><i class="far fa-address-book mr-1"></i> {{ item.IncomeExpenseCategoryName }}</div>
+                        <div class="p-1" v-for="(item) in transactionType" v-bind:key="item.key" v-on:click="selectTransactionType(item.key)"><i class="far fa-money-bill-alt mr-2" style="color: #2544ff"></i> {{ item.name }}</div>
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                     <div class="col-4">
                         <div class="widget">
                             <label for="">Số tiền</label>
-                            <input type="type" v-model="state.Amount" placeholder="Nhập số tiền"/>
+                            <input type="number" v-model="state.Amount" placeholder="Nhập số tiền"/>
                         </div>
                     </div>
                     <div class="col-4">
@@ -32,11 +32,11 @@
                             <label for="">Danh mục</label>
                             <div class="dropdown category-select">
                                 <a class="dropdown-toggle " type="button" id="category-select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span v-if="state.IncomeExpenseCategoryID !== '' "><i class="far fa-address-book"></i> {{ incomeExpenseCategoryChoosed.IncomeExpenseCategoryName }}</span>
-                                    <span v-else><i class="far fa-address-book mr-1"></i> Chọn danh mục</span>
+                                    <span v-if="state.IncomeExpenseCategoryID !== '' "><i class="far fa-address-book" style="color: #2544ff"></i> {{ incomeExpenseCategoryChoosed.IncomeExpenseCategoryName }}</span>
+                                    <span v-else><i class="far fa-address-book mr-2"  style="color: #2544ff"></i> Chọn danh mục</span>
                                 </a>
                                 <div class="dropdown-menu p-3" aria-labelledby="category-select">
-                                    <div class="p-1" v-for="(item) in incomeExpenseCategories" v-bind:key="item.IncomeExpenseCategoryID" v-on:click="selectIncomeExpenseCategory(item.IncomeExpenseCategoryID)"><i class="far fa-address-book mr-1"></i> {{ item.IncomeExpenseCategoryName }}</div>
+                                    <div class="p-1" v-for="(item) in incomeExpenseCategories" v-bind:key="item.IncomeExpenseCategoryID" v-on:click="selectIncomeExpenseCategory(item.IncomeExpenseCategoryID)"><i class="far fa-address-book mr-2"  style="color: #2544ff"></i> {{ item.IncomeExpenseCategoryName }}</div>
                                 </div>
                             </div>
 
@@ -66,11 +66,11 @@
                             <label for="">Ví</label>
                             <div class="dropdown spend-per-month">
                                 <a class="dropdown-toggle " type="button" id="spend-per-month" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span v-if="state.AccountID !== '' "><i class="far fa-trash-alt mr-1"></i>{{ userAccountChoosed.AccountName }}</span>
-                                    <span v-else><i class="far fa-trash-alt mr-1"></i> Chọn ví</span>
+                                    <span v-if="state.AccountID !== '' "><i class="far fa-trash-alt mr-2" style="color: #2544ff"></i>{{ userAccountChoosed.AccountName }}</span>
+                                    <span v-else><i class="far fa-trash-alt mr-2"  style="color: #2544ff"></i> Chọn ví</span>
                                 </a>
                                 <div class="dropdown-menu p-3" aria-labelledby="spend-per-month">
-                                    <div class="p-1" v-for="item in userAccounts" v-bind:key="item.AccountID" v-on:click="selectUserAccount(item.AccountID)"><i class="far fa-trash-alt mr-1"></i> {{ item.AccountName }}</div>
+                                    <div class="p-1" v-for="item in userAccounts" v-bind:key="item.AccountID" v-on:click="selectUserAccount(item.AccountID)"><i class="far fa-trash-alt mr-2" style="color: #2544ff"></i> {{ item.AccountName }}</div>
                                 </div>
                             </div>
                         </div>
@@ -142,6 +142,8 @@
 
             </template>
             <template v-slot:buttonModal>
+
+                <i class="fas fa-sync mr-4" v-on:click="sync" style="cursor: pointer"></i>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="far fa-trash-alt"></i> Hủy</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="createTransaction"><i class="fas fa-save"></i> Tạo</button>
             </template>
@@ -149,10 +151,9 @@
     </div>
 </template>
 <script>
-    import Popup from '../layout/Popup.vue';
-    //import TransactionClass from '../../assets/js/transaction'
-    //import eventBus from '../../assets/js/eventbus'
-    import { mapActions, mapState } from "vuex";
+    import Popup from '../layout/Popup.vue'
+    import { createUUID } from '../../assets/js/util'
+    import { mapActions, mapState } from "vuex"
     export default {
         props: [
             'modal'
@@ -164,14 +165,14 @@
                 selected: false,
                
                 state: {
-                    TransactionID: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+                    TransactionID: createUUID(),
                     AccountID: '',
                     Address: '',
-                    Amount: '',
-                    ClosingAmount:'',
+                    Amount: 0,
+                    ClosingAmount:0,
                     Description: '',
                     EventName: '',
-                    FCAmount: '',
+                    FCAmount: 0,
                     Following: true,
                     Giver: '',
                     ImageAttachName: null,
@@ -186,11 +187,12 @@
                     RelationshipID: null,
                     SortOrder: 0,
                     ToAccountID: null,
-                    TransactionType: 1
+                    TransactionType:  1
                 },
-                magic_flag: false,
                 incomeExpenseCategoryChoosed: null,
                 userAccountChoosed: null,
+                transactionTypeChoosed: null,
+               
             };
         },
         components: {
@@ -207,6 +209,16 @@
                 
                 return null;
             },
+
+            selectTransactionType(id) {
+              
+                var arr = this.transactionType.filter(ele => ele.key === id);
+                if (arr.length !== 0) {
+                    return [this.transactionTypeChoosed = arr[0], this.state.TransactionType = arr[0].key];
+                }
+                return null;
+            },
+
              selectUserAccount(id) {
                 for (var item in this.userAccounts) {
                     if (this.userAccounts[item].AccountID == id) {
@@ -214,7 +226,6 @@
                         return [this.userAccountChoosed = this.userAccounts[item], this.state.AccountID = this.userAccounts[item].AccountID];
                     }
                 }
-                
                 return null;
             },
             clearData() {
@@ -247,26 +258,51 @@
             },
             createTransaction() {
                 this.$store.dispatch('financetransaction/create', this.state);
-                //eventBus.$emit('rerender', true);
                 this.clearData();
+            },
+            async sync() {
+                if (confirm('Bạn có muốn đồng bộ dữ liệu lên server?')) { 
+                    await this.$store.dispatch('financetransaction/synchronize');
+                    if (this.message != null) {
+                        alert(this.message)
+                    }
+                }
             },
             ...mapActions("incomeexpensecategory", ["getAll"]),
             ...mapActions("useraccount", ["getAll"]),
-            ...mapActions("financetransaction", ["create"]),
+            ...mapActions("financetransaction", ["create", "synchronize", "getSyncData"]),
         },
         created() {
             this.$store.dispatch('incomeexpensecategory/getAll');
             this.$store.dispatch('useraccount/getAll');
+            if (this.transactionType) {
+                  return this.transactionTypeChoosed = this.transactionType[0];
+            }
+            console.log(this.syncData)
         },
         computed: mapState({
             incomeExpenseCategories: state => state.incomeexpensecategory.data,
             userAccounts: state => state.useraccount.data,
+            transactionType: state => state.financetransaction.transactionType,
+            message: state => state.financetransaction.message,
+            syncData: state => state.financetransaction.syncData,
         }),
     }
 </script>
 <style lang="scss">
     #addModal .widget:focus-within{
-       box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+       box-shadow: 0 0 0 2px rgba(0,123,255,.25);
+    }
+    #addModal input{
+        color: #495057;
+    }
+    #addModal .modal-header{
+        border-bottom: none;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+    #addModal .modal-content{
+        border: none;
     }
     #addModal .modal-content{
         height: auto !important;
@@ -277,8 +313,8 @@
     }
     #addModal .widget {
         height: 90px;
-        border: 1px solid gray;
-        border-radius: 10px;
+        border: 1px solid #00000033;
+        border-radius: 6px;
         padding: 10px 20px;
         display: flex;
         flex-direction: column;
@@ -456,10 +492,14 @@
         }
 
          .select-type {
-            min-width: 170px;
+            min-width: 200px;
             border: 1.5px solid white;
             border-radius: 20px;
             padding: 5px 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
             .dropdown-toggle::after{
                 margin-top: 5px;
             }
@@ -474,7 +514,7 @@
                 top: 10px !important;
                 box-shadow: rgba(0, 0, 0, 0.15) 1px 1px 3px 1px;
                 border: none;
-                left: -17px !important;
+                left: -65px !important;
                 span {
                     padding: 5px 20px;
                     &:hover {

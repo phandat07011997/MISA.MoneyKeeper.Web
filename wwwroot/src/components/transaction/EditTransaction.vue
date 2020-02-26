@@ -23,7 +23,7 @@
                     <div class="col-4">
                         <div class="widget">
                             <label for="">Số tiền</label>
-                            <input type="number" name="name" placeholder="Nhập số tiền" v-model="dataTransaction.Amount" required />
+                            <input type="text" name="name" placeholder="Nhập số tiền" v-model="dataTransaction.moneyFormat" v-on:input="writeMoney($event.target.value)" />
                         </div>
                     </div>
                     <div class="col-4">
@@ -52,7 +52,7 @@
                     <div class="col-4">
                         <div class="widget">
                             <label for="">Ngày tháng</label>
-                            <input type="date" id="start" name="trip-start"
+                            <input type="datetime-local" id="start" name="trip-start"
                                    value=""
                                    v-model="dataTransaction.IsoTransactionDate">
                         </div>
@@ -129,7 +129,7 @@
                         <div class="col-6">
                             <div class="widget">
                                 <label for="">Hạn trả</label>
-                                <input type="date" id="start" name="trip-start"
+                                <input type="datetime-local" id="start" name="trip-start"
                                        value=""
                                        v-model="dataTransaction.IsoDebitDate">
                             </div>
@@ -159,14 +159,15 @@
                 isCollapse: true,
                 selected: true,
                 categoryModal: [
-                    { text: "Chi tiền", val: "1" },
-                    { text: "Thu tiền", val: "2" },
-                    { text: "Cho vay", val: "3" },
-                    { text: "Đi vay", val: "4" },
-                    { text: "Chuyên khoản", val: "5" },
-                    { text: "Điều chỉnh số dư", val: "6" }
+                    { text: "Chi tiền", val: 1 },
+                    { text: "Thu tiền", val: 2 },
+                    { text: "Cho vay", val: 3 },
+                    { text: "Đi vay", val: 4 },
+                    { text: "Chuyên khoản", val: 5 },
+                    { text: "Điều chỉnh số dư", val: 6 }
                 ],
-                categoryModalchoose:"Chi tiền",
+                categoryModalchoose: "Chi tiền",
+                valcategoryModalchoose:1,
                 dataTransaction: {},
                 synData:
                 {
@@ -200,21 +201,29 @@
         },
         methods: {
             formatTime(time) {
-                var date = new Date(time);
-                var year = date.getFullYear();
-                var month = date.getMonth() + 1;
-                var dt = date.getDate();
-
-                if (dt < 10) {
-                    dt = '0' + dt;
+                var convert = new Date(time);
+                var year = convert.getFullYear() < 10 ? '0' + convert.getFullYear() : convert.getFullYear();
+                var month = convert.getMonth() < 10 ? '0' + (convert.getMonth() + 1) : convert.getMonth() + 1;
+                var date = convert.getDate() < 10 ? '0' + convert.getDate() : convert.getDate();
+                var hour = convert.getHours() < 10 ? '0' + convert.getHours() : convert.getHours();
+                var minute = convert.getMinutes() < 10 ? '0' + convert.getMinutes() : convert.getMinutes();
+                var second = convert.getSeconds() < 10 ? '0' + convert.getSeconds() : convert.getSeconds();
+                return year + '-' + month + '-' + date + 'T' + hour + ':' + minute + ':' + second;
+            },
+            moneyToString(money) {
+                if (parseInt(money)) {
+                    return parseFloat(money.toString().replace(/[,-]/g, ""))
+                        .toFixed(0)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 }
-                if (month < 10) {
-                    month = '0' + month;
+                else {
+                    return 0;
                 }
-                return year + '-' + month + '-' + dt;
             },
             selectCategoryModal(index) {
                 this.categoryModalchoose = this.categoryModal[index].text;
+                this.valcategoryModalchoose = this.categoryModal[index].val;
             },
             selectIncomeExpenseCategory(id, index) {
                 this.dataTransaction.IncomeExpenseCategoryID = id;
@@ -227,6 +236,9 @@
                         this.dataTransaction.AccountName = this.userAccounts[item].AccountName;
                     }
                 }
+            },
+            writeMoney(val) {
+                this.dataTransaction.moneyFormat = this.moneyToString(val);
             },
             saveEdit() {
                 //this.synData.AccountID=this.dataTransaction.AccountID;
@@ -250,14 +262,21 @@
                 //    this.synData.RelationshipID=this.dataTransaction.RelationshipID;
                 //    this.synData.SortOrder=this.dataTransaction.SortOrder;
                 //    this.synData.ToAccountID=this.dataTransaction.ToAccountID;
-                //    this.synData.TransactionID=this.dataTransaction.TransactionID;    
+                //    this.synData.TransactionID=this.dataTransaction.TransactionID;
                 //this.synData.TransactionType = this.dataTransaction.TransactionType;
+                var money = (this.dataTransaction.moneyFormat).replace(/,/g, '');
+                if (this.valcategoryModalchoose == 1 || this.valcategoryModalchoose == 3 || this.valcategoryModalchoose == 5) {
+                    this.dataTransaction.Amount = parseInt('-' + money);
+                }
+                else {
+                    this.dataTransaction.Amount = parseInt(money)
+                }
                 this.$store.dispatch('financetransaction/update', this.dataTransaction);
-                this.$store.dispatch('synchronizedata/synchronizeTransactionData', this.synData).then(response => {
-                        console.log(response)
-                     }, error => {
-                        console.error(error)
-                     });
+                this.$store.dispatch('synchronizedata/synchronizeTransactionData', this.synData).then(data => {
+                    console.log(data)
+                }, error => {
+                    console.error(error)
+                });
             }
         },
         created() {
@@ -267,7 +286,8 @@
 
                 data.IsoTransactionDate = transactionDate;
                 data.IsoDebitDate = debitDate;
-                return this.dataTransaction = Object.assign({}, data);
+                data.moneyFormat = this.moneyToString(data.Amount);
+                this.dataTransaction = Object.assign({}, data);
             });
 
             this.$store.dispatch('incomeexpensecategory/getAll');
@@ -275,178 +295,215 @@
         },
         computed: {
             ...mapState({
-                incomeExpenseCategories: state => state.incomeexpensecategory.data,
-                userAccounts: state => state.useraccount.data,
+                incomeExpenseCategories: (state) => state.incomeexpensecategory.data,
+                userAccounts: (state) => state.useraccount.data,
             }),
         },
         watch: {
-            
+
         }
     }
 </script>
 <style lang="scss" scoped>
-.dropdown-menu {
-	top: 10px!important;
-	box-shadow: rgba(0, 0, 0, 0.15) 1px 1px 3px 1px;
-	background: white;
-	user-select: none;
-	div {
-		&:hover {
-			background: #eee
-		}
-	}
-}
+    .dropdown-menu {
+        top: 10px !important;
+        box-shadow: rgba(0, 0, 0, 0.15) 1px 1px 3px 1px;
+        background: white;
+        user-select: none;
+        div
 
-.modal-header .dropdown-menu {
-	width: 200px;
-}
+    {
+        &:hover
 
-.widget {
-	height: 80px;
-	border: 1px solid #ddd!important;
-	border-radius: 0.5em;
-	padding: 10px 20px;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	textarea {
-		height: 100px;
-		width: 100%;
-		border: none;
-		border-radius: 10px;
-	}
-	label {
-		margin-bottom: 0px;
-		font-weight: bold;
-	}
-	.select-option {
-		border-top: none;
-		border-right: none;
-		border-left: none;
-		width: 80%;
-	}
-	input {
-		border: none;
-		border-bottom: 1px solid lightgray;
-		padding: 5px 0;
-		&:focus {
-			outline: none;
-		}
-	}
-	.spend-per-month {
-		width: 100%;
-		#spend-per-month {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-		}
-		.dropdown-menu {
-			width: 100%;
-			span {
-				padding: 5px 20px;
-				&:hover {
-					background: lightgray;
-				}
-			}
-		}
-	}
-	.category-select {
-		width: 100%;
-		#category-select {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-		}
-		.dropdown-menu {
-			top: 0!important;
-			width: 100%;
-			span {
-				padding: 5px 20px;
-				&:hover {
-					background: lightgray;
-				}
-			}
-		}
-	}
-}
+    {
+        background: #eee
+    }
 
-.info-add {
-	cursor: pointer;
-}
+    }
+    }
 
-*:before,
-*:after {
-	box-sizing: border-box;
-}
+    .modal-header .dropdown-menu {
+        width: 200px;
+    }
 
- :root {
-	--toggleHeight: 20px;
-	--toggleWidth: 40px;
-	--toggleGap: 2px;
-}
+    .widget {
+        height: 80px;
+        border: 1px solid #ddd !important;
+        border-radius: 0.5em;
+        padding: 10px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        textarea
 
-.toggle {
-	width: 0;
-	height: 0;
-}
+    {
+        height: 100px;
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+    }
 
-.toggle+label {
-	position: relative;
-	background: #c0c0c0;
-	width: var(--toggleWidth);
-	height: var(--toggleHeight);
-	display: inline-flex;
-	align-items: center;
-	border-radius: 25px;
-	cursor: pointer;
-	transition: background 0.2s ease-in-out;
-	text-indent: calc( var(--toggleWidth) + 10px);
-	white-space: nowrap;
-	&:after {
-		content: "";
-		background: #fff;
-		width: calc(var(--toggleHeight) - (var(--toggleGap) * 2));
-		height: calc(var(--toggleHeight) - (var(--toggleGap) * 2));
-		position: absolute;
-		top: var(--toggleGap);
-		left: var(--toggleGap);
-		border-radius: 50%;
-		transition: left 0.3s ease-in-out, background 0.2s ease-in-out;
-	}
-}
+    label {
+        margin-bottom: 0px;
+        font-weight: bold;
+    }
 
-.toggle:checked+label {
-	background: seaGreen;
-	&:after {
-		left: calc(100% - calc(var(--toggleHeight) - var(--toggleGap)));
-	}
-}
+    .select-option {
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        width: 80%;
+    }
+
+    input {
+        border: none;
+        border-bottom: 1px solid lightgray;
+        padding: 5px 0;
+        &:focus
+
+    {
+        outline: none;
+    }
+
+    }
+
+    .spend-per-month {
+        width: 100%;
+        #spend-per-month
+
+    {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .dropdown-menu {
+        width: 100%;
+        span
+
+    {
+        padding: 5px 20px;
+        &:hover
+
+    {
+        background: lightgray;
+    }
+
+    }
+    }
+    }
+
+    .category-select {
+        width: 100%;
+        #category-select
+
+    {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .dropdown-menu {
+        top: 0 !important;
+        width: 100%;
+        span
+
+    {
+        padding: 5px 20px;
+        &:hover
+
+    {
+        background: lightgray;
+    }
+
+    }
+    }
+    }
+    }
+
+    .info-add {
+        cursor: pointer;
+    }
+
+    *:before,
+    *:after {
+        box-sizing: border-box;
+    }
+
+    :root {
+        --toggleHeight: 20px;
+        --toggleWidth: 40px;
+        --toggleGap: 2px;
+    }
+
+    .toggle {
+        width: 0;
+        height: 0;
+    }
+
+        .toggle + label {
+            position: relative;
+            background: #c0c0c0;
+            width: var(--toggleWidth);
+            height: var(--toggleHeight);
+            display: inline-flex;
+            align-items: center;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.2s ease-in-out;
+            text-indent: calc( var(--toggleWidth) + 10px);
+            white-space: nowrap;
+            &:after
+
+    {
+        content: "";
+        background: #fff;
+        width: calc(var(--toggleHeight) - (var(--toggleGap) * 2));
+        height: calc(var(--toggleHeight) - (var(--toggleGap) * 2));
+        position: absolute;
+        top: var(--toggleGap);
+        left: var(--toggleGap);
+        border-radius: 50%;
+        transition: left 0.3s ease-in-out, background 0.2s ease-in-out;
+    }
+
+    }
+
+    .toggle:checked + label {
+        background: seaGreen;
+        &:after
+
+    {
+        left: calc(100% - calc(var(--toggleHeight) - var(--toggleGap)));
+    }
+
+    }
 
 
-/*file upload*/
+    /*file upload*/
 
-.fileinput-button {
-	position: relative;
-	overflow: hidden;
-	display: inline-block;
-	width: 100%;
-	border: 2px dotted #319e4e;
-	border-radius: 5px;
-	padding: 10px;
-	color: #319e4e;
-	font-size: 25px;
-	text-align: center;
-}
+    .fileinput-button {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        width: 100%;
+        border: 2px dotted #319e4e;
+        border-radius: 5px;
+        padding: 10px;
+        color: #319e4e;
+        font-size: 25px;
+        text-align: center;
+    }
 
-.fileinput-button input {
-	position: absolute;
-	top: 0;
-	right: 0;
-	margin: 0;
-	opacity: 0;
-	-ms-filter: 'alpha(opacity=0)';
-	font-size: 200px !important;
-	direction: ltr;
-	cursor: pointer;
-}
+        .fileinput-button input {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            opacity: 0;
+            -ms-filter: 'alpha(opacity=0)';
+            font-size: 200px !important;
+            direction: ltr;
+            cursor: pointer;
+        }
 </style>

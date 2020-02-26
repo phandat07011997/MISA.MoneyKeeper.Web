@@ -7,8 +7,8 @@
                 </button>
                 <span>Language</span>
             </div>
-            <div class="col-sm-12 language__item" @click="select_language">
-                <span>Tieng Viet</span>
+            <div class="col-sm-12 language__item" @click="select_language" >
+                <span>Tiếng Việt</span>
                 <br />
                 <span>Vietnamese</span>
 
@@ -30,33 +30,69 @@
 
         <div class="row">
             <div class="col-sm-3 offset-sm-9">
-                <div class="button__finish">
+                <div class="button__finish" @click="change_language()">
                     Done
                 </div>
             </div>
         </div>
+
+        <p>{{ hello }}</p>
     </div>
 </template>
 
 <script>
+    import axios from 'axios';
+
     export default {
         name: 'language',
         data() {
             return {
-
+                user: Object,
+                lang: 'vi-VN',
             }
         },
         methods: {
             select_language(event) {
                 var buttons = document.querySelectorAll(".language__item button");
- 
+                
                 for (var i = 0; i < buttons.length; i++) {
                     buttons[i].classList.remove("active");
                 }
 
                 var currButton = event.target.querySelectorAll("button")[0];
+                var span = currButton.parentElement.firstChild;
+         
+                if (span.innerHTML === "Tiếng Việt") {
+                    this.lang = "vi-VN";
+                } else {
+                    this.lang = "en-US";
+                }
                 currButton.classList.add("active");
+                //this.lang = title;
+                console.log(this.lang)
+            },
+        
+        change_language() {
+            var self = this;
+                var userName = "dinhduca7@gmail.com"
+               
+                console.log(userName);
+                axios.get("http://localhost:8080/Services/MISAMembershipService.svc/json/GetUserInfo?userName=" + userName).then(function(response) {
+                    console.log(response);
+                    self.user = response;
+                    
+                })
+                    .catch(function (err) {
+                        console.log(err);
 
+                    })
+         
+    }
+    },
+
+        computed: {
+            hello() {
+                return this.user.data ? this.user.data.UserId : "";
             }
         },
         props: ['hide']

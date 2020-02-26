@@ -1,4 +1,11 @@
-﻿<template>
+﻿
+    <template>
+        <div id="app">
+            <router-view></router-view>
+        </div>
+    </template>
+
+<!--<template>
     <div id="app">
         <div id="header">
             <TopBar />
@@ -39,6 +46,6 @@
 </script>
 <style lang="scss">
     @import "./assets/css/app.scss";
-</style>
+</style>-->
 
 

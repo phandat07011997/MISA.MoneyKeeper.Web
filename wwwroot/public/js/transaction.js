@@ -106,7 +106,7 @@ var FinanceTransaction = [
         "RelationshipID": null,
         "SortOrder": 0,
         "ToAccountID": null,
-        "TransactionID": "c081d77a-8ebd-49c6-82b2-d7fdf1d34f06",
+        "TransactionID": "d5e793ae-29e8-46a9-b6a6-1a52a58fcff4",
         "TransactionType": 0
     },
     {
@@ -227,7 +227,54 @@ var IncomeExpenseCategory = [
         "IncomeExpenseCategoryIcon": "https://static.moneylover.me/img/icon/icon_136.png",
     },
 ];
-
+var UserInfoData = {
+    "LastChangedDate": null,
+    "TableKey": 0,
+    "UserId": "ac1118ab-d601-43a4-8336-2369c8c2de04",
+    "Address": null,
+    "AvatarName": "740cc942-da25-4cdd-b038-def600c94fc6.jpeg",
+    "Commune": null,
+    "CountDayRemaining": -1,
+    "Country": null,
+    "Currency": "en-US",
+    "CurrencyCode": "VND",
+    "District": null,
+    "Email": "truonglv@gmail.com",
+    "FeatureLimit": "",
+    "FirstName": null,
+    "FullName": "truonglv",
+    "Gender": 0,
+    "InitializeLanguage": "vi-VN",
+    "IsAdsRemove": false,
+    "IsAlreadySetPassword": true,
+    "IsAutoMigrated": false,
+    "IsConfirmShareCode": true,
+    "IsInitializingAccount": true,
+    "IsMigrated": false,
+    "IsPremium": false,
+    "IsSyncContact": true,
+    "IsoBirthDay": "01/01/1753 12:00:00 AM",
+    "IsoCreatedDate": "09/06/2019 06:09:02 PM",
+    "IsoEndDate": "01/01/1753 12:00:00 AM",
+    "IsoStartDate": "01/01/1753 12:00:00 AM",
+    "JobName": null,
+    "Language": "vi-VN",
+    "LastName": null,
+    "ListLinkAccount": null,
+    "ManagingPurpose": 0,
+    "MisaUserID": "1433154",
+    "Mobile": null,
+    "MonthlySalary": null,
+    "Password": null,
+    "ProductID": "",
+    "Province": null,
+    "Relationship": 0,
+    "ResponseResult": null,
+    "SettingInfoJson": null,
+    "TotalCoin": 270,
+    "UUIDDevice": null,
+    "UserName": "truonglv@gmail.com"
+}
 
         db.transaction(function (tx) {
 
@@ -258,8 +305,9 @@ var IncomeExpenseCategory = [
             FinanceTransaction.forEach(ele => {
                 tx.executeSql("INSERT INTO FinanceTransaction VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [ele.TransactionID, ele.AccountID, ele.Address, ele.Amount, ele.ClosingAmount, ele.Description, ele.EventName, ele.FCAmount, ele.Following, ele.Giver, ele.ImageAttachName, ele.IncomeExpenseCategoryID, ele.IsFavorite, ele.IsoDebitDate, ele.IsoTransactionDate, ele.Latitude, ele.Longitude, ele.Payee, ele.RelatedPerson, ele.RelationshipID, ele.SortOrder, ele.ToAccountID, ele.TransactionType, new Date(ele.IsoTransactionDate).toDateString()]);
             })
-           
 
+            //// UserInfoData table
+            //tx.executeSql("CREATE TABLE IF NOT EXISTS UserInfoData(UserId,Address,AvatarName,Commune,);
         });
 
 console.log();

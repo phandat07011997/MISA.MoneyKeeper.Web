@@ -22,7 +22,7 @@
         <div class="search">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Tìm kiếm hạng mục" style="width: 300px" v-model="search" />
-            <button v-if="search != ''" @click="search = ''" class="btn bg-transparent" style="margin-left: -40px; z-index: 100;">
+            <button v-if="search != null" @click="search = null" class="btn bg-transparent" style="margin-left: -40px; z-index: 100;">
               <i style="color: gray" class="fa fa-times"></i>
             </button>
           </div>
@@ -37,7 +37,7 @@
       </div>
     </div>
     <div style="height: 300px"></div>
-      <AddCategory :modal="'addCat'"></AddCategory>
+      <AddCategory :modal="'addCat'" v-model="currentTab" :currentTab="currentTab"></AddCategory>
   </div>
 </template>
 
@@ -49,7 +49,7 @@ export default {
   data: function() {
     return {
       modal: "editCat",
-      search: "",
+      search: null,
       currentTab: "expenseTab",
       tabs: [
         { key: "expenseTab", label: "Mục chi" },
