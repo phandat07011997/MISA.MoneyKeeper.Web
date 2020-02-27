@@ -4,25 +4,25 @@
       <div class="title-addButton">
         <h1>Hạng mục thu chi</h1>
         <a data-toggle="modal" v-bind:data-target="'#addCat'" href="#">
-          <button>Thêm hạng mục</button>
+          <button class="shadow border">Thêm hạng mục</button>
         </a>
       </div>
       <!-- Nút điều hướng -->
       <div class="align-elements col-sm-6">
-        <div class="top-nav">
+        <div class="top-nav shadow border">
           <button
             class="col-sm-6"
-            :class="currentTab === tab.key ? 'active' : ''"
+            :class="currentTab === tab.key ? 'btn but-active' : 'btn but'"
             v-for="tab in tabs"
             v-bind:key="tab.key"
             @click="currentTab = tab.key"
-          >{{ tab.label }}</button>
+          ><h4>{{ tab.label }}</h4></button>
         </div>
         <!-- Phần tử tìm kiếm -->
-        <div class="search">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Tìm kiếm hạng mục" style="width: 300px" v-model="search" />
-            <button v-if="search != null" @click="search = null" class="btn bg-transparent" style="margin-left: -40px; z-index: 100;">
+        <div class="search col-12 ">
+          <div class="input-group ">
+            <input type="text" class="form-control shadow border" placeholder="Tìm kiếm hạng mục" v-model="search" />
+            <button v-if="search != ''" @click="search = ''" class="btn bg-transparent" style="margin-left: -40px; z-index: 100;">
               <i style="color: gray" class="fa fa-times"></i>
             </button>
           </div>
@@ -33,7 +33,7 @@
     <!-- Phần tử nội dung -->
     <div class="container col-sm-6">
       <div class="content">
-        <Content :currentTab="currentTab"></Content>
+        <Content :currentTab="currentTab" :search="search.toLowerCase()"></Content>
       </div>
     </div>
     <div style="height: 300px"></div>
@@ -49,7 +49,7 @@ export default {
   data: function() {
     return {
       modal: "editCat",
-      search: null,
+      search: '',
       currentTab: "expenseTab",
       tabs: [
         { key: "expenseTab", label: "Mục chi" },

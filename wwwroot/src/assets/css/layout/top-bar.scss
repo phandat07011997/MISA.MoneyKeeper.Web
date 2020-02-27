@@ -4,7 +4,7 @@
     // padding: 12px 12px;
     #left-top-bar {
         float: left;
-        width: 30%;
+        width: 40%;
         height: 100%;
         display: flex;
         justify-content: flex-start;
@@ -23,6 +23,7 @@
         }
 
         > span {
+            font-size: 20px;
             font-weight: bold;
             margin-left: 36px;
             color: white;
@@ -35,13 +36,13 @@
             }
 
             #money-total {
-                color: #009e0f;
+                color: #2ebf4f;
             }
         }
     }
 
     #mid-top-bar {
-        width: 40%;
+        width: 20%;
         height: 100%;
         display: flex;
         justify-content: center;
@@ -58,6 +59,8 @@
 
             #add-icon {
                 text-align: center;
+                font-size: 30px;
+                color: white;
 
                 img {
                     width: 40px;
@@ -76,7 +79,7 @@
 
     #right-top-bar {
         float: right;
-        width: 30%;
+        width: 40%;
         height: 100%;
         display: flex;
         justify-content: flex-end;

@@ -58,7 +58,7 @@ var AccountCategory = [
     }
 ]
 var FinanceTransaction = [
-    
+
     {
         "AccountID": "1b1b7ee4-9506-4a6b-899a-d17b4244ef7f",
         "Address": "",
@@ -228,86 +228,77 @@ var IncomeExpenseCategory = [
     },
 ];
 var UserInfoData = {
-    "LastChangedDate": null,
-    "TableKey": 0,
     "UserId": "ac1118ab-d601-43a4-8336-2369c8c2de04",
-    "Address": null,
+    "Address": "Tây Hồ, Hà Nội",
     "AvatarName": "740cc942-da25-4cdd-b038-def600c94fc6.jpeg",
     "Commune": null,
-    "CountDayRemaining": -1,
     "Country": null,
     "Currency": "en-US",
     "CurrencyCode": "VND",
     "District": null,
     "Email": "truonglv@gmail.com",
-    "FeatureLimit": "",
     "FirstName": null,
     "FullName": "truonglv",
     "Gender": 0,
     "InitializeLanguage": "vi-VN",
-    "IsAdsRemove": false,
-    "IsAlreadySetPassword": true,
-    "IsAutoMigrated": false,
-    "IsConfirmShareCode": true,
-    "IsInitializingAccount": true,
-    "IsMigrated": false,
     "IsPremium": false,
-    "IsSyncContact": true,
     "IsoBirthDay": "01/01/1753 12:00:00 AM",
     "IsoCreatedDate": "09/06/2019 06:09:02 PM",
     "IsoEndDate": "01/01/1753 12:00:00 AM",
     "IsoStartDate": "01/01/1753 12:00:00 AM",
-    "JobName": null,
+    "JobName": "Sinh viên",
     "Language": "vi-VN",
     "LastName": null,
     "ListLinkAccount": null,
-    "ManagingPurpose": 0,
     "MisaUserID": "1433154",
-    "Mobile": null,
+    "Mobile": "0396934750",
     "MonthlySalary": null,
     "Password": null,
     "ProductID": "",
     "Province": null,
-    "Relationship": 0,
-    "ResponseResult": null,
-    "SettingInfoJson": null,
     "TotalCoin": 270,
-    "UUIDDevice": null,
     "UserName": "truonglv@gmail.com"
 }
 
-        db.transaction(function (tx) {
 
-            //IncomeExpenseCategory table
-            tx.executeSql("CREATE TABLE IF NOT EXISTS IncomeExpenseCategory(IncomeExpenseCategoryID unique, IncomeExpenseCategoryName, IncomeExpenseCategoryIcon)");
+db.transaction(function (tx) {
+    tx.executeSql("CREATE TABLE IF NOT EXISTS UserInfoData(UserId,Address,FullName,Mobile,IsoBirthDay,Gender,JobName)");
+    tx.executeSql("INSERT INTO UserInfoData VALUES (?,?,?,?,?,?,?)", [UserInfoData.UserId, UserInfoData.Address, UserInfoData.FullName, UserInfoData.Mobile, UserInfoData.IsoBirthDay, UserInfoData.Gender, UserInfoData.JobName]);
 
-            IncomeExpenseCategory.forEach(ele => {
-                tx.executeSql("INSERT INTO IncomeExpenseCategory(IncomeExpenseCategoryID, IncomeExpenseCategoryName, IncomeExpenseCategoryIcon) VALUES (?, ?, ?)", [ele.IncomeExpenseCategoryID, ele.IncomeExpenseCategoryName, ele.IncomeExpenseCategoryIcon]);
-            })
+    //IncomeExpenseCategory table
+    tx.executeSql("CREATE TABLE IF NOT EXISTS IncomeExpenseCategory(IncomeExpenseCategoryID unique, IncomeExpenseCategoryName, IncomeExpenseCategoryIcon)");
 
-            //AccountCategory table
-            tx.executeSql("CREATE TABLE IF NOT EXISTS AccountCategory(AccountCategoryID unique, AccountCategoryName, AccountCategoryIcon)");
+    IncomeExpenseCategory.forEach(ele => {
+        tx.executeSql("INSERT INTO IncomeExpenseCategory(IncomeExpenseCategoryID, IncomeExpenseCategoryName, IncomeExpenseCategoryIcon) VALUES (?, ?, ?)", [ele.IncomeExpenseCategoryID, ele.IncomeExpenseCategoryName, ele.IncomeExpenseCategoryIcon]);
+    })
 
-            AccountCategory.forEach(ele => {
-                tx.executeSql("INSERT INTO AccountCategory(AccountCategoryID, AccountCategoryName, AccountCategoryIcon) VALUES (?, ?, ?)", [ele.AccountCategoryID, ele.AccountCategoryName, ele.AccountCategoryIcon]);
-            })
+    //AccountCategory table
+    tx.executeSql("CREATE TABLE IF NOT EXISTS AccountCategory(AccountCategoryID unique, AccountCategoryName, AccountCategoryIcon)");
 
-            //UserAccount table
-            tx.executeSql("CREATE TABLE IF NOT EXISTS UserAccount(AccountID unique, AccountCategoryID, AccountCurrentBalance, AccountDescription, AccountInitialBalance, AccountName, AccountSortingOrder, BankName, CreditCardIsReminder, CreditCardListRemindValue, CreditCardPaymentDay, CreditLine, CurrencyCode, CurrencyType, DictionaryKey, DueType, ExcludeReport, IconName, Inactive, InterestPaymentAccount, InterestPaymentType, InterestRate, IsAutoRenew, IsCreatRecurring, IsFinalize, IsSystem, IsoCreateDate, IsoEndDate, IsoFinalizeDate, IsoLastExcuteDate, IsoRecordTime, IsoStartDate, ListOtherValue, ListTransactionInterestPayment, MinInterestRate, RangeType, RecurringAmount, RecurringFromAccount, RecurringType, SavingFromAccount, TermMonth, TermType)");
+    AccountCategory.forEach(ele => {
+        tx.executeSql("INSERT INTO AccountCategory(AccountCategoryID, AccountCategoryName, AccountCategoryIcon) VALUES (?, ?, ?)", [ele.AccountCategoryID, ele.AccountCategoryName, ele.AccountCategoryIcon]);
+    })
 
-            UserAccount.forEach(ele => {
-                tx.executeSql("INSERT INTO UserAccount (AccountID, AccountCategoryID, AccountCurrentBalance, AccountDescription, AccountInitialBalance, AccountName, AccountSortingOrder, BankName, CreditCardIsReminder, CreditCardListRemindValue, CreditCardPaymentDay, CreditLine, CurrencyCode, CurrencyType, DictionaryKey, DueType, ExcludeReport, IconName, Inactive, InterestPaymentAccount, InterestPaymentType, InterestRate, IsAutoRenew, IsCreatRecurring, IsFinalize, IsSystem, IsoCreateDate, IsoEndDate, IsoFinalizeDate, IsoLastExcuteDate, IsoRecordTime, IsoStartDate, ListOtherValue, ListTransactionInterestPayment, MinInterestRate, RangeType, RecurringAmount, RecurringFromAccount, RecurringType, SavingFromAccount, TermMonth, TermType) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [ele.AccountID, ele.AccountCategoryID, ele.AccountCurrentBalance, ele.AccountDescription, ele.AccountInitialBalance, ele.AccountName, ele.AccountSortingOrder, ele.BankName, ele.CreditCardIsReminder, ele.CreditCardListRemindValue, ele.CreditCardPaymentDay, ele.CreditLine, ele.CurrencyCode, ele.CurrencyType, ele.DictionaryKey, ele.DueType, ele.ExcludeReport, ele.IconName, ele.Inactive, ele.InterestPaymentAccount, ele.InterestPaymentType, ele.InterestRate, ele.IsAutoRenew, ele.IsCreatRecurring, ele.IsFinalize, ele.IsSystem, ele.IsoCreateDate, ele.IsoEndDate, ele.IsoFinalizeDate, ele.IsoLastExcuteDate, ele.IsoRecordTime, ele.IsoStartDate, ele.ListOtherValue, ele.ListTransactionInterestPayment, ele.MinInterestRate, ele.RangeType, ele.RecurringAmount, ele.RecurringFromAccount, ele.RecurringType, ele.SavingFromAccount, ele.TermMonth, ele.TermType]);
-            })
+    //UserAccount table
+    tx.executeSql("CREATE TABLE IF NOT EXISTS UserAccount(AccountID unique, AccountCategoryID, AccountCurrentBalance, AccountDescription, AccountInitialBalance, AccountName, AccountSortingOrder, BankName, CreditCardIsReminder, CreditCardListRemindValue, CreditCardPaymentDay, CreditLine, CurrencyCode, CurrencyType, DictionaryKey, DueType, ExcludeReport, IconName, Inactive, InterestPaymentAccount, InterestPaymentType, InterestRate, IsAutoRenew, IsCreatRecurring, IsFinalize, IsSystem, IsoCreateDate, IsoEndDate, IsoFinalizeDate, IsoLastExcuteDate, IsoRecordTime, IsoStartDate, ListOtherValue, ListTransactionInterestPayment, MinInterestRate, RangeType, RecurringAmount, RecurringFromAccount, RecurringType, SavingFromAccount, TermMonth, TermType)");
 
-            //FinanceTransaction table
-            tx.executeSql("CREATE TABLE IF NOT EXISTS FinanceTransaction(TransactionID, AccountID, Address, Amount, ClosingAmount, Description, EventName, FCAmount, Following, Giver, ImageAttachName, IncomeExpenseCategoryID, IsFavorite, IsoDebitDate, IsoTransactionDate, Latitude, Longitude, Payee, RelatedPerson, RelationshipID, SortOrder, ToAccountID, TransactionType, Date)");
+    UserAccount.forEach(ele => {
+        tx.executeSql("INSERT INTO UserAccount (AccountID, AccountCategoryID, AccountCurrentBalance, AccountDescription, AccountInitialBalance, AccountName, AccountSortingOrder, BankName, CreditCardIsReminder, CreditCardListRemindValue, CreditCardPaymentDay, CreditLine, CurrencyCode, CurrencyType, DictionaryKey, DueType, ExcludeReport, IconName, Inactive, InterestPaymentAccount, InterestPaymentType, InterestRate, IsAutoRenew, IsCreatRecurring, IsFinalize, IsSystem, IsoCreateDate, IsoEndDate, IsoFinalizeDate, IsoLastExcuteDate, IsoRecordTime, IsoStartDate, ListOtherValue, ListTransactionInterestPayment, MinInterestRate, RangeType, RecurringAmount, RecurringFromAccount, RecurringType, SavingFromAccount, TermMonth, TermType) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [ele.AccountID, ele.AccountCategoryID, ele.AccountCurrentBalance, ele.AccountDescription, ele.AccountInitialBalance, ele.AccountName, ele.AccountSortingOrder, ele.BankName, ele.CreditCardIsReminder, ele.CreditCardListRemindValue, ele.CreditCardPaymentDay, ele.CreditLine, ele.CurrencyCode, ele.CurrencyType, ele.DictionaryKey, ele.DueType, ele.ExcludeReport, ele.IconName, ele.Inactive, ele.InterestPaymentAccount, ele.InterestPaymentType, ele.InterestRate, ele.IsAutoRenew, ele.IsCreatRecurring, ele.IsFinalize, ele.IsSystem, ele.IsoCreateDate, ele.IsoEndDate, ele.IsoFinalizeDate, ele.IsoLastExcuteDate, ele.IsoRecordTime, ele.IsoStartDate, ele.ListOtherValue, ele.ListTransactionInterestPayment, ele.MinInterestRate, ele.RangeType, ele.RecurringAmount, ele.RecurringFromAccount, ele.RecurringType, ele.SavingFromAccount, ele.TermMonth, ele.TermType]);
+    })
 
-            FinanceTransaction.forEach(ele => {
-                tx.executeSql("INSERT INTO FinanceTransaction VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [ele.TransactionID, ele.AccountID, ele.Address, ele.Amount, ele.ClosingAmount, ele.Description, ele.EventName, ele.FCAmount, ele.Following, ele.Giver, ele.ImageAttachName, ele.IncomeExpenseCategoryID, ele.IsFavorite, ele.IsoDebitDate, ele.IsoTransactionDate, ele.Latitude, ele.Longitude, ele.Payee, ele.RelatedPerson, ele.RelationshipID, ele.SortOrder, ele.ToAccountID, ele.TransactionType, new Date(ele.IsoTransactionDate).toDateString()]);
-            })
+    //FinanceTransaction table
+    tx.executeSql("CREATE TABLE IF NOT EXISTS FinanceTransaction(TransactionID, AccountID, Address, Amount, ClosingAmount, Description, EventName, FCAmount, Following, Giver, ImageAttachName, IncomeExpenseCategoryID, IsFavorite, IsoDebitDate, IsoTransactionDate, Latitude, Longitude, Payee, RelatedPerson, RelationshipID, SortOrder, ToAccountID, TransactionType, Date)");
 
-            //// UserInfoData table
-            //tx.executeSql("CREATE TABLE IF NOT EXISTS UserInfoData(UserId,Address,AvatarName,Commune,);
-        });
+    FinanceTransaction.forEach(ele => {
+        tx.executeSql("INSERT INTO FinanceTransaction VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [ele.TransactionID, ele.AccountID, ele.Address, ele.Amount, ele.ClosingAmount, ele.Description, ele.EventName, ele.FCAmount, ele.Following, ele.Giver, ele.ImageAttachName, ele.IncomeExpenseCategoryID, ele.IsFavorite, ele.IsoDebitDate, ele.IsoTransactionDate, ele.Latitude, ele.Longitude, ele.Payee, ele.RelatedPerson, ele.RelationshipID, ele.SortOrder, ele.ToAccountID, ele.TransactionType, new Date(ele.IsoTransactionDate).toDateString()]);
+    })
+
+
+
+
+
+
+
+});
 
 console.log();

@@ -24,7 +24,7 @@
                     <div class="col-4">
                         <div class="widget">
                             <label for="">Số tiền</label>
-                            <input type="number" v-model="state.Amount" placeholder="Nhập số tiền"/>
+                            <input type="text" v-model="state.Amount" placeholder="Nhập số tiền" v-on:input="writeMoney($event.target.value)"/>
                         </div>
                     </div>
                     <div class="col-4">
@@ -56,9 +56,7 @@
                     <div class="col-4">
                         <div class="widget">
                             <label for="">Ngày tháng</label>
-                            <input type="date" v-model="state.IsoTransactionDate" class="form-control" />
-
-
+                            <input type="datetime-local" value="" v-model="state.IsoTransactionDate"  class="form-control" />
                         </div>
                     </div>
                     <div class="col-4">
@@ -134,7 +132,7 @@
                         <div class="col-6">
                             <div class="widget">
                                 <label for="">Hạn trả</label>
-                                <input type="date" v-model="state.IsoDebitDate" class="form-control" />
+                                <input type="date" v-model="state.IsoDebitDate" class="form-control"/>
                             </div>
                         </div>
                     </div>
@@ -142,7 +140,6 @@
 
             </template>
             <template v-slot:buttonModal>
-
                 <i class="fas fa-sync mr-4" v-on:click="sync" style="cursor: pointer"></i>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="far fa-trash-alt"></i> Hủy</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="createTransaction"><i class="fas fa-save"></i> Tạo</button>
@@ -179,7 +176,7 @@
                     IncomeExpenseCategoryID: '',
                     IsFavorite: false,
                     IsoDebitDate: '',
-                    IsoTransactionDate: '',
+                    IsoTransactionDate: new Date(),
                     Latitude: 0,
                     Longitude: 0,
                     Payee:'',
@@ -199,6 +196,9 @@
             Popup,
         },
         methods: {
+            getTime() {
+                return new Date();
+            },
             selectIncomeExpenseCategory(id) {
                 for (var item in this.incomeExpenseCategories) {
                     if (this.incomeExpenseCategories[item].IncomeExpenseCategoryID == id) {
@@ -209,7 +209,16 @@
                 
                 return null;
             },
-
+            formatTime(time) {
+                var convert = new Date(time);
+                var year = convert.getFullYear() < 10 ? '0' + convert.getFullYear() : convert.getFullYear();
+                var month = convert.getMonth() < 10 ? '0' + (convert.getMonth() + 1) : convert.getMonth() + 1;
+                var date = convert.getDate() < 10 ? '0' + convert.getDate() : convert.getDate();
+                var hour = convert.getHours() < 10 ? '0' + convert.getHours() : convert.getHours();
+                var minute = convert.getMinutes() < 10 ? '0' + convert.getMinutes() : convert.getMinutes();
+                var second = convert.getSeconds() < 10 ? '0' + convert.getSeconds() : convert.getSeconds();
+                return year + '-' + month + '-' + date + 'T' + hour + ':' + minute + ':' + second;
+            },
             selectTransactionType(id) {
               
                 var arr = this.transactionType.filter(ele => ele.key === id);
@@ -228,6 +237,25 @@
                 }
                 return null;
             },
+
+             moneyToString(money) {
+                if (parseInt(money) > 0) {
+                    return parseFloat(money.toString().replace(/[,-]/g, ""))
+                        .toFixed(0)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
+                else {
+                    return 0;
+                }
+            },
+            writeMoney(val) {
+                 console.log(val)
+                 console.log( this.moneyToString(val))
+                 this.state.Amount = this.moneyToString(val);
+
+            },
+
             clearData() {
                 var data = {
                     AccountID: '',
@@ -243,7 +271,7 @@
                     IncomeExpenseCategoryID: '',
                     IsFavorite: false,
                     IsoDebitDate: '',
-                    IsoTransactionDate: '',
+                    IsoTransactionDate: new Date(),
                     Latitude: 0,
                     Longitude: 0,
                     Payee:'',
@@ -257,15 +285,26 @@
                 return this.state = data;
             },
             createTransaction() {
+                var money = (this.state.Amount).replace(/,/g, '');
+                if (this.transactionTypeChoosed.key == 1 || this.transactionTypeChoosed.key == 3) {
+                    this.state.Amount = parseInt('-' + money);
+                }
+                else {
+                    this.state.Amount = parseInt(money)
+                }
                 this.$store.dispatch('financetransaction/create', this.state);
                 this.clearData();
             },
             async sync() {
                 if (confirm('Bạn có muốn đồng bộ dữ liệu lên server?')) { 
-                    await this.$store.dispatch('financetransaction/synchronize');
-                    if (this.message != null) {
-                        alert(this.message)
-                    }
+                    await this.$store.dispatch('financetransaction/synchronize').then(res => {
+                        console.log(res)
+                        alert('Đồng bộ thành công');
+                       
+                    }).catch(err => {
+                        console.log(err)
+                        alert('Đồng bộ thất bại')
+                    });
                 }
             },
             ...mapActions("incomeexpensecategory", ["getAll"]),
@@ -273,12 +312,12 @@
             ...mapActions("financetransaction", ["create", "synchronize", "getSyncData"]),
         },
         created() {
+            this.state.IsoTransactionDate = this.formatTime(this.state.IsoTransactionDate);
             this.$store.dispatch('incomeexpensecategory/getAll');
             this.$store.dispatch('useraccount/getAll');
             if (this.transactionType) {
                   return this.transactionTypeChoosed = this.transactionType[0];
             }
-            console.log(this.syncData)
         },
         computed: mapState({
             incomeExpenseCategories: state => state.incomeexpensecategory.data,

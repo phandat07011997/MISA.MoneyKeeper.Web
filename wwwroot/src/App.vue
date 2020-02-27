@@ -1,10 +1,42 @@
 ﻿
     <template>
+        
         <div id="app">
+            {{ testData }}
             <router-view></router-view>
         </div>
     </template>
+    <script>
+        import { mapActions, mapState } from "vuex";
 
+        export default {
+            data() {
+                return {
+                    testData: null
+                }
+            },
+            methods: {
+                ...mapActions("sync", ["getData", "create", "login"]),
+            },
+            async created() {
+                await this.$store.dispatch('sync/login');
+                console.log('create')
+                await this.$store.dispatch('sync/getData').then(res => {
+                    this.$store.dispatch('sync/create', res.data);
+                });
+            },
+            mounted() {
+                
+            },
+            computed: {
+           
+                ...mapState({
+                     data: state => state.sync.data,
+                }),
+
+            },
+        }
+    </script>
 <!--<template>
     <div id="app">
         <div id="header">

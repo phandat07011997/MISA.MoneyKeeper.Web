@@ -21,7 +21,7 @@
         v-for="(child, indexChild) in par.childs"
         :key="indexChild"
       >
-        <li class="cat-child">
+        <li class="cat-child" v-if="removeAccents(child.name.toLowerCase()).includes(removeAccents(search))">
           <a
             class="font-size-name-cat"
             data-toggle="modal"
@@ -53,7 +53,7 @@ import ButtonCollapse from "./ButtonCollapse.vue";
 import WarningPopUp from "../categories/popup/WarningPopUp.vue";
 
 export default {
-  props: ["currentTab"],
+  props: ["currentTab", "search"],
   data: function() {
     return {
       isOpen: true,
@@ -64,10 +64,30 @@ export default {
   },
   computed: {
     categories() {
+      var category = "";
       if (this.currentTab === "expenseTab") {
-        return categories.categoriesEx;
+        category = categories.categoriesEx;
       } else {
-        return categories.categoriesIn;
+        category = categories.categoriesIn;
+      }
+      if (this.search === "") {
+        return category;
+      } else {
+        var search = this.removeAccents(this.search);
+        // console.log("search:" + search);
+        return category.filter(par => {
+          var parentName = this.removeAccents(par.name.toLowerCase());
+          // console.log("cha:" + parentName);
+          if (par.childs !== undefined) {
+            return par.childs.some(child => {
+              var childName = this.removeAccents(child.name.toLowerCase());
+              // console.log("con:" + childName);
+              return childName.includes(search) || parentName.includes(search);
+            });
+          } else {
+            return parentName.includes(search);
+          }
+        });
       }
     }
   },
@@ -78,6 +98,23 @@ export default {
       } else {
         this.isParent = false;
       }
+    },
+    removeAccents(str) {
+      var AccentsMap = [
+        "aàảãáạăằẳẵắặâầẩẫấậ",
+        "dđ",
+        "eèẻẽéẹêềểễếệ",
+        "iìỉĩíị",
+        "oòỏõóọôồổỗốộơờởỡớợ",
+        "uùủũúụưừửữứự",
+        "yỳỷỹýỵ",
+      ];
+      for (var i = 0; i < AccentsMap.length; i++) {
+        var re = new RegExp("[" + AccentsMap[i].substr(1) + "]", "g");
+        var char = AccentsMap[i][0];
+        str = str.replace(re, char);
+      }
+      return str;
     }
   },
   components: {

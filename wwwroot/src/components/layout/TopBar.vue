@@ -20,18 +20,19 @@
                 <a href="#">
                     <div id="user-icon">
                         <img src="../../assets/img/user-icon.png" /><i class="fas fa-sort-down" style="font-size:28px"></i>
+                        
                     </div>
                     <div class="dropdown-content">
                         <div id="user-info">
                             <div id="user-avatar"><img src="../../assets/img/user-icon.png" /></div>
-                            <div id="user-name">Phan Quốc Đạt</div>
+                            <div id="user-name">truonglv</div>
                             <div id="user-email">{{getUserFullName}}</div>
                         </div>
                         <hr />
 
                         <a class="" href="#" data-toggle="modal" v-bind:data-target="'#' + userInfoModal">Thông tin tài khoản</a>
                         <a href="#">Liên kết tài khoản</a>
-                        <a href="#">Đăng xuất</a>
+                        <a href="#"  @click="logout">Đăng xuất</a>
                         
                     </div>
                     
@@ -43,10 +44,7 @@
             <a class="" data-toggle="modal" v-bind:data-target="'#' + modal" href="#">
 
 
-                <div id="add-icon">
-                    <i class="fas fa-edit" style="font-size:30px"></i>
-                </div>
-                <div id="add-label">Thêm ghi chép</div>
+                <button class="btn btn-success" style="font-weight:bold;font-size:15px;"><i class="fas fa-plus"></i> Thêm ghi chép</button>
 
             </a>
             <AddTransaction v-bind:modal="modal" />
@@ -82,6 +80,12 @@
             getUserFullName() {
                 var user = JSON.parse(localStorage.getItem('user'));
                 return user.username;
+            }
+        },
+        methods: {
+            logout() {
+                localStorage.removeItem('user');
+                location.reload();
             }
         },
         created() {

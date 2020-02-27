@@ -1,14 +1,15 @@
 ﻿<template>
     <div class="transaction">
+        <!--<div class="hide-transaction-detail-enter-active"> ANH </div>-->
         <div class="mx-auto" style="width:80%">
             <!-- <sidebar-comp></sidebar-comp> -->
             <!--<div class="bg-danger" style="width:74px; height:5px;"></div>-->
             <div class="row m-0" style="width:100%">
                 <div class="p-0 shadow border border-top-0"
-                     v-bind:class="hiddenDetail ? 'container my-3' : 'col col-sm-4 m-3'">
+                     v-bind:class="hiddenDetail ? 'mx-auto col col-sm-4 m-3' : 'col col-sm-4 m-3'">
                     <!-- Thanh tìm kiếm và lọc dữ liệu -->
                     <div id="transaction-filter-bar">
-                        <div class="bg-primary p-2 d-flex align-items-center justify-content-end"
+                        <div class="bg-primary p-2 px-3 d-flex align-items-center justify-content-end"
                              style="width:100%;">
                             <div class="d-flex align-items-center justify-content-end">
                                 <div class="d-flex align-items-center" style="position:relative">
@@ -21,7 +22,7 @@
                                            style="width:200px; height:35px; border-radius:15px" />
                                 </div>
                                 <div class="text-light bg-inherit border-0 py-auto">
-                                    <i v-bind:class="hiddenFilter ? 'fas fa-chevron-down fa-2x': 'fas fa-chevron-up fa-2x'" @click="hiddenFilter = ! hiddenFilter"></i>
+                                    <i v-bind:class="hiddenFilter ? 'fas fa-chevron-down': 'fas fa-chevron-up'" @click="hiddenFilter = ! hiddenFilter"></i>
                                 </div>
                             </div>
                         </div>
@@ -72,53 +73,11 @@
                                 </div>
                             </div>
 
-                            <!--<ul class="row m-0 p-0">
-                            <li style="width:15%; height:40px" class="border-right d-flex align-items-center text-center p-2">
-                                <a class="justify-content-between" style="width:100%"> <b>Ngày</b></a>
-                                <ul>
-                                    <li>Hôm nay</li>
-                                    <li>Hôm qua</li>
-                                    <li>Ngày khác</li>
-                                </ul>
-                            </li>
-                            <li style="width:15%; height:40px" class="border-right d-flex align-items-center text-center p-2">
-                                <a class="justify-content-between" style="width:100%"> <b>Tháng</b></a>
-                                <ul>
-                                    <li>Hôm nay</li>
-                                    <li>Hôm qua</li>
-                                    <li>Ngày khác</li>
-                                </ul>
-                            </li>
-                            <li style="width:15%; height:40px" class="border-right d-flex align-items-center text-center p-2">
-                                <a class="justify-content-between" style="width:100%"> <b>Tháng</b></a>
-                                <ul>
-                                    <li>Hôm nay</li>
-                                    <li>Hôm qua</li>
-                                    <li>Ngày khác</li>
-                                </ul>
-                            </li>
-                            <li style="width:15%; height:40px" class="border-right d-flex align-items-center text-center p-2">
-                                <a class="justify-content-between" style="width:100%"> <b>Tháng</b></a>
-                                <ul>
-                                    <li>Hôm nay</li>
-                                    <li>Hôm qua</li>
-                                    <li>Ngày khác</li>
-                                </ul>
-                            </li>
-                            <li style="width:15%; height:40px; min-width:100px" class="border-right d-flex align-items-center text-center p-2">
-                                <a class="justify-content-between" style="width:100%"> <b>Tùy chọn </b></a>
-                                <ul>
-                                    <li>Hôm nay</li>
-                                    <li>Hôm qua</li>
-                                    <li>Ngày khác</li>
-                                </ul>
-                            </li>
-                        </ul>-->
                         </div>
                         <div id="transaction-overall-infor"
                              class="p-3 bg-light border-bottom mx-auto overrall-in-out shadow-sm"
                              style="width: 100%">
-                            <div class="container">
+                            <div class="mx-auto">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h5 class="text-success m-0">Thu: {{totalIncome | incomeToString("vi-VN", "VND")}}</h5>
                                     <h5 class="text-danger m-0">
@@ -149,190 +108,230 @@
                     <!-- Thanh tổng quan thu chi -->
                     <!-- Bảng ghi chép thu chi-->
                     <!--Thông tin chung-->
-                    <div style="max-height:50vh; overflow-y:auto">
-                        <div class="overflow-hidden container p-0" style="width:100%" v-for="(itm,index) in dataDate" :key="index">
-
-                            <div class="title container bg-light border-top border-bottom mt-1"
-                                 v-bind:style="hiddenDetail? 'height:65px':'height:50px'">
-                                <div class="d-flex align-items-center justify-content-between m-auto py-0 text-secondary-primary">
-                                    <div class="d-flex align-items-center" v-bind:class="hiddenDetail? 'p-2':''">
-                                        <div style="font-size: 48px; line-height:48px">{{itm.date.getDate() | dateInMonth()}}</div>
-                                        <div class="text-left px-2 py-auto">
-                                            <div class="m-0 p-0 font-weight-bold">{{dayInWeek[itm.date.getDay()-1]}}</div>
-                                            <div class="m-0 p-0 font-weight-bold"> T{{itm.date.getMonth()+1 | dateInMonth()}}  / {{itm.date.getFullYear()}}   </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <!-- <div class="icon-in-out d-flex mr-2">
-                                            <div class="bg-success mx-1" style="width:18px; height:40px"></div>
-                                            <div class="bg-danger" style="width:18px; height:40px"></div>
-                </div>-->
-                                        <div class="text-right">
-                                            <b class="text-success">Thu: {{itm.income| incomeToString(currencyCode,currencyName)}}</b>
-                                            <br />
-                                            <b class="text-danger">Chi: {{itm.expense| incomeToString(currencyCode,currencyName)}}</b>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--Thu/Chi-->
-
-                            <div class="bg-warning container p-0" style="overflow:auto">
-                                <div class="d-flex justify-content-end"
-                                     v-on:click="hiddenDetail=false"
-                                     v-for="(item,index) in data"
-                                     :key="index">
-
-                                    <div class="border-bottom bg-light text-dark d-flex align-items-center justify-content-between p-2 active"
-                                         style="width:95%;"
-                                         v-bind:id="item.TransactionID"
-                                         v-bind:style="hiddenDetail? 'height:50px; cursor: pointer':'cursor: pointer'"
-                                         v-if="isOneDate(new Date(item.IsoTransactionDate) , itm.date)"
-                                         v-on:click="bindIDForDetailForm(index)">
-                                        <!--<div>   <img src="item.IncomeExpenseCategoryIcon" alt="" style="height: 30px" /></div>-->
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <i v-bind:class="item.icon"></i>
-                                            {{item.IncomeExpenseCategoryName}}
+                    <div class="mt-2" style="">
+                        <div style="max-height:70vh; overflow-y:auto">
+                            <div class="container p-0 mb-2" style="width:100%" v-for="(itm,index) in dataDate" :key="index">
+                                <div class="title container bg-light border-top border-bottom"
+                                     v-bind:style="hiddenDetail? 'height:65px':'height:65px'">
+                                    <div class="d-flex align-items-center justify-content-between m-auto py-0 text-secondary-primary">
+                                        <div class="d-flex align-items-center" v-bind:class="hiddenDetail? 'p-2':'p-2   '">
+                                            <div style="font-size: 48px; line-height:48px">{{itm.date.getDate() | dateInMonth()}}</div>
+                                            <div class="text-left px-2 py-auto">
+                                                <div class="m-0 p-0 font-weight-bold">{{dayInWeek[itm.date.getDay()-1]}}</div>
+                                                <div class="m-0 p-0 font-weight-bold"> T{{itm.date.getMonth()+1 | dateInMonth()}}  / {{itm.date.getFullYear()}}   </div>
+                                            </div>
                                         </div>
                                         <div class="d-flex align-items-center">
-                                            <div v-bind:class="(item.Amount >= 0)? 'text-success mx-2':'text-danger mx-2'">
-                                                <b>{{item.Amount | incomeToString(currencyCode,currencyName) }}</b>
+                                            <!-- <div class="icon-in-out d-flex mr-2">
+                                                                        <div class="bg-success mx-1" style="width:18px; height:40px"></div>
+                                                                        <div class="bg-danger" style="width:18px; height:40px"></div>
+                                            </div>-->
+                                            <div class="text-right">
+                                                <b class="text-success">Thu: {{itm.income| incomeToString(currencyCode,currencyName)}}</b>
+                                                <br />
+                                                <b class="text-danger">Chi: {{itm.expense| incomeToString(currencyCode,currencyName)}}</b>
                                             </div>
-                                            <i class="fas fa-ellipsis-v mx-2 text-secondary-primary"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Thu/Chi-->
+
+                                <div class="bg-warning container p-0" style="overflow:auto">
+                                    <div class="d-flex justify-content-end"
+                                         v-on:click="hiddenDetail=false; showDetail =  true"
+                                         v-for="(item,index) in data"
+                                         :key="index">
+
+                                        <div class="border-bottom bg-light text-dark d-flex align-items-center justify-content-between p-2 mini-transaction-detail-item "
+                                             style="width:95%;"
+                                             v-bind:id="item.TransactionID"
+                                             v-bind:tabindex="index"
+                                             v-bind:style="hiddenDetail? 'height:50px; cursor: pointer':'height:50px;cursor: pointer'"
+                                             v-if="isOneDate(new Date(item.IsoTransactionDate) , itm.date)"
+                                             v-on:click="bindIDForDetailForm(index)">
+                                            <!--<div>   <img src="item.IncomeExpenseCategoryIcon" alt="" style="height: 30px" /></div>-->
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <i v-bind:class="item.icon"></i>
+                                                {{item.IncomeExpenseCategoryName}}
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <div v-bind:class="(item.Amount >= 0)? 'text-success mx-2':'text-danger mx-2'">
+                                                    <b>{{item.Amount | incomeToString(currencyCode,currencyName) }}</b>
+                                                </div>
+                                                <i class="fas fa-ellipsis-v mx-2 text-secondary-primary"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+
                     </div>
-                    
+
                 </div>
 
                 <!--Thông tin chi tiết thu chi -->
-                <div id="transaction-detail"
-                     class="col col-lg-7 mx-auto my-3 py-3 border border-top-0 shadow bg-light"
-                     v-bind:style="hiddenDetail ? 'display: none;':'display: block; height:400px' ">
-                    <div class="p-2 d-flex align-items-center justify-content-between">
-                        <b style="font-size:24px; color:#084866;">Chi tiết ghi chép</b>
-                        <i class="fas fa-times fa-2x" v-on:click="hiddenDetail=true"></i>
-                    </div>
-                    <hr class="m-0 mb-2 p-0" />
+                <transition name="fade">
+                    <div class=" col col-md-7 "
+                         style="position:sticky !important; top:16px!important"
+                         v-if="!hiddenDetail">
+                        <div id="transaction-detail"
+                             class="mx-auto my-3 px-2 pb-2 border border-top-0 shadow bg-light"
+                             style="overflow: hidden;" v-if="!hiddenDetail">
+                            <div class="p-2 d-flex align-items-center border-bottom">
+                                <i class="fas fa-chevron-up mr-3" style="cursor:pointer" @click="hiddenDetail=true;"></i>
+                                <b style="font-size:22px; color:#084866;">Chi tiết ghi chép</b>
+                            </div>
 
-                    <div class="row">
-                        <div class="col col-md-6">
+
+                            <div class="row">
+                                <div class="col col-md-6">
+                                    <div class="border-bottom m-1 d-flex px-2 justify-content-between"
+                                         style="height:40px; font-size:20px">
+                                        <label class="my-auto">
+                                            <b>Ghi chép</b>
+                                        </label>
+                                        <label class="my-auto">{{typeOfTransaction[transactionDetail.TransactionType]}}</label>
+                                    </div>
+                                </div>
+                                <div class="col col-md-6">
+                                    <div class="border-bottom m-1 d-flex px-2 justify-content-between"
+                                         style="height:40px; font-size:20px">
+                                        <label class="my-auto">
+                                            <b>Hạng mục</b>
+                                        </label>
+                                        <label class="my-auto">{{transactionDetail.IncomeExpenseCategoryName}}</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-bottom m-1 d-flex px-2 justify-content-between"
+                                 style="height:60px; font-size:20px">
+                                <label class="my-auto">
+                                    <b>Số tiền</b>
+                                </label>
+                                <label class="my-auto"
+                                       style="font-size:36px"
+                                       v-bind:class="(transactionDetail.Amount >= 0)? 'text-success mx-2':'text-danger mx-2'">{{transactionDetail.Amount| incomeToString(currencyCode,currencyName) }}</label>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-6">
+                                    <div class="border-bottom m-1 d-flex px-2 justify-content-between"
+                                         style="height:40px; font-size:20px">
+                                        <label class="my-auto">
+                                            <b>Ví</b>
+                                        </label>
+                                        <label class="my-auto">{{transactionDetail.AccountName}}</label>
+                                    </div>
+                                </div>
+                                <div class="col col-md-6">
+                                    <div class="border-bottom m-1 d-flex px-2 justify-content-between"
+                                         style="height:40px; font-size:20px">
+                                        <label class="my-auto">
+                                            <b>Thời gian</b>
+                                        </label>
+                                        <label class="my-auto">{{ transactionDetail.IsoTransactionDate| vnDate()}}</label>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="border-bottom m-1 d-flex px-2 justify-content-between"
                                  style="height:40px; font-size:20px">
                                 <label class="my-auto">
-                                    <b>Ghi chép</b>
+                                    <b>Diễn tả</b>
                                 </label>
-                                <label class="my-auto">{{typeOfTransaction[transactionDetail.TransactionType]}}</label>
+                                <label class="my-auto">{{transactionDetail.Description}}</label>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-6">
+                                    <div class="border-bottom m-1 d-flex px-2 justify-content-between"
+                                         style="height:40px; font-size:20px">
+                                        <label class="my-auto">
+                                            <b>Chi cho ai</b>
+                                        </label>
+                                        <label class="my-auto">{{transactionDetail.RelatedPerson}}</label>
+                                    </div>
+                                </div>
+                                <div class="col col-md-6">
+                                    <div class="border-bottom m-1 d-flex px-2 justify-content-between"
+                                         style="height:40px; font-size:20px">
+                                        <label class="my-auto">
+                                            <b>Sự kiện</b>
+                                        </label>
+                                        <label class="my-auto">{{transactionDetail.EventName}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end" style="height:auto;">
+                                <button type="button"
+                                        class="btn bg-primary m-1 text-light"
+                                        data-toggle="modal"
+                                        v-on:click="editTransaction"
+                                        v-bind:data-target="'#' + modal">
+                                    <i class="fas fa-edit mr-1"></i>Sửa
+                                </button>
+
+                                <button type="button" class="btn btn-danger m-1" data-toggle="modal" data-target="#confirmModal">
+                                    <i class="fas fa-trash-alt mr-1"></i>Xóa
+                                </button>
                             </div>
                         </div>
-                        <div class="col col-md-6">
-                            <div class="border-bottom m-1 d-flex px-2 justify-content-between"
-                                 style="height:40px; font-size:20px">
-                                <label class="my-auto">
-                                    <b>Hạng mục</b>
-                                </label>
-                                <label class="my-auto">{{transactionDetail.IncomeExpenseCategoryName}}</label>
+
+
+                        <!--<div>
+                            <div v-for=" (item, index) in dataDate" :key="index">
+                                {{item}}
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="border-bottom m-1 d-flex px-2 justify-content-between"
-                         style="height:60px; font-size:20px">
-                        <label class="my-auto">
-                            <b>Số tiền</b>
-                        </label>
-                        <label class="my-auto"
-                               style="font-size:36px"
-                               v-bind:class="(transactionDetail.Amount >= 0)? 'text-success mx-2':'text-danger mx-2'">{{transactionDetail.Amount| incomeToString(currencyCode,currencyName) }}</label>
-                    </div>
-                    <div class="row">
-                        <div class="col col-md-6">
-                            <div class="border-bottom m-1 d-flex px-2 justify-content-between"
-                                 style="height:40px; font-size:20px">
-                                <label class="my-auto">
-                                    <b>Ví</b>
-                                </label>
-                                <label class="my-auto">{{transactionDetail.AccountName}}</label>
-                            </div>
-                        </div>
-                        <div class="col col-md-6">
-                            <div class="border-bottom m-1 d-flex px-2 justify-content-between"
-                                 style="height:40px; font-size:20px">
-                                <label class="my-auto">
-                                    <b>Thời gian</b>
-                                </label>
-                                <label class="my-auto">{{ new  Date(transactionDetail.IsoTransactionDate).toDateString()}}</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="border-bottom m-1 d-flex px-2 justify-content-between"
-                         style="height:40px; font-size:20px">
-                        <label class="my-auto">
-                            <b>Diễn tả</b>
-                        </label>
-                        <label class="my-auto">{{transactionDetail.Description}}</label>
-                    </div>
-                    <div class="row">
-                        <div class="col col-md-6">
-                            <div class="border-bottom m-1 d-flex px-2 justify-content-between"
-                                 style="height:40px; font-size:20px">
-                                <label class="my-auto">
-                                    <b>Chi cho ai</b>
-                                </label>
-                                <label class="my-auto">{{transactionDetail.RelatedPerson}}</label>
-                            </div>
-                        </div>
-                        <div class="col col-md-6">
-                            <div class="border-bottom m-1 d-flex px-2 justify-content-between"
-                                 style="height:40px; font-size:20px">
-                                <label class="my-auto">
-                                    <b>Sự kiện</b>
-                                </label>
-                                <label class="my-auto">{{transactionDetail.EventName}}</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--<div>
-                    <div v-for=" (item, index) in dataDate" :key="index">
-                        {{item}}
-                    </div>
-                </div>-->
+                        </div>-->
 
 
-                    <div class="d-flex justify-content-end mt-2" style="height:auto;">
-                        <button type="button"
-                                class="btn bg-primary m-1 text-light"
-                                data-toggle="modal"
-                                v-on:click="editTransaction"
-                                v-bind:data-target="'#' + modal">
-                            <i class="fas fa-edit mr-1"></i>Sửa
-                        </button>
 
-                        <button type="button" class="btn btn-danger m-1" @click="removeTransaction()">
-                            <i class="fas fa-trash-alt mr-1"></i>Xóa
-                        </button>
+
+
                     </div>
-                </div>
+                </transition>
+
+
             </div>
         </div>
         <edit-transaction v-bind:modal="modal" />
+        <!-- Modal -->
+        <div class="modal fade" v-if="!isNullSelected()" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="ConfirmModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">                
+                <div class="modal-content" >
+                    <div class="modal-header m-0 p-2">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Xác nhận</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body px-2">
+                        Bạn có thật sự muốn xóa ghi chép này không?
+                    </div>
+                    <div class="border-top p-2 d-flex justify-content-end">
+                        <button type="button" class="btn btn-danger m-1" data-dismiss="modal" @click="removeTransaction()">Có</button>
+                        <button type="button" class="btn bg-primary m-1 text-white" data-dismiss="modal" aria-label="Close" aria-hidden="true" >Không</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div id="snackbar" class='border bg-secondary'> <i class="far fa-check-circle text-success m-2"></i>Đã xóa thành công!</div>
     </div>
 </template>
 <script>
     import EditTransaction from "@/components/transaction/EditTransaction.vue";
     import eventBus from "../assets/js/eventbus";
     import { mapActions, mapState } from "vuex";
+    import { getVietnameseDateForm } from '../assets/js/util';
     export default {
         name: "transaction",
         data() {
             return {
                 modal: "editTransactionModal",
-                hiddenDetail: false,
+                hiddenDetail: true,
+                showDetail: false,
                 hiddenFilter: true,
                 areYouSure: false,
                 income: 300000,
@@ -357,6 +356,9 @@
             dateInMonth(value) {
                 let tmp = (value < 10) ? ('0' + value) : '' + value;
                 return tmp;
+            },
+            vnDate(value) {
+                return getVietnameseDateForm(value);
             }
         },
         components: {
@@ -381,15 +383,18 @@
                 this.transactionDetail = this.data[value];
 
             },
+            isNullSelected() {
+                return (typeof (this.transactionDetail.TransactionID) === 'undefined');
+            },
             removeTransaction() {
-                if (typeof (this.transactionDetail.TransactionID) === 'undefined') alert('Chưa có bản ghi nào được chọn!'); else
-
-                    if (confirm("Bạn có chắc chắn muốn xóa ghi chép này không?")) {
-                        this.$store.dispatch('financetransaction/delete', this.transactionDetail.TransactionID);
-                        alert('Đã xóa thành công');
-                        //this.hiddenDetail = true;
-                        //this.$store.dispatch('financetransaction/getAll');
-                    }
+                this.$store.dispatch('financetransaction/delete', this.transactionDetail.TransactionID);
+                this.transactionDetail = [];
+                this.myFunction();
+            },
+            myFunction() {
+                var x = document.getElementById("snackbar");
+                x.className = "show";
+                setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
             },
             isOneDate(a, b) {
                 if (a.getDate() != b.getDate()) return false;
@@ -451,12 +456,108 @@
         background-color: #5E879B;
         color: white;
     }
-    #transaction-detail{
-        position: sticky;
-        top: 16px;
-    }
-    #transaction-filter-bar{
-        position: sticky !important ;
+
+    #transaction-detail {
+        position: sticky !important;
         top: 16px !important;
+    }
+
+    #transaction-filter-bar {
+        position: sticky !important;
+        top: 16px !important;
+    }
+
+    .mini-transaction-detail-item:hover, .mini-transaction-detail-item:focus {
+        background-color: #e8f0fe !important;
+        /*border-bottom: 3px solid gray !important;*/
+        user-select: none;
+        outline: none;
+    }
+
+    #transaction-detail {
+        animation: showDetailFrame 0.5s;
+        animation-iteration-count: 1;
+        transform-origin: 50% 50%;
+    }
+
+    @keyframes showDetailFrame {
+        0% {
+            opacity: 1;
+            transform: translate(0px,0px);
+            height: 0px;
+        }
+
+        100% {
+            opacity: 1;
+            transform: translate(0px,0px);
+            height: 380px;
+        }
+    }
+
+
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #366A82;
+    }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #205a75;
+        }
+    /* Snackbar */
+    #snackbar {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        right: 20px;
+        bottom: 20px;
+        font-size: 17px;
+    }
+
+        #snackbar.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+
+    @keyframes fadein {
+        from {
+            bottom: 0;
+            opacity: 0;
+        }
+
+        to {
+            bottom: 20px;
+            opacity: 1;
+        }
+    }
+
+
+    @keyframes fadeout {
+        from {
+            bottom: 20px;
+            opacity: 1;
+        }
+
+        to {
+            bottom: 0;
+            opacity: 0;
+        }
     }
 </style>

@@ -3,7 +3,7 @@
     <div class="d-flex">
         <Popup v-bind:modal="modal">
             <template v-slot:iconModal>
-                <img width="30" src="../../assets/img/edit-icon.png" />
+                <i class="far fa-edit"></i>
             </template>
             <div class="d-flex justify-content-center align-items-center">
                 <div class="dropdown">
@@ -140,7 +140,7 @@
             </template>
             <template v-slot:buttonModal>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="far fa-trash-alt"></i> Hủy</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="saveEdit()"><i class="fas fa-save"></i> Lưu</button>
+                <button type="button" class="btn bg-primary text-light" data-dismiss="modal" v-on:click="saveEdit()"><i class="fas fa-save"></i> Lưu</button>
             </template>
         </Popup>
     </div>
@@ -210,6 +210,17 @@
                 var second = convert.getSeconds() < 10 ? '0' + convert.getSeconds() : convert.getSeconds();
                 return year + '-' + month + '-' + date + 'T' + hour + ':' + minute + ':' + second;
             },
+            formatTimeEdit(time) {
+                var convert = new Date(time);
+                console.log(convert)   
+                var year = convert.getFullYear() < 10 ? '0' + convert.getFullYear() : convert.getFullYear();
+                var month = convert.getMonth() < 10 ? '0' + (convert.getMonth() + 1) : convert.getMonth() + 1;
+                var date = convert.getDate() < 10 ? '0' + convert.getDate() : convert.getDate();
+                var hour = convert.getHours() < 10 ? '0' + convert.getHours() : convert.getHours();
+                var minute = convert.getMinutes() < 10 ? '0' + convert.getMinutes() : convert.getMinutes();
+                var second = convert.getSeconds() < 10 ? '0' + convert.getSeconds() : convert.getSeconds();
+                return month + '/' + date + '/' + year + ' ' + hour + ':' + minute + ':' + second + ' ' + (hour > 12 ? 'PM' : 'AM');
+            },
             moneyToString(money) {
                 if (parseInt(money)) {
                     return parseFloat(money.toString().replace(/[,-]/g, ""))
@@ -271,12 +282,14 @@
                 else {
                     this.dataTransaction.Amount = parseInt(money)
                 }
+                this.dataTransaction.IsoTransactionDate = this.formatTimeEdit(this.dataTransaction.IsoTransactionDate);
+                this.dataTransaction.IsoDebitDate = this.formatTimeEdit(this.dataTransaction.IsoDebitDate);
                 this.$store.dispatch('financetransaction/update', this.dataTransaction);
-                this.$store.dispatch('synchronizedata/synchronizeTransactionData', this.synData).then(data => {
-                    console.log(data)
-                }, error => {
-                    console.error(error)
-                });
+                //this.$store.dispatch('synchronizedata/synchronizeTransactionData', this.synData).then(data => {
+                //    console.log(data)
+                //}, error => {
+                //    console.error(error)
+                //});
             }
         },
         created() {

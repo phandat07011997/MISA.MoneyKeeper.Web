@@ -20,25 +20,35 @@
             <form>
               <div class="form-group">
                 <label for="inputFullName">Tên hiển thị</label>
-                <input type="text" class="form-control" id="inputFullName" v-model="UserInfoData.FullName" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputFullName"
+                  v-model="userInfoData.FullName"
+                />
               </div>
               <div class="form-group">
                 <label for="inputFullName">Số điện thoại</label>
-                <input type="number" class="form-control" id="inputFullName" v-model="UserInfoData.Mobile" />
+                <input
+                  type="number"
+                  class="form-control"
+                  id="inputFullName"
+                  v-model="userInfoData.Mobile"
+                />
               </div>
               <div class="form-group">
                 <label for="inputFullName">Ngày sinh</label>
-                <input type="date" class="form-control" id="inputFullName" v-model="UserInfoData.IsoBirthDay"/>
+                <input type="date" class="form-control" id="inputFullName" value="1997-01-07" />
               </div>
               <div class="form-group">
                 <label for="inputFullName">Giới tính</label>
                 <br />
                 <label class="radio-inline">
-                  <input type="radio" name="optradio" value="0" v-model="UserInfoData.Gender"/>Nam
+                  <input type="radio" name="optradio" value="0" v-model="userInfoData.Gender" />Nam
                 </label>
                 &nbsp;
                 <label class="radio-inline">
-                  <input type="radio" name="optradio" value="1" v-model="UserInfoData.Gender"/>Nữ
+                  <input type="radio" name="optradio" value="1" v-model="userInfoData.Gender" />Nữ
                 </label>
               </div>
               <div class="form-group">
@@ -47,12 +57,17 @@
                   type="text"
                   class="form-control"
                   id="inputAddress"
-                  value="Số 2 ngõ 124/22/44 Âu Cơ"
+                  v-model="userInfoData.Address"
                 />
               </div>
               <div class="form-group">
                 <label for="inputAddress">Nghề nghiệp</label>
-                <input type="text" class="form-control" id="inputAddress" v-model="UserInfoData.JobName" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputAddress"
+                  v-model="userInfoData.JobName"
+                />
               </div>
             </form>
           </div>
@@ -71,62 +86,20 @@
 </template>
 <script>
 import Popup from "../layout/Popup.vue";
+import {mapGetters} from 'vuex';
 export default {
   props: ["modal"],
   data() {
-    return {
-      UserInfoData: {
-        LastChangedDate: null,
-        TableKey: 0,
-        UserId: "ac1118ab-d601-43a4-8336-2369c8c2de04",
-        Address: null,
-        AvatarName: "740cc942-da25-4cdd-b038-def600c94fc6.jpeg",
-        Commune: null,
-        CountDayRemaining: -1,
-        Country: null,
-        Currency: "en-US",
-        CurrencyCode: "VND",
-        District: null,
-        Email: "truonglv@gmail.com",
-        FeatureLimit: "",
-        FirstName: null,
-        FullName: "truonglv",
-        Gender: 0,
-        InitializeLanguage: "vi-VN",
-        IsAdsRemove: false,
-        IsAlreadySetPassword: true,
-        IsAutoMigrated: false,
-        IsConfirmShareCode: true,
-        IsInitializingAccount: true,
-        IsMigrated: false,
-        IsPremium: false,
-        IsSyncContact: true,
-        IsoBirthDay: "01/01/1753 12:00:00 AM",
-        IsoCreatedDate: "09/06/2019 06:09:02 PM",
-        IsoEndDate: "01/01/1753 12:00:00 AM",
-        IsoStartDate: "01/01/1753 12:00:00 AM",
-        JobName: "Sinh viên",
-        Language: "vi-VN",
-        LastName: null,
-        ListLinkAccount: null,
-        ManagingPurpose: 0,
-        MisaUserID: "1433154",
-        Mobile: "0396934750",
-        MonthlySalary: null,
-        Password: null,
-        ProductID: "",
-        Province: null,
-        Relationship: 0,
-        ResponseResult: null,
-        SettingInfoJson: null,
-        TotalCoin: 270,
-        UUIDDevice: null,
-        UserName: "truonglv@gmail.com"
-      }
-    };
+    return {};
   },
   components: {
     Popup
+  },
+  created() {
+    this.$store.dispatch("fetchUserInfoData");
+  },
+  computed:{
+    ...mapGetters(['userInfoData'])
   }
 };
 </script>

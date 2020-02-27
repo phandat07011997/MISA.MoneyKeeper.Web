@@ -112,7 +112,7 @@ export default {
             commit('getAll');
         },
 
-        async synchronize({ commit }) {
+        async synchronize() {
 
             var transactionClass = new TransactionClass();
             var dataArr = [];
@@ -164,16 +164,7 @@ export default {
                     }
                 }
 
-                console.log(dataBlock)
-                axios.post('http://localhost:8080/Services/FinanceService.svc/json/SynchronizeData', dataBlock)
-                    .then((res) => {
-                        console.log(res);
-                        commit('notify', 'Đồng bộ thành công')
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                        commit('notify', 'Đồng bộ thất bại')
-                    });
+                return axios.post('http://localhost:8080/Services/FinanceService.svc/json/SynchronizeData', dataBlock);
             }).catch(err => {
                 console.log(err)
             })

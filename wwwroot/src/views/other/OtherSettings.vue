@@ -36,7 +36,7 @@ export default {
           id: 4,
           nameSub: "Đồng tiền chính",
           iconSub: "fas fa-money-bill",
-          activeComponent: "/other/recurring"
+          activeComponent: "/other/settings/default-currency"
         },
         {
           id: 5,
