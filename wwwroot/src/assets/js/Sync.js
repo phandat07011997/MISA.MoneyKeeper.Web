@@ -41,10 +41,13 @@ export default class SyncClass {
             ]
             var UserAccount = data.userAccount.NewAndEditedUserAccountList;
             var FinanceTransaction = data.financeTransaction.NewAndEditedFinanceTransactionList;
-
+            var UserInfoData = data.userInfoData;
 
             db.transaction(function (tx) {
-
+                //UserInfoData table
+                tx.executeSql("CREATE TABLE IF NOT EXISTS UserInfoData(UserId,Address,FullName,Mobile,IsoBirthDay,Gender,JobName)");
+                tx.executeSql("INSERT INTO UserInfoData VALUES (?,?,?,?,?,?,?)", [UserInfoData.UserId, UserInfoData.Address, UserInfoData.FullName, UserInfoData.Mobile, UserInfoData.IsoBirthDay, UserInfoData.Gender, UserInfoData.JobName]);
+              
                 //IncomeExpenseCategory table
                 tx.executeSql("CREATE TABLE IF NOT EXISTS IncomeExpenseCategory(IncomeExpenseCategoryID unique, IncomeExpenseCategoryName, IncomeExpenseCategoryIcon)");
 

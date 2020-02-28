@@ -33,10 +33,10 @@ export const popupcategory = {
     methods: {
         checkExist(collection, name) {
             return collection.some(function (elem) {
-                if (elem.childs === undefined) {
+                if (elem.children === undefined) {
                     return elem.name === name;
                 } else {
-                    return elem.childs.some(function (elemChild) {
+                    return elem.children.some(function (elemChild) {
                         return elem.name === name || elemChild.name === name;
                     });
                 }

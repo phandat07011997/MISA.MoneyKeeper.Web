@@ -2,16 +2,14 @@
 <template>
     <div class="d-flex">
         <Popup v-bind:modal="modal">
-            <template v-slot:iconModal>
-                <img width="30" src="../../assets/img/edit-icon.png" />
-            </template>
+           
             <div class="d-flex justify-content-center align-items-center">
                 <div class="dropdown select-type">
                     <a class="dropdown-toggle " type="button" id="select-type" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span v-if="transactionTypeChoosed !== null "> {{ transactionTypeChoosed && transactionTypeChoosed.name }}</span>
                         <span v-else>Chi tiền</span>
                     </a>
-                    <div class="dropdown-menu p-3" aria-labelledby="category-select">
+                    <div class="dropdown-menu p-3" aria-labelledby="select-type">
                         <div class="p-1" v-for="(item) in transactionType" v-bind:key="item.key" v-on:click="selectTransactionType(item.key)"><i class="far fa-money-bill-alt mr-2" style="color: #2544ff"></i> {{ item.name }}</div>
                     </div>
                 </div>
@@ -30,12 +28,12 @@
                     <div class="col-4">
                         <div class="widget">
                             <label for="">Danh mục</label>
-                            <div class="dropdown category-select">
-                                <a class="dropdown-toggle " type="button" id="category-select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="dropdown category-select-addtransaction">
+                                <a class="dropdown-toggle " type="button" id="category-select-addtransaction" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display: flex; justify-content:space-between; align-items: center;">
                                     <span v-if="state.IncomeExpenseCategoryID !== '' "><i class="far fa-address-book" style="color: #2544ff"></i> {{ incomeExpenseCategoryChoosed.IncomeExpenseCategoryName }}</span>
                                     <span v-else><i class="far fa-address-book mr-2"  style="color: #2544ff"></i> Chọn danh mục</span>
                                 </a>
-                                <div class="dropdown-menu p-3" aria-labelledby="category-select">
+                                <div class="dropdown-menu p-3" aria-labelledby="category-select-addtransaction">
                                     <div class="p-1" v-for="(item) in incomeExpenseCategories" v-bind:key="item.IncomeExpenseCategoryID" v-on:click="selectIncomeExpenseCategory(item.IncomeExpenseCategoryID)"><i class="far fa-address-book mr-2"  style="color: #2544ff"></i> {{ item.IncomeExpenseCategoryName }}</div>
                                 </div>
                             </div>
@@ -77,8 +75,8 @@
                 </div>
 
                 <div class="info-add font-weight-bold p-3" v-on:click="isCollapse = !isCollapse">
-                    Thông tin thêm <i class="fas fa-chevron-down" v-if="isCollapse == true" />
-                    <i class="fas fa-chevron-up" v-else />
+                    Thông tin thêm <i class="fas fa-chevron-up" v-if="isCollapse == true" />
+                    <i class="fas fa-chevron-down" v-else />
                 </div>
 
                 <div class="row pb-4" v-show="isCollapse">
@@ -346,9 +344,26 @@
     #addModal .modal-content{
         height: auto !important;
         min-height: unset;
+        min-width: 950px;
     }
     #addModal .widget input.form-control:focus{
         box-shadow: none;
+    }
+    .category-select-addtransaction > .dropdown-menu{
+        width: 100% !important;
+        top: 10px !important;
+    }
+    .category-select-addtransaction .dropdown-menu > div:hover{
+        background: #9c9c9c33;
+        cursor: pointer;
+    }
+    .select-type .dropdown-menu > div:hover{
+        background: #9c9c9c33;
+        cursor: pointer;
+    }
+    .spend-per-month .dropdown-menu > div:hover{
+        background: #9c9c9c33;
+        cursor: pointer;
     }
     #addModal .widget {
         height: 90px;
@@ -410,18 +425,17 @@
     }
     }
 
-    #addModal .category-select {
-        width: 100%;
-        #category-select
-
-    {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    #addModal a#category-select-addtransaction {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
     }
 
-    .dropdown-menu {
+    #addModal .category-select-addtransaction {
         width: 100%;
+
+    .dropdown-menu {
+        width: 100% !important;
         span
 
     {
@@ -439,6 +453,7 @@
 
     .info-add {
         cursor: pointer;
+        width: 30%;
     }
 
     *:before,
@@ -520,7 +535,7 @@
             direction: ltr;
             cursor: pointer;
         }
-        .category-select >  .dropdown-menu {
+        .category-select-addtransaction >  .dropdown-menu {
             top: 20px !important;
         }
         .spend-per-month >  .dropdown-menu {
@@ -553,7 +568,7 @@
                 top: 10px !important;
                 box-shadow: rgba(0, 0, 0, 0.15) 1px 1px 3px 1px;
                 border: none;
-                left: -65px !important;
+                left: -61px !important;
                 span {
                     padding: 5px 20px;
                     &:hover {

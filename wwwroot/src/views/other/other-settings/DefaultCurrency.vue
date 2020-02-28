@@ -1,6 +1,6 @@
 ﻿<template>
     <div class="container container-currency shadow mt-5" v-if="!hide">
-        <div class="d-flex-column " style="position:relative">
+        <div class="d-flex-column " >
             <div class="header_language ml-0">
                 <button class="back_settings" @click="$emit('hidden-content')">
                     <i class="fas fa-arrow-left" style="font-size:32px;"></i>
@@ -28,19 +28,37 @@
                 </ul>
             </div>
             <div class="button_money">
-                <button type="button" class="btn btn-lg btn-success mt-4" @click="postCurrency ">
+                <button type="button" class="btn btn-lg btn-success mt-4" @click="postCurrency">
                     Xong
                 </button>
             </div>
         </div>
+        <ToastNotification >
+            <template v-slot:toast_title>Lưu đơn vị tiền tệ</template>
+   
+            <template v-slot:toast_body  v-if="resultMessage=='Success'">
+                <div>
+                    <i class="fas fa-check " style="color:green"></i> 
+                    <span>Lưu thành công!!!</span>
+                </div>
+            </template>
+            <template v-slot:toast_body  v-else>
+                <div>
+                    <i class="fas fa-times" style="color:red"></i>
+                    <span>Lưu thất bại!!!</span>
+                </div>
+            </template>
+        </ToastNotification>
     </div>
 </template>
 <script>
+    import ToastNotification from '@/components/layout/ToastNotification.vue'
     import axios from 'axios'
     export default {
         name: 'default-currency',
         data() {
             return {
+                
                 search: '',
                 resultMessage:'',
                 inforUser: Object,
@@ -85,7 +103,7 @@
                     },
                     {
                         id: 6,
-                        iconCurrency: '',
+                        iconCurrency: 'fas fa-dollar-sign',
                         currencyCode: 'CNY',
                         currencyFlag: "china.png",
                         currencyname: 'Yuan Renminbi',
@@ -152,6 +170,10 @@
         },
 
         methods: {
+            getAlert() {
+                return true;
+                
+            },
             getFlag(temp) {
                 return 'https://img.icons8.com/color/48/000000/' + temp;
             },
@@ -198,7 +220,7 @@
                     );
                 if (this.resultMessage === "Success") {
                     this.inforUser.CurrencyCode = this.select_currency;
-                    console.log("OK")
+                    console.log('Success')
                 }
                 else {
                     console.log("false");
@@ -232,7 +254,9 @@
 
         props: ['hide'],
 
-
+        components:{
+        ToastNotification,
+    }
 
 
     }
@@ -362,5 +386,6 @@
        .input-div{
 
        }
+       
        
 </style>

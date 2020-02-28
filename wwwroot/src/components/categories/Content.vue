@@ -1,5 +1,5 @@
 <template>
-  <div class="expense-tab">
+  <div class="expense-tab shadow border">
     <ul v-for="(par, index) in categories" :key="index">
       <li class="cat-par">
         <ButtonCollapse :isOpen="isOpen" :parNote="'#a'+index"></ButtonCollapse>
@@ -10,7 +10,7 @@
           href="#"
           @click="currentNameCat = par.name; isParentFunc(par)"
         >
-          <i v-bind:class="[par.icon]"></i>
+          <i class="icon-category" v-bind:class="[par.icon]"></i>
           {{ par.name }}
           <i v-if="!par.allowToEdit" class="fas fa-lock"></i>
         </a>
@@ -18,10 +18,13 @@
       <ul
         v-bind:id="'a'+index"
         class="collapse show"
-        v-for="(child, indexChild) in par.childs"
+        v-for="(child, indexChild) in par.children"
         :key="indexChild"
       >
-        <li class="cat-child" v-if="removeAccents(child.name.toLowerCase()).includes(removeAccents(search))">
+        <li
+          class="cat-child"
+          v-if="removeAccents(child.name.toLowerCase()).includes(removeAccents(search))"
+        >
           <a
             class="font-size-name-cat"
             data-toggle="modal"
@@ -29,7 +32,7 @@
             href="#"
             @click="currentNameCat = child.name; isParentFunc(child); parent = par.name"
           >
-            <i v-bind:class="[child.icon]"></i>
+            <i class="icon-category" v-bind:class="[child.icon]" style="color: #B8312F"></i>
             {{child.name}}
           </a>
         </li>
@@ -78,8 +81,8 @@ export default {
         return category.filter(par => {
           var parentName = this.removeAccents(par.name.toLowerCase());
           // console.log("cha:" + parentName);
-          if (par.childs !== undefined) {
-            return par.childs.some(child => {
+          if (par.children !== undefined) {
+            return par.children.some(child => {
               var childName = this.removeAccents(child.name.toLowerCase());
               // console.log("con:" + childName);
               return childName.includes(search) || parentName.includes(search);
@@ -93,7 +96,7 @@ export default {
   },
   methods: {
     isParentFunc(itemCat) {
-      if (itemCat.childs) {
+      if (itemCat.children) {
         this.isParent = true;
       } else {
         this.isParent = false;
@@ -107,7 +110,7 @@ export default {
         "iìỉĩíị",
         "oòỏõóọôồổỗốộơờởỡớợ",
         "uùủũúụưừửữứự",
-        "yỳỷỹýỵ",
+        "yỳỷỹýỵ"
       ];
       for (var i = 0; i < AccentsMap.length; i++) {
         var re = new RegExp("[" + AccentsMap[i].substr(1) + "]", "g");
@@ -126,14 +129,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.expense-tab {
-  .cat-child {
-    margin-left: 30px;
-  }
-}
-
 .cat-par {
   position: relative;
+  .icon-category {
+    color: #E66904;
+  }
   .fa-lock {
     position: absolute;
     right: 100px;

@@ -1,7 +1,7 @@
 <template>
   <i
     class="collapse-button"
-    :class="[isOpenData ? 'fas fa-caret-down' : 'fas fa-caret-up']"
+    :class="[isOpenData ? 'fas fa-chevron-up' : 'fas fa-chevron-down']"
     href="#"
     data-toggle="collapse"
     v-bind:data-target="parNote"
@@ -21,7 +21,8 @@ export default {
 </script>
 <style lang="scss" scoped>
   .collapse-button{
-    font-size: 35px;
+    margin-top: 4px;
+    font-size: 25px;
     color: gray;
   }
 </style>

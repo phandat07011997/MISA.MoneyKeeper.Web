@@ -1,7 +1,6 @@
 <template>
     <div id="top-bar">
         <div id="left-top-bar">
-            <img src="../../assets/img/logo-moneykeeper.png" alt />
             <span class="money-now">
 
                 <i class="far fa-credit-card hidden-xs" aria-hidden="true"></i>
@@ -12,15 +11,15 @@
 
         <div id="right-top-bar">
             <div id="bell">
-                <a href="#">
-                    <img src="../../assets/img/bell.png" />
-                </a>
+                <div @click="notification = !notification" style="cursor:pointer">
+                    <i class="fas fa-bell" style="color:#031847;font-size:30px;"></i>
+                </div>
             </div>
             <div id="user">
                 <a href="#">
                     <div id="user-icon">
-                        <img src="../../assets/img/user-icon.png" /><i class="fas fa-sort-down" style="font-size:28px"></i>
-                        
+                        <i class="fas fa-user" style="color:#031847;font-size:30px;"></i>
+
                     </div>
                     <div class="dropdown-content">
                         <div id="user-info">
@@ -32,12 +31,12 @@
 
                         <a class="" href="#" data-toggle="modal" v-bind:data-target="'#' + userInfoModal">Thông tin tài khoản</a>
                         <a href="#">Liên kết tài khoản</a>
-                        <a href="#"  @click="logout">Đăng xuất</a>
-                        
+                        <a href="#" @click="logout">Đăng xuất</a>
+
                     </div>
-                    
+
                 </a>
-                <UserInfo v-bind:modal="userInfoModal"/>
+                <UserInfo v-bind:modal="userInfoModal" />
             </div>
         </div>
         <div id="mid-top-bar">
@@ -52,23 +51,28 @@
 
         </div>
         <div class="clr"></div>
+        <Notification v-if="notification"></Notification>
+
     </div>
     
 </template>
 <script>
-    import UserInfo from '@/components/user/UserInfo.vue'
-    import AddTransaction from '@/components/transaction/AddTransaction.vue'
+    import Notification from '@/components/layout/Notification.vue';
+    import UserInfo from '@/components/user/UserInfo.vue';
+    import AddTransaction from '@/components/transaction/AddTransaction.vue';
     export default {
         name: "topbar",
         data() {
             return {
                 modal: "addModal",
-                userInfoModal: "userModal"
+                userInfoModal: "userModal",
+                notification: false,
             };
         },
         components: {
             AddTransaction,
-            UserInfo
+            UserInfo,
+            Notification
         },
         computed:
         {
@@ -90,7 +94,6 @@
         },
         created() {
 
-            //}
         }
     }
 </script>

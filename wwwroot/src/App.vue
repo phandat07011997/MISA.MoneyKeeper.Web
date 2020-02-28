@@ -19,11 +19,16 @@
                 ...mapActions("sync", ["getData", "create", "login"]),
             },
             async created() {
-                await this.$store.dispatch('sync/login');
-                console.log('create')
-                await this.$store.dispatch('sync/getData').then(res => {
-                    this.$store.dispatch('sync/create', res.data);
-                });
+                await this.$store.dispatch('sync/login').then(res => {
+                    console.log(res)
+                    console.log('create')
+                    this.$store.dispatch('sync/getData').then(res => {
+                        console.log(res)
+                        this.$store.dispatch('sync/create', res.data);
+                    });
+
+                }).catch(err => { console.log('Lỗi'); console.log(err) });
+                
             },
             mounted() {
                 

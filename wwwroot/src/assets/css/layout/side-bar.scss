@@ -12,32 +12,49 @@
     }
 }
 .menu-on-left {
-
-    width: 76px;
+    width: 210px;
     height: 100%;
-    background-color: rgb(8, 72, 102);
+    background-color: #031847;
     z-index: 1;
     position: fixed;
 
-    ul li {
-        text-align: center;
-        margin: 0;
-        height: 80px;
+    img {
+        margin-top: 12px;
+        margin-left: 12px;
+        margin-bottom: 12px;
+        height: 48px;
+        width: 50px;
+        margin-left: 14px;
+    }
 
-        a {
+
+    ul {
+        padding-left: 0px;
+
+        li {
             text-align: center;
+            margin: 0;
+            height: 56px;
+            list-style: none;
+
+            a {
+                text-align: start;
+                color: white;
+                font-size: 14px;
+                text-decoration: none;
+                height: 56px;
+                margin: auto;
+                list-style: none;
+                
+            }
+
+            &:hover {
+                background-color: #1088c0;
+                color: rgb(8, 72, 102);
+            }
+
             color: white;
-            font-weight: bold;
-            font-size: 10px;
-            text-decoration: none;
         }
-
-        &:hover {
-            background-color: #319e4e;
-            color: rgb(8, 72, 102);
-        }
-
-        color: white;
     }
 }
 

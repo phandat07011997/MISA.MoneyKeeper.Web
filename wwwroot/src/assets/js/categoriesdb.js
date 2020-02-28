@@ -6,7 +6,7 @@ export var categories = {
             allowToEdit: true,
             icon: "fas fa-utensils",
             note: '',
-            childs: [
+            children: [
                 { name: "Ăn tiệm", icon: "fas fa-store", note: '' },
                 { name: "Cafe", icon: "fas fa-coffee", note: '' },
                 { name: "Đi chợ/siêu thị", icon: "fas fa-synagogue", note: '' }
@@ -25,7 +25,7 @@ export var categories = {
             icon: "fas fa-baby",
             allowToEdit: true,
             note: '',
-            childs: [
+            children: [
                 {  name: "Đồ chơi", icon: "fab fa-playstation", note: '' },
                 {  name: "Học phí", icon: "fas fa-money-check-alt", note: '' },
                 { name: "Sách vở", icon: "fas fa-book-open", note: '' },
@@ -38,7 +38,7 @@ export var categories = {
             icon: "fab fa-amazon",
             allowToEdit: true,
             note: '',
-            childs: [
+            children: [
                 { name: "Điện", icon: "fas fa-plug", note: '' },
                 { name: "Điện thoại cố định", icon: "fas fa-phone-alt", note: '' },
                 { name: "Điện thoại di động", icon: "fas fa-mobile", note: '' },
@@ -55,7 +55,7 @@ export var categories = {
             allowToEdit: true,
             icon: 'fas fa-directions',
             note: '',
-            childs: [
+            children: [
                 { name: "Bảo hiểm xe", icon: "fas fa-user-shield", note: '' },
                 { name: "Gửi xe", icon: "fas fa-parking", note: '' },
                 { name: "Rửa xe", icon: "fas fa-recycle", note: '' },
@@ -69,7 +69,7 @@ export var categories = {
             allowToEdit: true,
             icon: 'fas fa-award',
             note: '',
-            childs: [
+            children: [
                 { name: "Biếu tặng", icon: "fas fa-gift", note: '' },
                 { name: "Cưới xin", icon: "fas fa-hand-holding-heart", note: '' },
                 { name: "Ma chay", icon: "far fa-dizzy", note: '' },
@@ -81,7 +81,7 @@ export var categories = {
             allowToEdit: true,
             icon: 'fas fa-spa',
             note: '',
-            childs: [
+            children: [
                 { name: "Du lịch", icon: 'fas fa-plane-departure', note: '' },
                 { name: "Làm đẹp", icon: 'far fa-snowflake', note: '' },
                 { name: "Mỹ phẩm", icon: 'fas fa-wine-bottle', note: '' },
@@ -94,7 +94,7 @@ export var categories = {
             allowToEdit: true,
             icon: 'far fa-building',
             note: '',
-            childs: [
+            children: [
                 { name: "Mua sắm đồ đạc", icon: 'fas fa-mobile-alt', note: '' },
                 { name: "Sửa chữa nhà cửa", icon: 'fas fa-tools', note: '' },
                 { name: "Thuê nhà", icon: 'fas fa-truck-moving', note: '' }
@@ -104,7 +104,7 @@ export var categories = {
             name: "Phát triển bản thân",
             allowToEdit: true,
             note: '',
-            childs: [
+            children: [
                 { name: "Giao lưu, quan hệ", icon: 'far fa-handshake', note: '' },
                 { name: "Học hành", icon: 'fas fa-laptop-code', note: '' }
             ]
@@ -114,7 +114,7 @@ export var categories = {
             name: "Sức khỏe",
             allowToEdit: true,
             note: '',
-            childs: [
+            children: [
                 { name: "Khám chữa bệnh", icon: 'fas fa-stethoscope', note: '' },
                 { name: "Thể thao", icon: 'fas fa-dumbbell', note: '' },
                 { name: "Thuốc men", icon: 'fas fa-notes-medical', note: '' }
@@ -131,7 +131,7 @@ export var categories = {
             name: "Trang phục",
             allowToEdit: true,
             note: '',
-            childs: [
+            children: [
                 { name: "Giầy dép", icon: 'fas fa-shoe-prints', note: '' },
                 { name: "Phụ kiện khác", icon: 'fas fa-mitten', note: '' },
                 { name: "Quần áo", icon: 'fas fa-user-tie', note: '' }

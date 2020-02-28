@@ -1,5 +1,5 @@
 ﻿import axios from 'axios'
-import SyncClass from '../../assets/js/Sync'
+import SyncClass from '../../assets/js/sync'
 
 export default {
 	namespaced: true,
@@ -15,13 +15,7 @@ export default {
 	},
 	actions: {
 		login( ) {
-			axios.post('http://localhost:8080/AuthenticationService.svc/json/login', { "username": "truonglv@gmail.com", "password": "12345678" })
-				.then((res) => {
-					console.log(res);
-				})
-				.catch((err) => {
-					console.log(err);
-				});
+			return axios.post('http://localhost:8080/AuthenticationService.svc/json/login', { "username": "truonglv@gmail.com", "password": "12345678" });
 		},
 
 		getData() {

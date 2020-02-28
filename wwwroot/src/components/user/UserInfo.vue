@@ -38,7 +38,7 @@
               </div>
               <div class="form-group">
                 <label for="inputFullName">Ngày sinh</label>
-                <input type="date" class="form-control" id="inputFullName" value="1997-01-07" />
+                <input type="date" class="form-control" id="inputFullName" v-model="date" />
               </div>
               <div class="form-group">
                 <label for="inputFullName">Giới tính</label>
@@ -86,20 +86,31 @@
 </template>
 <script>
 import Popup from "../layout/Popup.vue";
-import {mapGetters} from 'vuex';
+import { mapGetters } from "vuex";
 export default {
   props: ["modal"],
   data() {
-    return {};
+    return {
+      // date : this.moment(this.$store.state.userinfodata.userInfo.IsoBirthDay.toString())
+      
+      date : 1
+       
+    };
   },
   components: {
     Popup
   },
+  // methods: {
+  //   moment(date) {
+  //     var moment = require("moment");
+  //     return moment(date,"DD/MM/YYYY hh:mm:ss A").format("YYYY-MM-DD");
+  //   }
+  // },
   created() {
     this.$store.dispatch("fetchUserInfoData");
   },
-  computed:{
-    ...mapGetters(['userInfoData'])
+  computed: {
+    ...mapGetters(["userInfoData"])
   }
 };
 </script>

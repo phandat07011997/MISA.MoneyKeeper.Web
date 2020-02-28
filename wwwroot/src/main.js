@@ -11,6 +11,14 @@ import enMessage from './lang/en.json'
 Vue.use(VueI18n)
 Vue.config.productionTip = false
 
+Vue.mixin({
+    methods: {
+        dialogConfirm() {
+            
+        }
+    }
+})
+
 const messages = {
     vn: vnMessage,
     en: enMessage,
