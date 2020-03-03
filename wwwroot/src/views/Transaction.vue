@@ -254,19 +254,17 @@
                                 <label class="my-auto">{{transactionDetail.EventName}}</label>
                             </div>
 
-                            <div class="d-flex justify-content-end" style="height:auto;">
+                            <div class="d-flex justify-content-between" style="height:auto;">
                                 <button type="button" class="btn btn-danger m-1" data-toggle="modal" data-target="#confirmModal">
                                     <i class="fas fa-trash-alt mr-1"></i>Xóa
                                 </button>
                                 <button type="button"
-                                        class="btn bg-primary m-1 text-light"
+                                        class="btn btn-success m-1"
                                         data-toggle="modal"
                                         v-on:click="editTransaction"
                                         v-bind:data-target="'#' + modal">
                                     <i class="fas fa-edit mr-1"></i>Sửa
                                 </button>
-
-
                             </div>
                         </div>
 
@@ -301,9 +299,9 @@
                     <div class="modal-body px-2">
                         Bạn có thật sự muốn xóa ghi chép này không?
                     </div>
-                    <div class="border-top p-2 d-flex justify-content-end">
+                    <div class="border-top p-2 d-flex justify-content-between align-items-center w-100">
                         <button type="button" class="btn btn-danger m-1" data-dismiss="modal" @click="removeTransaction()">Có</button>
-                        <button type="button" class="btn bg-primary m-1 text-white" data-dismiss="modal" aria-label="Close" aria-hidden="true">Không</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" aria-label="Close" aria-hidden="true">Không</button>
                     </div>
                 </div>
 
@@ -423,6 +421,9 @@
     };
 </script>
 <style>
+    #transaction-detail button{
+        width:90px;    
+    }
     .fs1, .iInput:not([class*=" fs"]) {
         font-size: 1em;
     }

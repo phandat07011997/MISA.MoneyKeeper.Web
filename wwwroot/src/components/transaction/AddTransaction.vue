@@ -138,9 +138,11 @@
 
             </template>
             <template v-slot:buttonModal>
-                <i class="fas fa-sync mr-4" v-on:click="sync" style="cursor: pointer"></i>
-                <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="far fa-trash-alt"></i> Hủy</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="createTransaction"><i class="fas fa-save"></i> Tạo</button>
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    <!--<i class="fas fa-sync mr-4" v-on:click="sync" style="cursor: pointer"></i>-->
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" style="padding: 3px 10px;"> <i class="fas fa-times"></i> Đóng</button>
+                    <button type="button" class="btn btn-sm btn-success" data-dismiss="modal" style="padding: 3px 10px;" v-on:click="createTransaction"><i class="fas fa-save"></i> Tạo</button>
+                </div>
             </template>
         </Popup>
     </div>
@@ -337,6 +339,18 @@
         border-bottom: none;
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
+        background: white !important;
+        color:black;
+        border-bottom: 1px solid lightgray;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+        
+    }
+    #addModal .button-style{
+        color: black;
     }
     #addModal .modal-content{
         border: none;
@@ -344,7 +358,10 @@
     #addModal .modal-content{
         height: auto !important;
         min-height: unset;
-        min-width: 950px;
+        min-width: 1020px;
+    }
+    #addModal .modal-footer{
+        padding: 15px 30px;
     }
     #addModal .widget input.form-control:focus{
         box-shadow: none;

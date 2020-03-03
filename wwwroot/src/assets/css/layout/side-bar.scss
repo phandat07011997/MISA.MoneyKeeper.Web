@@ -18,6 +18,23 @@
     z-index: 1;
     position: fixed;
 
+    .brand-widget {
+        height: 50px;
+
+        img {
+            width: 35px;
+            height: 35px;
+            margin-right: 13px;
+        }
+
+        .brand-title{
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+
     img {
         margin-top: 12px;
         margin-left: 12px;
@@ -34,7 +51,7 @@
         li {
             text-align: center;
             margin: 0;
-            height: 56px;
+            height: 50px;
             list-style: none;
 
             a {
@@ -42,10 +59,9 @@
                 color: white;
                 font-size: 14px;
                 text-decoration: none;
-                height: 56px;
+                height: 50px;
                 margin: auto;
                 list-style: none;
-                
             }
 
             &:hover {

@@ -42,13 +42,15 @@
 <style scoped>
     .container-notification{
         position:absolute;
-        width:500px;
+        width:242px;
         height:600px;
         max-height:1000px;
         margin-top:500px;
             margin-top: 0;
     margin-left:76%;
-        margin-left: calc(100%-60px);
+        /*margin-left: calc(100%-60px);*/
+        top: 50px;
+        left: calc(100%-60px);
         background-color:white; 
         z-index:1;
 

@@ -2,9 +2,6 @@
 <template>
     <div class="d-flex">
         <Popup v-bind:modal="modal">
-            <template v-slot:iconModal>
-                <i class="far fa-edit"></i>
-            </template>
             <div class="d-flex justify-content-center align-items-center">
                 <div class="dropdown">
                     <a class="dropdown-toggle" type="button" id="category-select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -73,9 +70,9 @@
                     <div class="col-4"></div>
                 </div>
 
-                <div class="info-add font-weight-bold p-3" v-on:click="isCollapse = !isCollapse">
-                    Thông tin thêm <i class="fas fa-chevron-down" v-if="isCollapse == true" />
-                    <i class="fas fa-chevron-up" v-else />
+                <div class="info-add font-weight-bold pt-3 pb-3" v-on:click="isCollapse = !isCollapse">
+                    Thông tin thêm <i class="fas fa-chevron-up" v-if="isCollapse == true" />
+                    <i class="fas fa-chevron-down" v-else />
                 </div>
 
                 <div class="row pb-3" v-show="isCollapse">
@@ -139,8 +136,11 @@
 
             </template>
             <template v-slot:buttonModal>
-                <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="far fa-trash-alt"></i> Hủy</button>
-                <button type="button" class="btn bg-primary text-light" data-dismiss="modal" v-on:click="saveEdit()"><i class="fas fa-save"></i> Lưu</button>
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-ban"></i> Đóng</button>
+                    <button type="button" class="btn btn-success text-light" data-dismiss="modal" v-on:click="saveEdit()"><i class="fas fa-save"></i> Lưu</button>
+                </div>
+                
             </template>
         </Popup>
     </div>
@@ -318,6 +318,9 @@
     }
 </script>
 <style lang="scss" scoped>
+    button {
+        width:90px;
+    }
     .dropdown-menu {
         top: 10px !important;
         box-shadow: rgba(0, 0, 0, 0.15) 1px 1px 3px 1px;
@@ -336,14 +339,15 @@
     }
 
     .modal-header .dropdown-menu {
-        width: 200px;
+            width: 280px;
+            margin-left: -80px;
     }
 
     .widget {
         height: 80px;
         border: 1px solid #ddd !important;
         border-radius: 0.5em;
-        padding: 10px 20px;
+        padding: 10px 10px;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -359,6 +363,8 @@
     label {
         margin-bottom: 0px;
         font-weight: bold;
+        color: gray;
+        font-size: 13px;
     }
 
     .select-option {

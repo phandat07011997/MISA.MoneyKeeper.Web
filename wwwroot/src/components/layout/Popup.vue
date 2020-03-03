@@ -5,11 +5,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div class="modal-icon">
-                        <slot name="iconModal"></slot>
-                    </div>
                     <div class="col-md-4 modal-title text-left p-0" id="exampleModalLabel">
-                        <div class="col-md-12">
+                        <div class="col-md-12 p-0">
                             <slot name="headerExpense"></slot>
                         </div>
                     </div>
@@ -17,7 +14,7 @@
                         <div class=""><slot></slot></div>
                     </div>
 
-                    <button type="button" class=" close button-style" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close button-style text-danger" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>

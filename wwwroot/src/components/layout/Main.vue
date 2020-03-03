@@ -13,7 +13,7 @@
 
     <div class="clr"></div>
     <a href="#" id="back-to-top-btn" v-on:click="backToTop()">
-      <i class="fas fa-caret-square-up"></i>
+      <i class="fas fa-chevron-up"></i>
     </a>
   </div>
 </template>

@@ -5,21 +5,42 @@
 
                 <i class="far fa-credit-card hidden-xs" aria-hidden="true"></i>
                 <span id="hiddenText"> Tài chính hiện tại:</span>
-                <span id="money-total" class=""> +100.000 VND</span>
+                <span id="money-total" class="font-weight-bold"> +100.000 VND</span>
             </span>
         </div>
 
         <div id="right-top-bar">
-            <div id="bell">
-                <div @click="notification = !notification" style="cursor:pointer">
-                    <i class="fas fa-bell" style="color:#031847;font-size:30px;"></i>
-                </div>
-            </div>
-            <div id="user">
-                <a href="#">
-                    <div id="user-icon">
-                        <i class="fas fa-user" style="color:#031847;font-size:30px;"></i>
+            <a class="mr-4" data-toggle="modal" v-bind:data-target="'#' + modal" href="#">
+                <button class="btn btn-success" style="font-size:14px;"><i class="fas fa-plus" style="font-size: 12px"></i> Thêm ghi chép</button>
+            </a>
+            <AddTransaction v-bind:modal="modal" />
 
+            <ul class="menu-list nav mr-2">
+                <li>
+                    <div>
+                        <div style="cursor:pointer">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <div @click="notification = !notification" style="cursor:pointer">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+            <div id="user" class="hidden-xs">
+                <a href="#">
+                    <div id="user-icon" class="d-flex flex-row justify-content-center align-items-center">
+                        <!--<i class="fas fa-user" style="color:#07468a;font-size:20px;"></i>-->
+                        <div class="user-title">
+                            truonglv
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTem2SU6oN_YjOaW9od3BOFSYSl2493ebxnhx3DkVVz7fBO2Y-Y" alt="..." class="rounded-circle">
                     </div>
                     <div class="dropdown-content">
                         <div id="user-info">
@@ -39,17 +60,7 @@
                 <UserInfo v-bind:modal="userInfoModal" />
             </div>
         </div>
-        <div id="mid-top-bar">
-            <a class="" data-toggle="modal" v-bind:data-target="'#' + modal" href="#">
-
-
-                <button class="btn btn-success" style="font-weight:bold;font-size:15px;"><i class="fas fa-plus"></i> Thêm ghi chép</button>
-
-            </a>
-            <AddTransaction v-bind:modal="modal" />
-
-
-        </div>
+       
         <div class="clr"></div>
         <Notification v-if="notification"></Notification>
 
@@ -98,6 +109,36 @@
     }
 </script>
 <style lang="scss">
-
     @import '../../assets/css/layout/top-bar.scss';
+    #user-icon{
+        border-left: 1px solid lightgray;
+    }
+   .user-title {
+       padding: 0 10px;
+       color: #666;
+   }
+   #user-icon i{
+       color: lightgray;
+       font-size: 11px;
+       padding: 0 10px;
+   }
+   #bell i{
+       color: lightgray;
+       font-size: 17px;
+   }
+   .menu-list{
+       height: 50px;
+   }
+   .menu-list li{
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       flex-direction: row;
+       padding: 0 10px;
+       color: lightgray;
+   }
+   .menu-list li:hover{
+       background-color: lightgray;
+       color: white;
+   }
 </style>

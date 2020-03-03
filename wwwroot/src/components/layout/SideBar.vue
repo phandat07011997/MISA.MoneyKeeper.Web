@@ -1,7 +1,14 @@
 <template>
-  <div class="menu-on-left shadow-sm " style="height:100%">
-      <div class="d-flex just-content-center align-items-center mt-2"><img src="../../assets/img/logo-moneykeeper.png" alt="" style="margin:auto" /></div>
-    <ul class="ml-0  p-0 list-menu hidden-xs-down" style="height:100%;margin-top:17px;">
+    <div class="menu-on-left shadow-sm " style="height:100%">
+        <div class="d-flex just-content-start align-items-center brand-widget">
+        <img src="../../assets/img/logo-moneykeeper.png" alt="" />
+        <div class="brand-title">
+            <span style="color: white; font-size: 15px; font-weight: bold">Money keeper</span>
+            <span style="color: white; font-size: 12px">Sổ thu chi</span>
+        </div>
+           
+        </div>
+        <ul class="ml-0  p-0 list-menu hidden-xs-down" style="height:100%;" id="accordion">
 
             <!-- <router-link to="/" class="text-decoration-none"> -->
             <li class="">
@@ -26,13 +33,13 @@
 
             </li>
             <li class="">
-                <a href="#accountSubMenu" class="router-link d-flex just-content-start align-items-center dropdown-toggle" data-toggle="collapse" aria-expanded="true" role="button">
+                <a href="#" class="router-link d-flex just-content-start align-items-center dropdown-toggle collapsed" data-toggle="collapse" data-target="#reportSubAccount" aria-expanded="false" aria-controls="reportSubAccount" role="button">
                     <i class="far fa-list-alt" style="font-size:16px"></i>
                     <span style="font-size:14px;margin-left:10px;width:150px;">Tài Khoản</span>
                 </a>
 
             </li>
-            <div class=" collaspe show" id="accountSubMenu">
+            <div id="reportSubAccount" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                 <ul>
                     <li>
                         <router-link to="/account/mainAccount" class="d-flex justify-content-start align-items-center ">
@@ -60,17 +67,17 @@
                         </router-link>
 
                     </li>
-
                 </ul>
             </div>
+
             <li class="">
-                <a href="#reportSubMenu" class="router-link d-flex just-content-start align-items-center dropdown-toggle" data-toggle="collapse" aria-expanded="true" role="button">
+                <a href="#reportSubMenu" class="router-link d-flex just-content-start align-items-center dropdown-toggle collapsed" data-toggle="collapse" data-target="#reportSubMenu" aria-expanded="false" aria-controls="reportSubMenu" role="button">
                     <i class="fab fa-wpforms" style="font-size:16px"></i>
                     <span style="font-size:14px;margin-left:10px;width:150px">Báo Cáo</span>
-                    </a>
+                </a>
 
             </li>
-            <div class="collaspe show" id="reportSubMenu">
+            <div id="reportSubMenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                 <ul>
                     <li>
                         <router-link to="/report/financial" class="d-flex justify-content-start align-items-center">
@@ -125,73 +132,70 @@
 
                 </ul>
             </div>
-                <li class="">
-                    <a href="#otherSubMenu" class="router-link d-flex just-content-start align-items-center dropdown-toggle" data-toggle="collapse" aria-expanded="true" role="button">
-                        <i class="fas fa-bars" style="font-size:16px"></i>
-                        <span style="font-size:14px;margin-left:10px;width:150px">Khác</span>
-                        </a>
+            <li class="">
+                <a href="#otherSubMenu" class="router-link d-flex just-content-start align-items-center dropdown-toggle collapsed" data-toggle="collapse" data-target="#otherSubMenu" aria-expanded="false" aria-controls="otherSubMenu" role="button">
+                    <i class="fas fa-bars" style="font-size:16px"></i>
+                    <span style="font-size:14px;margin-left:10px;width:150px">Khác</span>
+                </a>
+            </li>
+            <div id="otherSubMenu" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <ul>
+                    <li>
+                        <router-link to="/other/settings" class="d-flex justify-content-start align-items-center">
 
-</li>
-                <div class=" collaspe show" id="otherSubMenu">
-                    <ul>
-                        <li>
-                            <router-link to="/other/settings" class="d-flex justify-content-start align-items-center">
+                            <i class="fas fa-user fa-1x" style="width:20px;margin-left:30px"></i>
 
-                                <i class="fas fa-user fa-1x" style="width:20px;margin-left:30px"></i>
+                            <span style="text-align:left;margin-left:15px;">Tài khoản</span>
+                        </router-link>
 
-                                <span style="text-align:left;margin-left:15px;">Tài khoản</span>
-                            </router-link>
+                    </li>
+                    <li style="">
+                        <router-link to="/account/deposit" class="d-flex justify-content-start align-items-center">
 
-                        </li>
-                        <li style="">
-                            <router-link to="/account/deposit" class="d-flex justify-content-start align-items-center">
+                            <i class="fas fa-book" style="width:20px;margin-left: 30px"></i>
 
-                                <i class="fas fa-book" style="width:20px;margin-left: 30px"></i>
+                            <span style="text-align:left;margin-left:15px;">Sổ tiết kiệm</span>
+                        </router-link>
 
-                                <span style="text-align:left;margin-left:15px;">Sổ tiết kiệm</span>
-                            </router-link>
+                    </li>
+                    <li style="">
+                        <router-link to="/account/saveMoney" class="d-flex justify-content-start align-items-center">
 
-                        </li>
-                        <li style="">
-                            <router-link to="/account/saveMoney" class="d-flex justify-content-start align-items-center">
+                            <i class="fab fa-twitter" style="width:20px;margin-left: 30px"></i>
+                            <span style="text-align:left;margin-left:15px;">Tích lũy</span>
+                        </router-link>
 
-                                <i class="fab fa-twitter" style="width:20px;margin-left: 30px"></i>
-                                <span style="text-align:left;margin-left:15px;">Tích lũy</span>
-                            </router-link>
+                    </li>
 
-                        </li>
-
-                    </ul>
-                    </div>
-
-</ul>
+                </ul>
+            </div>
+        </ul>
     </div>
-
 </template>
 
 <script>
-export default {
-  name: "sidebar",
-  data() {
-    return {
-      bind:true,
-      bindSize:'S',
-      items: [
-        {
-          id: 1,
-          iconClass: "fas fa-home",
-          isHover: false,
-          navName: "Tổng quan",
-          activeComponent: "/",
-          
-        },
-        {
-          id: 2,
-          iconClass: "fas fa-book",
-          isHover: false,
-          navName: "Sổ Ghi Chép",
-          activeComponent: "/transaction"
-        },
+    export default {
+        name: "sidebar",
+        data() {
+            return {
+                bind: true,
+                bindSize: 'S',
+                items: [
+                    {
+                        id: 1,
+                        iconClass: "fas fa-home",
+                        isHover: false,
+                        navName: "Tổng quan",
+                        activeComponent: "/",
+
+                    },
+                    {
+                        id: 2,
+                        iconClass: "fas fa-book",
+                        isHover: false,
+                        navName: "Sổ Ghi Chép",
+                        activeComponent: "/transaction"
+                    },
 
                     {
                         id: 3,
@@ -238,6 +242,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
     @import "../../assets/css/layout/side-bar.scss";
 </style>
